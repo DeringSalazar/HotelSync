@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:elevation="4dp"
+    android:layout_margin="8dp"
+    android:clipToOutline="true"
+    android:background="@drawable/bg_card_reserva">
+
+    <!-- Nombre del hotel y precio -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:baselineAligned="false">
+
+        <TextView
+            android:id="@+id/tvHotelName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Gran Plaza Hotel"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/tvPrecio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$450"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="#00BCD4" />
+    </LinearLayout>
+
+    <!-- Estado de la reserva (dinámico) -->
+    <TextView
+        android:id="@+id/tvEstado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Confirmada"
+        android:layout_marginTop="6dp"
+        android:textStyle="bold"
+        android:textColor="#009688" />
+
+    <!-- Nombre del huésped -->
+    <TextView
+        android:id="@+id/tvHuesped"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Huésped: Juan Pérez"
+        android:layout_marginTop="2dp"
+        android:textColor="#555555" />
+
+    <!-- Fechas y datos -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="8dp"
+        android:weightSum="2">
+
+        <!-- Check-in -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Check-in"
+                android:textColor="#0B0A0A"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvCheckIn"
+                android:text="2025-01-15"
+                android:textColor="#000000"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <!-- Check-out -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Check-out"
+                android:textColor="#090808"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvCheckOut"
+                android:text="2025-01-18"
+                android:textColor="#000000"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Habitaciones y Huéspedes -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="8dp"
+        android:weightSum="2">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Habitaciones"
+                android:textColor="#050505"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvHabitaciones"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="2"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Huéspedes"
+                android:textColor="#0B0A0A"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvHuespedes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="4"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Botones (mitad y mitad) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="12dp"
+        android:weightSum="2"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/btnEditar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Editar"
+            android:drawableLeft="@android:drawable/ic_menu_edit"
+            android:drawablePadding="6dp"
+            android:textColor="#000000"
+            android:backgroundTint="#E0E0E0"/>
+
+        <Button
+            android:id="@+id/btnEliminar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Eliminar"
+            android:drawableLeft="@android:drawable/ic_menu_delete"
+            android:drawablePadding="6dp"
+            android:textColor="#000000"
+            android:backgroundTint="#E0E0E0"
+            android:layout_marginStart="8dp"/>
+    </LinearLayout>
+</LinearLayout>

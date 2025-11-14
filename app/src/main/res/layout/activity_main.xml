@@ -72,8 +72,8 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/button"
+                <RadioButton
+                    android:id="@+id/BtnHuesped"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="8dp"
@@ -83,8 +83,8 @@
                     android:textAllCaps="false"
                     android:textColor="#00796B" />
 
-                <Button
-                    android:id="@+id/button2"
+                <RadioButton
+                    android:id="@+id/BtnEmpleado"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -93,7 +93,9 @@
                     android:text="Empleado"
                     android:textAllCaps="false"
                     android:textColor="#666666" />
+
             </LinearLayout>
+
 
             <TextView
                 android:id="@+id/textView4"
@@ -105,7 +107,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/editTextText"
+                android:id="@+id/TxtCedula"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginBottom="16dp"
@@ -125,7 +127,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/editTextText2"
+                android:id="@+id/TxtContra"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginBottom="16dp"
@@ -136,7 +138,7 @@
                 android:textColorHint="#999999" />
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/BtnIngresar"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginBottom="8dp"
@@ -146,7 +148,7 @@
                 android:textColor="#FFFFFF" />
 
             <Button
-                android:id="@+id/button4"
+                android:id="@+id/BtnRegistrarse"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@drawable/bg_button"

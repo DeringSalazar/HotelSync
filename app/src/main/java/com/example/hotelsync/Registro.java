@@ -65,6 +65,7 @@ public class Registro extends AppCompatActivity {
             registro.put("apellido", apellido);
             registro.put("telefono", telefono);
             registro.put("correo", correo);
+            registro.put("rol", tabla);
             BaseDatos.insert(tabla, null, registro);
             BaseDatos.close();
             TxtCedula.setText("");

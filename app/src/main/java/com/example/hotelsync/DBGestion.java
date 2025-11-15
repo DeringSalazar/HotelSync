@@ -13,8 +13,8 @@ public class DBGestion extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table huesped (cedula text primary key, nombre text, apellido text, telefono text, correo text)");
-        db.execSQL("create table empleado (cedula text primary key, nombre text, apellido text, telefono text, correo text)");
+        db.execSQL("create table huesped (cedula text primary key, nombre text, apellido text, telefono text, correo text, rol text)");
+        db.execSQL("create table empleado (cedula text primary key, nombre text, apellido text, telefono text, correo text, rol text)");
         db.execSQL("create table habitacion (codigo text primary key, numero text, estado text, piso text, nombre text, descripcion text, precio_noche text, capacidad text)");
         db.execSQL("create table reserva (" +
                 "id_reserva text primary key, " +

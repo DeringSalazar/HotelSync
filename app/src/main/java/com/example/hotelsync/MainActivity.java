@@ -1,8 +1,10 @@
 package com.example.hotelsync;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,38 +31,56 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void IniciarSesion(View view)  {
+    public void IniciarSesion(View view) {
         DBGestion admin = new DBGestion(this, "BaseDatos", null, 1);
         SQLiteDatabase BaseDatos = admin.getReadableDatabase();
 
-        String cedula, nombre;
-        String tabla = "";
-        cedula = TxtCedula.getText().toString();
-        nombre = TxtNombre.getText().toString();
+        String cedula = TxtCedula.getText().toString().trim();
+        String nombre = TxtNombre.getText().toString().trim();
 
         if (cedula.isEmpty() || nombre.isEmpty()) {
             Toast.makeText(this, "Ingrese todos los datos", Toast.LENGTH_LONG).show();
             return;
         }
 
+        String rolSeleccionado = "";
         if (BtnEmpleado.isChecked()) {
-            tabla = "empleado";
+            rolSeleccionado = "empleado";
         } else if (BtnHuesped.isChecked()) {
-            tabla = "huesped";
-        }
-
-        if (tabla.trim().isEmpty()) {
+            rolSeleccionado = "huesped";
+        } else {
             Toast.makeText(this, "Seleccione un rol válido", Toast.LENGTH_LONG).show();
             return;
         }
 
-        String query = "SELECT * FROM \"" + tabla + "\" WHERE cedula=? AND nombre=?";
+        // ✅ Espacios correctos y solo 2 parámetros
+        String query = "SELECT rol FROM " + rolSeleccionado + " WHERE cedula = ? AND nombre = ?";
         String[] parametros = { cedula, nombre };
-        var cursor = BaseDatos.rawQuery(query, parametros);
+
+        Cursor cursor = BaseDatos.rawQuery(query, parametros);
+
         if (cursor.moveToFirst()) {
-            Intent intent = new Intent(this, Registro.class);
+            String rolReal = cursor.getString(0);
+
+            // Ya no necesitas esta validación porque consultaste la tabla correcta
+            // pero la dejo por si acaso
+            if (!rolReal.equals(rolSeleccionado)) {
+                Toast.makeText(this, "El rol seleccionado no coincide", Toast.LENGTH_LONG).show();
+                cursor.close();
+                BaseDatos.close();
+                return;
+            }
+
+            Intent intent;
+            if (rolReal.equals("empleado")) {
+                intent = new Intent(this, EmpleadoActivity.class);
+            } else {
+                intent = new Intent(this, ReservaActivity.class);
+            }
+
             startActivity(intent);
-            Toast.makeText(this, "Inicio de sesión exitoso", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
+
         } else {
             Toast.makeText(this, "Datos incorrectos", Toast.LENGTH_LONG).show();
         }
@@ -68,5 +88,4 @@ public class MainActivity extends AppCompatActivity {
         cursor.close();
         BaseDatos.close();
     }
-
 }

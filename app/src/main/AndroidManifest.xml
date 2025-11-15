@@ -15,6 +15,9 @@
             android:name=".EmpleadoActivity"
             android:exported="false" />
         <activity
+            android:name=".ReservaActivity"
+            android:exported="false" />
+        <activity
             android:name=".Registro"
             android:exported="false" />
         <activity

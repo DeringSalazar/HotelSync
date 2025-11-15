@@ -151,8 +151,7 @@
                 android:id="@+id/BtnRegistrarse"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:shadowRadius="@integer/material_motion_duration_medium_1"
-
+                android:background="@drawable/bg_button"
                 android:backgroundTint="#E0E0E0"
                 android:onClick="Siguiente"
                 android:text="Registrarse"

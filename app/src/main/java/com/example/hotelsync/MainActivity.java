@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        String rolSeleccionado = "";
+        String rolSeleccionado;
         if (BtnEmpleado.isChecked()) {
             rolSeleccionado = "empleado";
         } else if (BtnHuesped.isChecked()) {
@@ -53,19 +53,16 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        // ✅ Espacios correctos y solo 2 parámetros
         String query = "SELECT rol FROM " + rolSeleccionado + " WHERE cedula = ? AND nombre = ?";
-        String[] parametros = { cedula, nombre };
+        String[] parametros = {cedula, nombre};
 
         Cursor cursor = BaseDatos.rawQuery(query, parametros);
 
         if (cursor.moveToFirst()) {
             String rolReal = cursor.getString(0);
 
-            // Ya no necesitas esta validación porque consultaste la tabla correcta
-            // pero la dejo por si acaso
             if (!rolReal.equals(rolSeleccionado)) {
-                Toast.makeText(this, "El rol seleccionado no coincide", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "El rol seleccionado no coincide con el registrado", Toast.LENGTH_LONG).show();
                 cursor.close();
                 BaseDatos.close();
                 return;
@@ -79,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             startActivity(intent);
-            Toast.makeText(this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Inicio de sesión exitoso", Toast.LENGTH_LONG).show();
 
         } else {
             Toast.makeText(this, "Datos incorrectos", Toast.LENGTH_LONG).show();

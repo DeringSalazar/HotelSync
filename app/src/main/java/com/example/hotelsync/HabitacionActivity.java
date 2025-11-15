@@ -47,7 +47,7 @@ public class HabitacionActivity extends AppCompatActivity {
         btnEliminar = findViewById(R.id.btnEliminarHabitacion);
         listaHabitaciones = findViewById(R.id.listaHabitaciones);
 
-        dbGestion = new DBGestion(this, "hotel.db", null, 1);
+        dbGestion = new DBGestion(this, "BaseDatos", null, 1);
         sql = dbGestion.getWritableDatabase();
         String[] estados = {"Libre", "Ocupada"};
         ArrayAdapter<String> adapterEstados = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, estados);

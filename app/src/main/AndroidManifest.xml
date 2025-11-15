@@ -18,6 +18,9 @@
             android:name=".ReservaActivity"
             android:exported="false" />
         <activity
+            android:name=".HabitacionActivity"
+            android:exported="false" />
+        <activity
             android:name=".Registro"
             android:exported="false" />
         <activity

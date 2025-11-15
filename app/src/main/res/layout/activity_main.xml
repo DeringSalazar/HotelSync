@@ -79,6 +79,7 @@
                     android:layout_marginEnd="8dp"
                     android:layout_weight="1"
                     android:backgroundTint="#E0F7FA"
+                    android:onClick="InicioHuesped"
                     android:text="Huésped"
                     android:textAllCaps="false"
                     android:textColor="#00796B" />
@@ -90,6 +91,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
                     android:backgroundTint="#F5F5F5"
+                    android:onClick="InicioEmpleado"
                     android:text="Empleado"
                     android:textAllCaps="false"
                     android:textColor="#666666" />
@@ -115,6 +117,7 @@
                 android:hint="Ingrese su cédula"
                 android:inputType="text"
                 android:padding="12dp"
+                android:textColor="#020202"
                 android:textColorHint="#999999" />
 
             <TextView
@@ -134,6 +137,7 @@
                 android:background="#F3F3F3"
                 android:hint="Ingrese su nombre"
                 android:padding="12dp"
+                android:textColor="#020202"
                 android:textColorHint="#999999" />
 
             <LinearLayout
@@ -150,7 +154,7 @@
                     android:layout_marginEnd="8dp"
                     android:layout_weight="1"
                     android:backgroundTint="#E0F7FA"
-                    android:onClick="IniciarSesion"
+                    android:onClick="Login"
                     android:text="Iniciar Sesion"
                     android:textAllCaps="false"
                     android:textColor="#00796B" />

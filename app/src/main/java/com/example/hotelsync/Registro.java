@@ -36,27 +36,17 @@ public class Registro extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void Guardar(View view) {
+    public void GuardarEmpleado(View view) {
         DBGestion admin = new DBGestion(this, "BaseDatos", null, 1);
         SQLiteDatabase BaseDatos = admin.getWritableDatabase();
 
         String cedula, nombre, apellido, telefono, correo;
-        String tabla = "";
 
         cedula = TxtCedula.getText().toString();
         nombre = TxtNombre.getText().toString();
         apellido = TxtApellido.getText().toString();
         telefono = TxtTelefono.getText().toString();
         correo = TxtCorreo.getText().toString();
-
-        if (BtnEmpleado.isChecked()) {
-            tabla = "empleado";
-        } else if (BtnHuesped.isChecked()) {
-            tabla = "huesped";
-        } else {
-            Toast.makeText(this, "Debe seleccionar un rol (Empleado o Huésped)", Toast.LENGTH_LONG).show();
-            return;
-        }
 
         if (!cedula.isEmpty() && !nombre.isEmpty() && !apellido.isEmpty() && !telefono.isEmpty() && !correo.isEmpty()) {
             ContentValues registro = new ContentValues();
@@ -65,8 +55,38 @@ public class Registro extends AppCompatActivity {
             registro.put("apellido", apellido);
             registro.put("telefono", telefono);
             registro.put("correo", correo);
-            registro.put("rol", tabla);
-            BaseDatos.insert(tabla, null, registro);
+            BaseDatos.insert("empleado", null, registro);
+            BaseDatos.close();
+            TxtCedula.setText("");
+            TxtNombre.setText("");
+            TxtApellido.setText("");
+            TxtTelefono.setText("");
+            TxtCorreo.setText("");
+            Toast.makeText(getApplicationContext(), "Los datos se insertaron correctamente", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(getApplicationContext(), "Faltan Datos", Toast.LENGTH_LONG).show();
+        }
+    }
+    public void GuardarHuesped(View view) {
+        DBGestion admin = new DBGestion(this, "BaseDatos", null, 1);
+        SQLiteDatabase BaseDatos = admin.getWritableDatabase();
+
+        String cedula, nombre, apellido, telefono, correo;
+
+        cedula = TxtCedula.getText().toString();
+        nombre = TxtNombre.getText().toString();
+        apellido = TxtApellido.getText().toString();
+        telefono = TxtTelefono.getText().toString();
+        correo = TxtCorreo.getText().toString();
+
+        if (!cedula.isEmpty() && !nombre.isEmpty() && !apellido.isEmpty() && !telefono.isEmpty() && !correo.isEmpty()) {
+            ContentValues registro = new ContentValues();
+            registro.put("cedula", cedula);
+            registro.put("nombre", nombre);
+            registro.put("apellido", apellido);
+            registro.put("telefono", telefono);
+            registro.put("correo", correo);
+            BaseDatos.insert("huesped", null, registro);
             BaseDatos.close();
             TxtCedula.setText("");
             TxtNombre.setText("");

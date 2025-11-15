@@ -27,62 +27,70 @@ public class MainActivity extends AppCompatActivity {
 
     public void Siguiente(View view)  {
         Intent intent= new Intent(this,Registro.class);
-        // intent.putExtra("texto",TxtUno.getText().toString());
         startActivity(intent);
     }
 
-    public void IniciarSesion(View view) {
+    public void InicioHuesped(View view)  {
+        String cedula = TxtCedula.getText().toString();
+        String nombre = TxtNombre.getText().toString();
+
+        if (cedula.isEmpty() || nombre.isEmpty()) {
+            Toast.makeText(this, "Ingrese cédula y nombre", Toast.LENGTH_LONG).show();
+            return;
+        }
+
         DBGestion admin = new DBGestion(this, "BaseDatos", null, 1);
         SQLiteDatabase BaseDatos = admin.getReadableDatabase();
 
-        String cedula = TxtCedula.getText().toString().trim();
-        String nombre = TxtNombre.getText().toString().trim();
+        String query = "SELECT * FROM huesped WHERE cedula=? AND nombre=?";
+        String[] parametros = { cedula, nombre };
+        try {
+            var cursor = BaseDatos.rawQuery(query, parametros);
+            if (cursor.moveToFirst()) {
+                Intent intent = new Intent(this, ReservaActivity.class);
+                startActivity(intent);
+
+                Toast.makeText(this, "Inicio de sesión exitoso", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(this, "Datos incorrectos", Toast.LENGTH_LONG).show();
+            }
+            cursor.close();
+            BaseDatos.close();
+
+        } catch (Exception e) {
+            Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void InicioEmpleado(View view)  {
+        String cedula = TxtCedula.getText().toString();
+        String nombre = TxtNombre.getText().toString();
 
         if (cedula.isEmpty() || nombre.isEmpty()) {
-            Toast.makeText(this, "Ingrese todos los datos", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Ingrese cédula y nombre", Toast.LENGTH_LONG).show();
             return;
         }
 
-        String rolSeleccionado;
-        if (BtnEmpleado.isChecked()) {
-            rolSeleccionado = "empleado";
-        } else if (BtnHuesped.isChecked()) {
-            rolSeleccionado = "huesped";
-        } else {
-            Toast.makeText(this, "Seleccione un rol válido", Toast.LENGTH_LONG).show();
-            return;
-        }
+        DBGestion admin = new DBGestion(this, "BaseDatos", null, 1);
+        SQLiteDatabase BaseDatos = admin.getReadableDatabase();
 
-        String query = "SELECT rol FROM " + rolSeleccionado + " WHERE cedula = ? AND nombre = ?";
-        String[] parametros = {cedula, nombre};
+        String query = "SELECT * FROM empleado WHERE cedula=? AND nombre=?";
+        String[] parametros = { cedula, nombre };
+        try {
+            var cursor = BaseDatos.rawQuery(query, parametros);
+            if (cursor.moveToFirst()) {
+                Intent intent = new Intent(this, EmpleadoActivity.class);
+                startActivity(intent);
 
-        Cursor cursor = BaseDatos.rawQuery(query, parametros);
-
-        if (cursor.moveToFirst()) {
-            String rolReal = cursor.getString(0);
-
-            if (!rolReal.equals(rolSeleccionado)) {
-                Toast.makeText(this, "El rol seleccionado no coincide con el registrado", Toast.LENGTH_LONG).show();
-                cursor.close();
-                BaseDatos.close();
-                return;
-            }
-
-            Intent intent;
-            if (rolReal.equals("empleado")) {
-                intent = new Intent(this, EmpleadoActivity.class);
+                Toast.makeText(this, "Inicio de sesión exitoso", Toast.LENGTH_LONG).show();
             } else {
-                intent = new Intent(this, ReservaActivity.class);
+                Toast.makeText(this, "Datos incorrectos", Toast.LENGTH_LONG).show();
             }
+            cursor.close();
+            BaseDatos.close();
 
-            startActivity(intent);
-            Toast.makeText(this, "Inicio de sesión exitoso", Toast.LENGTH_LONG).show();
-
-        } else {
-            Toast.makeText(this, "Datos incorrectos", Toast.LENGTH_LONG).show();
+        } catch (Exception e) {
+            Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
         }
-
-        cursor.close();
-        BaseDatos.close();
     }
 }

@@ -100,6 +100,7 @@
                 android:hint="Ingrese su cédula"
                 android:inputType="text"
                 android:padding="12dp"
+                android:textColor="#020202"
                 android:textColorHint="#999999" />
 
             <TextView
@@ -118,8 +119,8 @@
                 android:layout_marginBottom="16dp"
                 android:background="#F3F3F3"
                 android:hint="Ingrese su nombre"
-                android:inputType="textPassword"
                 android:padding="12dp"
+                android:textColor="#020202"
                 android:textColorHint="#999999" />
 
             <TextView
@@ -140,6 +141,7 @@
                 android:hint="Ingrese su apellido"
                 android:inputType="text"
                 android:padding="12dp"
+                android:textColor="#020202"
                 android:textColorHint="#999999" />
 
             <TextView
@@ -160,6 +162,7 @@
                 android:hint="Ingrese su telefono"
                 android:inputType="text"
                 android:padding="12dp"
+                android:textColor="#020202"
                 android:textColorHint="#999999" />
 
             <TextView
@@ -180,6 +183,7 @@
                 android:hint="Ingrese su correo"
                 android:inputType="text"
                 android:padding="12dp"
+                android:textColor="#020202"
                 android:textColorHint="#999999" />
 
             <LinearLayout

@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HotelSync">
         <activity
+            android:name=".EmpleadoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ReservaActivity"
+            android:exported="false" />
+        <activity
             android:name=".Registro"
             android:exported="false" />
         <activity

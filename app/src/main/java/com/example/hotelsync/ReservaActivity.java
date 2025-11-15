@@ -41,7 +41,7 @@ public class ReservaActivity extends AppCompatActivity {
         btnReservar = findViewById(R.id.btnReservar);
         lista = findViewById(R.id.lista);
 
-        db = new DBGestion(this, "hotel.db", null, 1);
+        db = new DBGestion(this, "BaseDatos", null, 1);
         sql = db.getWritableDatabase();
 
         btnReservar.setOnClickListener(v -> crearReserva());

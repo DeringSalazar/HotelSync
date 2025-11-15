@@ -1,6 +1,8 @@
 package com.example.hotelsync;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.*;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,5 +23,10 @@ public class MainActivity extends AppCompatActivity {
         BtnEmpleado = findViewById(R.id.BtnEmpleado);
     }
 
+    public void Siguiente(View view)  {
+        Intent intent= new Intent(this,Registro.class);
+        // intent.putExtra("texto",TxtUno.getText().toString());
+        startActivity(intent);
 
+    }
 }

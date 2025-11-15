@@ -122,41 +122,52 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
-                android:text="Contraseña"
+                android:text="Nombre"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/TxtContra"
+                android:id="@+id/TxtNombre"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginBottom="16dp"
                 android:background="#F3F3F3"
-                android:hint="Ingrese su contraseña"
-                android:inputType="textPassword"
+                android:hint="Ingrese su nombre"
                 android:padding="12dp"
                 android:textColorHint="#999999" />
 
-            <Button
-                android:id="@+id/BtnIngresar"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginBottom="8dp"
-                android:background="@drawable/bg_button"
-                android:text="Iniciar sesión"
-                android:textAllCaps="false"
-                android:textColor="#FFFFFF" />
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/BtnRegistrarse"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@drawable/bg_button"
-                android:backgroundTint="#E0E0E0"
-                android:onClick="Siguiente"
-                android:text="Registrarse"
-                android:textAllCaps="false"
-                android:textColor="#FFFFFF" />
+                <Button
+                    android:id="@+id/BtnIniciar"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#E0F7FA"
+                    android:onClick="IniciarSesion"
+                    android:text="Iniciar Sesion"
+                    android:textAllCaps="false"
+                    android:textColor="#00796B" />
+
+                <Button
+                    android:id="@+id/BtnRegistrarse"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#F5F5F5"
+                    android:onClick="Siguiente"
+                    android:text="Registrarse"
+                    android:textAllCaps="false"
+                    android:textColor="#666666" />
+
+            </LinearLayout>
 
         </LinearLayout>
 

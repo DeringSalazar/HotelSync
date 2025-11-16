@@ -1,191 +1,204 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="12dp"
-    android:background="#F2F2F2">
+    android:background="#F2F6F8"
+    tools:context=".ReservaActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- TARJETA REGISTRO -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="#FFFFFF"
-            android:elevation="6dp"
-            android:padding="20dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="8dp">
+            android:padding="16dp"
+            android:gravity="center_horizontal">
 
             <!-- TÍTULO -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Registro de Reservas"
+                android:textColor="#070707"
                 android:textSize="22sp"
                 android:textStyle="bold"
-                android:textColor="#333333"
-                android:layout_gravity="center"/>
+                android:layout_marginBottom="12dp" />
 
-            <!-- DATOS HUESPED -->
-            <TextView
-                android:text="Datos del huésped"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:textColor="#444"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"/>
-
-            <Spinner
-                android:id="@+id/spinnerCedulas"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"/>
-
-            <EditText
-                android:id="@+id/txtNombre"
-                android:hint="Nombre"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"/>
-
-            <EditText
-                android:id="@+id/txtApellido"
-                android:hint="Apellido"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"/>
-
-            <!-- DETALLES DE LA RESERVA -->
-            <TextView
-                android:text="Detalles de la Reserva"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:textColor="#444"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"/>
-
-            <Spinner
-                android:id="@+id/spinnerHabitaciones"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"/>
-
-            <!-- FECHA INICIO – FECHA FIN A LA PAR -->
+            <!-- TARJETA DE REGISTRO -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="8dp"
-                android:weightSum="2">
+                android:orientation="vertical"
+                android:background="#FFFFFF"
+                android:elevation="6dp"
+                android:padding="20dp"
+                android:layout_marginBottom="16dp">
+
+                <!-- Datos huésped -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Datos del huésped"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#444" />
+
+                <Spinner
+                    android:id="@+id/spinnerCedulas"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#FFFFFF"/>
 
                 <EditText
-                    android:id="@+id/txtInicio"
-                    android:hint="Fecha inicio"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginEnd="6dp"/>
+                    android:id="@+id/txtNombre"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:hint="Nombre"
+                    android:background="#FFFFFF"
+                    android:padding="8dp"
+                    android:layout_marginTop="8dp"/>
 
                 <EditText
-                    android:id="@+id/txtFin"
-                    android:hint="Fecha fin"
-                    android:layout_width="0dp"
+                    android:id="@+id/txtApellido"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:hint="Apellido"
+                    android:background="#FFFFFF"
+                    android:padding="8dp"
+                    android:layout_marginTop="8dp"/>
+
+                <!-- DETALLES RESERVA -->
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginStart="6dp"/>
+                    android:text="Detalles de la Reserva"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#444"
+                    android:layout_marginTop="18dp"/>
+
+                <Spinner
+                    android:id="@+id/spinnerHabitaciones"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#FFFFFF"/>
+
+                <!-- FECHAS A LA PAR -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:layout_marginTop="8dp">
+
+                    <EditText
+                        android:id="@+id/txtInicio"
+                        android:hint="Fecha inicio"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="6dp"
+                        android:background="#FFFFFF"
+                        android:padding="8dp"/>
+
+                    <EditText
+                        android:id="@+id/txtFin"
+                        android:hint="Fecha fin"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="6dp"
+                        android:background="#FFFFFF"
+                        android:padding="8dp"/>
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/txtCantidad"
+                    android:hint="Cantidad de habitaciones"
+                    android:inputType="number"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#FFFFFF"
+                    android:padding="8dp" />
+
+                <!-- BOTONES CRUD -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp"
+                    android:weightSum="3"
+                    android:gravity="center">
+
+                    <Button
+                        android:id="@+id/btnReservar"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_weight="1"
+                        android:layout_margin="6dp"
+                        android:text="Reservar"
+                        android:backgroundTint="#673AB7"
+                        android:textColor="#FFF"/>
+
+                    <Button
+                        android:id="@+id/btnEditar"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_weight="1"
+                        android:layout_margin="6dp"
+                        android:text="Editar"
+                        android:backgroundTint="#673AB7"
+                        android:textColor="#FFF"/>
+
+                    <Button
+                        android:id="@+id/btnEliminar"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_weight="1"
+                        android:layout_margin="6dp"
+                        android:text="Eliminar"
+                        android:backgroundTint="#673AB7"
+                        android:textColor="#FFF"/>
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btnRegresar"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:text="Regresar"
+                    android:layout_marginTop="10dp"
+                    android:backgroundTint="#757575"
+                    android:textColor="#FFF" />
             </LinearLayout>
 
-            <EditText
-                android:id="@+id/txtCantidad"
-                android:hint="Cantidad de habitaciones"
-                android:inputType="number"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"/>
-
-            <!-- BOTONES CRUD EN UNA SOLA FILA -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:layout_marginTop="20dp"
-                android:weightSum="3">
-
-                <Button
-                    android:id="@+id/btnReservar"
-                    android:text="Reservar"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_margin="6dp"
-                    android:backgroundTint="#673AB7"
-                    android:textColor="#FFF"/>
-
-                <Button
-                    android:id="@+id/btnEditar"
-                    android:text="Editar"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_margin="6dp"
-                    android:backgroundTint="#673AB7"
-                    android:textColor="#FFF"/>
-
-                <Button
-                    android:id="@+id/btnEliminar"
-                    android:text="Eliminar"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_margin="6dp"
-                    android:backgroundTint="#673AB7"
-                    android:textColor="#FFF"/>
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/btnRegresar"
-                android:text="Regresar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:backgroundTint="#757575"
-                android:textColor="#FFF"/>
-
-        </LinearLayout>
-
-        <!-- LISTA DE RESERVAS -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#FFFFFF"
-            android:elevation="4dp"
-            android:padding="16dp">
-
+            <!-- LISTA DE RESERVAS -->
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="Reservas Registradas"
+                android:textColor="#070707"
                 android:textStyle="bold"
                 android:textSize="18sp"
-                android:textColor="#333"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_marginBottom="6dp"/>
 
+            <ListView
+                android:id="@+id/lista"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:background="#FFFFFF"
+                android:dividerHeight="1dp"/>
         </LinearLayout>
 
-        <ListView
-            android:id="@+id/lista"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:dividerHeight="1dp"/>
-
-    </LinearLayout>
-
-</ScrollView>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

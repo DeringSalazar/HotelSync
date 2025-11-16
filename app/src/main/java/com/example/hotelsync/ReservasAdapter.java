@@ -72,7 +72,6 @@ public class ReservasAdapter extends BaseAdapter {
         return convertView;
     }
 
-    // --- ViewHolder ---
     static class ViewHolder {
         ImageView imgHabitacion;
         TextView txtCodigo;

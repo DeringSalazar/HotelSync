@@ -65,38 +65,75 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="4"
+            android:orientation="vertical"
             android:layout_marginTop="10dp">
 
-            <Button
-                android:id="@+id/btnGuardarHabitacion"
-                android:layout_width="0dp"
-                android:layout_weight="1"
+            <!-- FILA 1 -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Guardar"/>
+                android:orientation="horizontal"
+                android:weightSum="2">
 
-            <Button
-                android:id="@+id/btnBuscarHabitacion"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="Buscar"/>
+                <Button
+                    android:id="@+id/btnGuardarHabitacion"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:text="Guardar"/>
 
-            <Button
-                android:id="@+id/btnActualizarHabitacion"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="Actualizar"/>
+                <Button
+                    android:id="@+id/btnBuscarHabitacion"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:text="Buscar"/>
+            </LinearLayout>
 
-            <Button
-                android:id="@+id/btnEliminarHabitacion"
-                android:layout_width="0dp"
-                android:layout_weight="1"
+            <!-- FILA 2 -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Eliminar"/>
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <Button
+                    android:id="@+id/btnActualizarHabitacion"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:text="Actualizar"/>
+
+                <Button
+                    android:id="@+id/btnEliminarHabitacion"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:text="Eliminar"/>
+            </LinearLayout>
+
+            <!-- FILA 3 - BOTÓN CENTRADO -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnExtra"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:onClick="Anterior"
+                    android:text="Anterior" />
+            </LinearLayout>
+
         </LinearLayout>
+
 
         <TextView
             android:layout_marginTop="12dp"

@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FDFAFA"
+    android:background="#FAF9F9"
     tools:context=".EmpleadoActivity">
 
     <LinearLayout
@@ -22,24 +22,13 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:id="@+id/BtnEmpleado"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginBottom="16dp"
-            android:backgroundTint="#E0F7FA"
-            android:onClick="usuarioempleado"
-            android:text="Creación del Empleado"
-            android:textAllCaps="false"
-            android:textColor="#00796B" />
-
-        <Button
             android:id="@+id/BtnHabitacion"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginBottom="16dp"
             android:backgroundTint="#E0F7FA"
-            android:onClick="Habitacion"
-            android:text="Gestión de habitaciones"
+            android:onClick="reservaHuesped"
+            android:text="Gestión de reservaciones"
             android:textAllCaps="false"
             android:textColor="#00796B" />
 
@@ -49,8 +38,8 @@
             android:layout_height="48dp"
             android:layout_marginBottom="16dp"
             android:backgroundTint="#F5F5F5"
-            android:onClick="Reserva"
-            android:text="Gestión de reservas"
+            android:onClick="usuario"
+            android:text="Creacion de Usuario"
             android:textAllCaps="false"
             android:textColor="#666666" />
 
@@ -73,7 +62,7 @@
         android:layout_marginStart="173dp"
         android:layout_marginTop="192dp"
         android:layout_marginEnd="180dp"
-        android:text="Vista pincipal del empleado"
+        android:text="Vista pincipal de los Huespedes"
         android:textColor="#0B0A0A"
         android:textSize="20sp"
         android:textStyle="bold"

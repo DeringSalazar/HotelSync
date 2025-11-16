@@ -1,0 +1,206 @@
+package com.example.hotelsync;
+
+import android.content.ContentValues;
+import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.*;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.ArrayList;
+
+public class Usuarios extends AppCompatActivity {
+
+    RadioGroup radioGroupRol;
+    RadioButton rbHuesped, rbEmpleado;
+    EditText edtCedula, edtNombre, edtApellido, edtTelefono, edtCorreo;
+    Button btnInsertar, btnBuscar, btnActualizar, btnEliminar, btnRegresar;
+    ListView listViewUsuarios;
+
+    DBGestion admin;
+    SQLiteDatabase basedatos;
+
+    ArrayList<Vista> listaUsuarios;
+    UsuariosAdapter adaptador;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_usuarios);
+
+        radioGroupRol = findViewById(R.id.radioGroupRol);
+        rbHuesped = findViewById(R.id.rbHuesped);
+        rbEmpleado = findViewById(R.id.rbEmpleado);
+        edtCedula = findViewById(R.id.edtCedula);
+        edtNombre = findViewById(R.id.edtNombre);
+        edtApellido = findViewById(R.id.edtApellido);
+        edtTelefono = findViewById(R.id.edtTelefono);
+        edtCorreo = findViewById(R.id.edtCorreo);
+        btnInsertar = findViewById(R.id.btnInsertar);
+        btnBuscar = findViewById(R.id.btnBuscar);
+        btnActualizar = findViewById(R.id.btnActualizar);
+        btnEliminar = findViewById(R.id.btnEliminar);
+        btnRegresar = findViewById(R.id.btnRegresar);
+        listViewUsuarios = findViewById(R.id.listViewUsuarios);
+
+        admin = new DBGestion(this, "BaseDatos", null, 1);
+        basedatos = admin.getWritableDatabase();
+
+        listaUsuarios = new ArrayList<>();
+        adaptador = new UsuariosAdapter(this, listaUsuarios);
+        listViewUsuarios.setAdapter(adaptador);
+
+        btnInsertar.setOnClickListener(v -> insertarRegistro());
+        btnBuscar.setOnClickListener(v -> buscarRegistro());
+        btnActualizar.setOnClickListener(v -> actualizarRegistro());
+        btnEliminar.setOnClickListener(v -> eliminarRegistro());
+        btnRegresar.setOnClickListener(v -> finish());
+
+        radioGroupRol.setOnCheckedChangeListener((group, checkedId) -> cargarListaPorRol());
+
+        cargarListaPorRol();
+    }
+
+    private String rolSeleccionado() {
+        return rbHuesped.isChecked() ? "huesped" : "empleado";
+    }
+
+    private void insertarRegistro() {
+        String tabla = rolSeleccionado();
+        String cedula = edtCedula.getText().toString().trim();
+        String nombre = edtNombre.getText().toString().trim();
+        String apellido = edtApellido.getText().toString().trim();
+        String telefono = edtTelefono.getText().toString().trim();
+        String correo = edtCorreo.getText().toString().trim();
+
+        if (cedula.isEmpty() || nombre.isEmpty()) {
+            Toast.makeText(this, "Cédula y nombre son obligatorios", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        ContentValues cv = new ContentValues();
+        cv.put("cedula", cedula);
+        cv.put("nombre", nombre);
+        cv.put("apellido", apellido);
+        cv.put("telefono", telefono);
+        cv.put("correo", correo);
+
+        try {
+            long res = basedatos.insertOrThrow(tabla, null, cv);
+            if (res != -1) {
+                Toast.makeText(this, "Insertado en " + tabla, Toast.LENGTH_SHORT).show();
+                limpiarCampos();
+                cargarListaPorRol();  // <-- Se recarga la lista con tu formato
+            }
+        } catch (Exception e) {
+            Toast.makeText(this, "Error al insertar: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void buscarRegistro() {
+        String tabla = rolSeleccionado();
+        String cedula = edtCedula.getText().toString().trim();
+        if (cedula.isEmpty()) {
+            Toast.makeText(this, "Ingrese cédula para buscar", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Cursor c = basedatos.rawQuery(
+                "SELECT cedula, nombre, apellido, telefono, correo FROM " + tabla + " WHERE cedula=?",
+                new String[]{cedula});
+
+        if (c.moveToFirst()) {
+            edtCedula.setText(c.getString(0));
+            edtNombre.setText(c.getString(1));
+            edtApellido.setText(c.getString(2));
+            edtTelefono.setText(c.getString(3));
+            edtCorreo.setText(c.getString(4));
+            Toast.makeText(this, "Registro encontrado en " + tabla, Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "No existe la cédula en " + tabla, Toast.LENGTH_SHORT).show();
+        }
+        c.close();
+    }
+
+    private void actualizarRegistro() {
+        String tabla = rolSeleccionado();
+        String cedula = edtCedula.getText().toString().trim();
+        if (cedula.isEmpty()) {
+            Toast.makeText(this, "Ingrese cédula para actualizar", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        ContentValues cv = new ContentValues();
+        cv.put("nombre", edtNombre.getText().toString().trim());
+        cv.put("apellido", edtApellido.getText().toString().trim());
+        cv.put("telefono", edtTelefono.getText().toString().trim());
+        cv.put("correo", edtCorreo.getText().toString().trim());
+
+        int filas = basedatos.update(tabla, cv, "cedula=?", new String[]{cedula});
+        if (filas > 0) {
+            Toast.makeText(this, "Actualizado en " + tabla, Toast.LENGTH_SHORT).show();
+            limpiarCampos();
+            cargarListaPorRol();
+        } else {
+            Toast.makeText(this, "No se encontró la cédula en " + tabla, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void eliminarRegistro() {
+        String tabla = rolSeleccionado();
+        String cedula = edtCedula.getText().toString().trim();
+        if (cedula.isEmpty()) {
+            Toast.makeText(this, "Ingrese cédula para eliminar", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        int filas = basedatos.delete(tabla, "cedula=?", new String[]{cedula});
+        if (filas > 0) {
+            Toast.makeText(this, "Eliminado de " + tabla, Toast.LENGTH_SHORT).show();
+            limpiarCampos();
+            cargarListaPorRol();
+        } else {
+            Toast.makeText(this, "No se encontró la cédula en " + tabla, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void cargarListaPorRol() {
+        String tabla = rolSeleccionado();
+        listaUsuarios.clear();
+
+        Cursor c = basedatos.rawQuery(
+                "SELECT cedula, nombre, apellido, telefono, correo FROM " + tabla,
+                null);
+
+        if (c.moveToFirst()) {
+            do {
+
+                Vista v = new Vista(
+                        c.getInt(0),
+                        R.drawable.user_h,
+                        c.getString(1),
+                        c.getString(2),
+                        c.getInt(3),
+                        c.getString(4)
+                );
+
+                listaUsuarios.add(v);
+
+            } while (c.moveToNext());
+        }
+        c.close();
+
+        adaptador.notifyDataSetChanged();
+    }
+
+    private void limpiarCampos() {
+        edtCedula.setText("");
+        edtNombre.setText("");
+        edtApellido.setText("");
+        edtTelefono.setText("");
+        edtCorreo.setText("");
+    }
+}

@@ -20,4 +20,18 @@ public class EmpleadoActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void usuarioempleado(View view)  {
+        Intent intent= new Intent(this,Usuarios.class);
+        startActivity(intent);
+    }
+
+    public void Reserva(View view)  {
+        Intent intent= new Intent(this,GestionEmpleado.class);
+        startActivity(intent);
+    }
+
+    public void Volver(View view)  {
+        Intent intent= new Intent(this,MainActivity.class);
+        startActivity(intent);
+    }
 }

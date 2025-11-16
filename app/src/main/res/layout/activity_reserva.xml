@@ -23,11 +23,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <EditText
-        android:id="@+id/txtHabitacion"
-        android:hint="Código de habitación"
+    <Spinner
+        android:id="@+id/spinnerHabitaciones"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
 
     <EditText
         android:id="@+id/txtInicio"
@@ -48,12 +48,53 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <Button
-        android:id="@+id/btnReservar"
-        android:text="Reservar"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"/>
+        android:orientation="vertical"
+        android:layout_marginTop="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <Button
+                android:id="@+id/btnReservar"
+                android:text="Reservar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="6dp"/>
+
+            <Button
+                android:id="@+id/btnEditar"
+                android:text="Editar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="6dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <Button
+                android:id="@+id/btnEliminar"
+                android:text="Eliminar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="6dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
 
     <!-- Lista de reservas -->
     <ListView

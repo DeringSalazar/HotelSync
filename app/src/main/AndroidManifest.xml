@@ -12,6 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HotelSync">
         <activity
+            android:name=".Usuarios"
+            android:exported="false" />
+        <activity
+            android:name=".Huesped"
+            android:exported="false" />
+        <activity
+            android:name=".GestionEmpleado"
+            android:exported="false" />
+        <activity
             android:name=".EmpleadoActivity"
             android:exported="false" />
         <activity
@@ -19,9 +28,6 @@
             android:exported="false" />
         <activity
             android:name=".HabitacionActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Registro"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

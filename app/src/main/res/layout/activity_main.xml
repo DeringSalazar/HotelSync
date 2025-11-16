@@ -72,73 +72,19 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <RadioButton
-                    android:id="@+id/BtnHuesped"
+                <Button
+                    android:id="@+id/BtnHabitacion"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="48dp"
                     android:layout_marginEnd="8dp"
                     android:layout_weight="1"
                     android:backgroundTint="#E0F7FA"
-                    android:onClick="InicioHuesped"
-                    android:text="Huésped"
+                    android:onClick="Huesped"
+                    android:text="Huespedes"
                     android:textAllCaps="false"
                     android:textColor="#00796B" />
 
-                <RadioButton
-                    android:id="@+id/BtnEmpleado"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_weight="1"
-                    android:backgroundTint="#F5F5F5"
-                    android:onClick="InicioEmpleado"
-                    android:text="Empleado"
-                    android:textAllCaps="false"
-                    android:textColor="#666666" />
-
             </LinearLayout>
-
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:text="Cédula"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/TxtCedula"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginBottom="16dp"
-                android:background="#F3F3F3"
-                android:hint="Ingrese su cédula"
-                android:inputType="text"
-                android:padding="12dp"
-                android:textColor="#020202"
-                android:textColorHint="#999999" />
-
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:text="Nombre"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/TxtNombre"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginBottom="16dp"
-                android:background="#F3F3F3"
-                android:hint="Ingrese su nombre"
-                android:padding="12dp"
-                android:textColor="#020202"
-                android:textColorHint="#999999" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -148,30 +94,18 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/BtnHabitacion"
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_weight="1"
-                    android:backgroundTint="#E0F7FA"
-                    android:onClick="IniciarSesion"
-                    android:text="Iniciar Sesion"
-                    android:textAllCaps="false"
-                    android:textColor="#00796B" />
-
-                <Button
-                    android:id="@+id/BtnReservas"
+                    android:id="@+id/BtnReservas2"
                     android:layout_width="0dp"
                     android:layout_height="48dp"
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
                     android:backgroundTint="#F5F5F5"
-                    android:onClick="Siguiente"
-                    android:text="Registrarse"
+                    android:onClick="Empleado"
+                    android:text="Empleados"
                     android:textAllCaps="false"
                     android:textColor="#666666" />
-
             </LinearLayout>
+
 
         </LinearLayout>
 

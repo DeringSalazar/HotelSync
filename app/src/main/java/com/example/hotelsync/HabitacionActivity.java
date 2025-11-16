@@ -1,9 +1,11 @@
 package com.example.hotelsync;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -57,6 +59,11 @@ public class HabitacionActivity extends AppCompatActivity {
         btnActualizar.setOnClickListener(v -> actualizarHabitacion());
         btnEliminar.setOnClickListener(v -> eliminarHabitacion());
         cargarHabitaciones();
+    }
+
+    public void Anterior(View view)  {
+        Intent intent= new Intent(this, EmpleadoActivity.class);
+        startActivity(intent);
     }
 
     private void guardarHabitacion() {

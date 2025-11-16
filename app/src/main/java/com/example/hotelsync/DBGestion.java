@@ -22,7 +22,7 @@ public class DBGestion extends SQLiteOpenHelper {
                 "codigo_habitacion text references habitacion(codigo), " +
                 "fecha_inicio text, " +
                 "fecha_fin text, " +
-                "Total text)");
+                "total text)");
         db.execSQL("create table reserva_huesped (" +
                 "idreserva text, " +
                 "cedula_huesped text, " +

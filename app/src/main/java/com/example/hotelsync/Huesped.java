@@ -21,13 +21,8 @@ public class Huesped extends AppCompatActivity {
     }
 
     public void reservaHuesped(View view)  {
-        try {
-            Intent intent = new Intent(this, ReservaActivity.class);
-            startActivity(intent);
-            Toast.makeText(this, "Paso a la siguiente pantalla perfectamente", Toast.LENGTH_LONG).show();
-        } catch (Exception err) {
-            Toast.makeText(this, "Error: " + err.getMessage(), Toast.LENGTH_LONG).show();
-        }
+        Intent intent = new Intent(this, ReservaActivity.class);
+        startActivity(intent);
     }
 
 

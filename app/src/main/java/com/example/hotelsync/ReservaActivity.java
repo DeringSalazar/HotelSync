@@ -1,11 +1,9 @@
 package com.example.hotelsync;
 
 import android.content.ContentValues;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,16 +17,16 @@ import java.util.ArrayList;
 
 public class ReservaActivity extends AppCompatActivity {
 
-    EditText txtNombre, txtApellido, txtCedula, txtInicio, txtFin, txtCantidad;
-    Button btnReservar, btnEditar, btnEliminar;
+    EditText txtNombre, txtApellido, txtInicio, txtFin, txtCantidad;
+    Button btnReservar, btnEditar, btnEliminar, btnRegresar;
     ListView lista;
 
     DBGestion db;
     SQLiteDatabase sql;
 
-    Spinner spinnerHabitaciones;
-    ArrayList<String> listaHabitaciones, datos;
-    ArrayAdapter<String> adapterHabitaciones, adaptador;
+    Spinner spinnerHabitaciones, spinnerCedulas;
+    ArrayList<String> listaHabitaciones, listaCedulas, datos;
+    ArrayAdapter<String> adapterHabitaciones, adapterCedulas, adaptador;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,41 +35,66 @@ public class ReservaActivity extends AppCompatActivity {
 
         txtNombre = findViewById(R.id.txtNombre);
         txtApellido = findViewById(R.id.txtApellido);
-        txtCedula = findViewById(R.id.txtCedula);
+        spinnerCedulas = findViewById(R.id.spinnerCedulas);
         spinnerHabitaciones = findViewById(R.id.spinnerHabitaciones);
         txtInicio = findViewById(R.id.txtInicio);
         txtFin = findViewById(R.id.txtFin);
         txtCantidad = findViewById(R.id.txtCantidad);
         btnReservar = findViewById(R.id.btnReservar);
-        lista = findViewById(R.id.lista);
         btnEditar = findViewById(R.id.btnEditar);
         btnEliminar = findViewById(R.id.btnEliminar);
+        lista = findViewById(R.id.lista);
+        btnRegresar = findViewById(R.id.btnRegresar);
 
         db = new DBGestion(this, "BaseDatos", null, 1);
         sql = db.getWritableDatabase();
 
+        cargarCedulas();
+        cargarHabitaciones();
+        cargarReservas();
+        eventoSpinnerCedulas();
+
         btnReservar.setOnClickListener(v -> crearReserva());
         btnEditar.setOnClickListener(v -> editarReserva());
         btnEliminar.setOnClickListener(v -> eliminarReserva());
+        btnRegresar.setOnClickListener(v -> finish());
+    }
 
-        cargarReservas();
-        cargarHabitaciones();
+    private void eventoSpinnerCedulas() {
+
+        spinnerCedulas.setOnItemSelectedListener(new android.widget.AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(android.widget.AdapterView<?> parent, android.view.View view, int position, long id) {
+
+                String cedulaSeleccionada = listaCedulas.get(position);
+
+                Cursor c = sql.rawQuery(
+                        "SELECT nombre, apellido FROM huesped WHERE cedula = ?",
+                        new String[]{cedulaSeleccionada}
+                );
+
+                if (c.moveToFirst()) {
+                    txtNombre.setText(c.getString(0));   // nombre
+                    txtApellido.setText(c.getString(1)); // apellido
+                }
+
+                c.close();
+            }
+
+            @Override
+            public void onNothingSelected(android.widget.AdapterView<?> parent) {}
+        });
     }
 
     private void crearReserva() {
 
-        ContentValues huesped = new ContentValues();
-        huesped.put("cedula", txtCedula.getText().toString());
-        huesped.put("nombre", txtNombre.getText().toString());
-        huesped.put("apellido", txtApellido.getText().toString());
-
-        sql.insertWithOnConflict("huesped", null, huesped, SQLiteDatabase.CONFLICT_IGNORE);
+        String cedulaSeleccionada = spinnerCedulas.getSelectedItem().toString();
 
         String idReserva = "R" + System.currentTimeMillis();
 
         ContentValues reserva = new ContentValues();
         reserva.put("id_reserva", idReserva);
-        reserva.put("cedula_empleado", "EMP001"); // temporal
+        reserva.put("cedula_empleado", "EMP001");
         reserva.put("codigo_habitacion", spinnerHabitaciones.getSelectedItem().toString());
         reserva.put("fecha_inicio", txtInicio.getText().toString());
         reserva.put("fecha_fin", txtFin.getText().toString());
@@ -84,18 +107,19 @@ public class ReservaActivity extends AppCompatActivity {
         for (int i = 0; i < cantidad; i++) {
             ContentValues rh = new ContentValues();
             rh.put("idreserva", idReserva);
-            rh.put("cedula_huesped", txtCedula.getText().toString());
+            rh.put("cedula_huesped", cedulaSeleccionada);
             rh.put("estado", "Pendiente");
             sql.insert("reserva_huesped", null, rh);
         }
 
         Toast.makeText(this, "Reserva creada correctamente", Toast.LENGTH_LONG).show();
-
         cargarReservas();
     }
 
     private void editarReserva() {
-        String codigo = txtCedula.getText().toString().trim();
+
+        String codigo = spinnerCedulas.getSelectedItem().toString();
+        String cedulaSeleccionada = spinnerCedulas.getSelectedItem().toString();
 
         ContentValues r = new ContentValues();
         r.put("cedula_empleado", "EMP001");
@@ -107,7 +131,7 @@ public class ReservaActivity extends AppCompatActivity {
         int fila1 = sql.update("reserva", r, "id_reserva=?", new String[]{codigo});
 
         ContentValues h = new ContentValues();
-        h.put("cedula_huesped", txtCedula.getText().toString());
+        h.put("cedula_huesped", cedulaSeleccionada);
 
         int fila2 = sql.update("reserva_huesped", h, "idreserva=?", new String[]{codigo});
 
@@ -120,7 +144,8 @@ public class ReservaActivity extends AppCompatActivity {
     }
 
     private void eliminarReserva() {
-        String codigo = txtCedula.getText().toString().trim();
+
+        String codigo = spinnerCedulas.getSelectedItem().toString();
 
         sql.delete("reserva_huesped", "idreserva=?", new String[]{codigo});
         int filas = sql.delete("reserva", "id_reserva=?", new String[]{codigo});
@@ -132,8 +157,6 @@ public class ReservaActivity extends AppCompatActivity {
             Toast.makeText(this, "No existe la reserva", Toast.LENGTH_SHORT).show();
         }
     }
-
-
 
     private void cargarReservas() {
 
@@ -148,10 +171,12 @@ public class ReservaActivity extends AppCompatActivity {
                 String inicio = c.getString(3);
                 String fin = c.getString(4);
 
-                datos.add("Reserva: " + id +
-                        "\nHabitación: " + habitacion +
-                        "\nInicio: " + inicio +
-                        "\nFin: " + fin);
+                datos.add(
+                        "Reserva: " + id +
+                                "\nHabitación: " + habitacion +
+                                "\nInicio: " + inicio +
+                                "\nFin: " + fin
+                );
             } while (c.moveToNext());
         }
 
@@ -163,22 +188,42 @@ public class ReservaActivity extends AppCompatActivity {
 
     private void cargarHabitaciones() {
         listaHabitaciones = new ArrayList<>();
-        Cursor c = sql.rawQuery(
-                "SELECT codigo FROM habitacion",
-                null
-        );
+        Cursor c = sql.rawQuery("SELECT codigo FROM habitacion", null);
+
         if (c.moveToFirst()) {
             do {
                 listaHabitaciones.add(c.getString(0));
             } while (c.moveToNext());
         }
+
         c.close();
+
         adapterHabitaciones = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_spinner_dropdown_item,
                 listaHabitaciones
         );
         spinnerHabitaciones.setAdapter(adapterHabitaciones);
+    }
+
+    private void cargarCedulas() {
+
+        listaCedulas = new ArrayList<>();
+        Cursor c = sql.rawQuery("SELECT cedula FROM huesped", null);
+
+        if (c.moveToFirst()) {
+            do {
+                listaCedulas.add(c.getString(0));
+            } while (c.moveToNext());
+        }
+        c.close();
+        adapterCedulas = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_spinner_dropdown_item,
+                listaCedulas
+        );
+
+        spinnerCedulas.setAdapter(adapterCedulas);
     }
 
 }

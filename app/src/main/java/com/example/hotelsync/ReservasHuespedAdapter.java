@@ -42,11 +42,11 @@ public class ReservasHuespedAdapter extends BaseAdapter {
 
         if (convertView == null) {
             convertView = LayoutInflater.from(context)
-                    .inflate(R.layout.listview_reservas_huesped, parent, false);
+                   // .inflate(R.layout.listview_reservas_huesped, parent, false);
 
-            holder = new ViewHolder();
-            holder.imgIcono = convertView.findViewById(R.id.imgIcono);
-            holder.txtIdReserva = convertView.findViewById(R.id.txtIdReserva);
+           // holder = new ViewHolder();
+           // holder.imgIcono = convertView.findViewById(R.id.imgIcono);
+          //  holder.txtIdReserva = convertView.findViewById(R.id.txtIdReserva);
             holder.txtCedula = convertView.findViewById(R.id.txtCedula);
             holder.txtNombre = convertView.findViewById(R.id.txtNombre);
             holder.txtEstado = convertView.findViewById(R.id.txtEstado);

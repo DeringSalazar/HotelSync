@@ -137,26 +137,28 @@ public class HabitacionActivity extends AppCompatActivity {
     }
 
     private void cargarHabitaciones() {
-        datos = new ArrayList<>();
+        ArrayList<Habitacion> lista = new ArrayList<>();
         Cursor c = sql.rawQuery("SELECT * FROM habitacion", null);
 
         if (c.moveToFirst()) {
             do {
-                datos.add(
-                        "Código: " + c.getString(0) +
-                                "\nNúmero: " + c.getString(1) +
-                                "\nEstado: " + c.getString(2) +
-                                "\nPiso: " + c.getString(3) +
-                                "\nNombre: " + c.getString(4) +
-                                "\nDescripción: " + c.getString(5) +
-                                "\nPrecio/noche: " + c.getString(6) +
-                                "\nCapacidad: " + c.getString(7)
-                );
+                lista.add(new Habitacion(
+                        c.getString(0),
+                        c.getString(1),
+                        c.getString(2),
+                        c.getString(3),
+                        c.getString(4),
+                        c.getString(5),
+                        c.getString(6),
+                        c.getString(7),
+                        R.drawable.habitacion
+                ));
             } while (c.moveToNext());
         }
         c.close();
 
-        adaptador = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, datos);
-        listaHabitaciones.setAdapter(adaptador);
+        HabitacionAdapter adapter = new HabitacionAdapter(this, lista);
+        listaHabitaciones.setAdapter(adapter);
     }
+
 }

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="12dp"
+    android:background="#FFFFFF">
+
+    <ImageView
+        android:id="@+id/imgHabitacion"
+        android:layout_width="131dp"
+        android:layout_height="121dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/habitacion"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/layoutInfo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="12dp"
+        app:layout_constraintStart_toEndOf="@id/imgHabitacion"
+        app:layout_constraintTop_toTopOf="@id/imgHabitacion"
+        app:layout_constraintBottom_toBottomOf="@id/imgHabitacion"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/txtCodigo"
+            android:text="Código: 1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:textColor="#000"/>
+
+        <TextView
+            android:id="@+id/txtNumero"
+            android:text="Número: 150"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="#555"/>
+
+        <TextView
+            android:id="@+id/txtEstado"
+            android:text="Estado: Libre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="#555"/>
+
+        <TextView
+            android:id="@+id/txtPiso"
+            android:text="Piso: 1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="#555"/>
+
+        <TextView
+            android:id="@+id/txtNombre"
+            android:text="Nombre: suite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="#555"/>
+
+        <TextView
+            android:id="@+id/txtDescripcion"
+            android:text="Descripción: ..."
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="#555"/>
+
+        <TextView
+            android:id="@+id/txtPrecio"
+            android:text="Precio/noche: 0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="#555"/>
+
+        <TextView
+            android:id="@+id/txtCapacidad"
+            android:text="Capacidad: 4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="#555"/>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

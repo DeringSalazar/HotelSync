@@ -86,11 +86,25 @@ public class ReservaActivity extends AppCompatActivity {
         });
     }
 
+    private String generarIdReserva() {
+        Cursor c = sql.rawQuery("SELECT id_reserva FROM reserva ORDER BY id_reserva DESC LIMIT 1", null);
+        String nuevoId = "R0001";
+        if (c.moveToFirst()) {
+            String ultimoId = c.getString(0);
+            int numero = Integer.parseInt(ultimoId.substring(1));
+            numero++;
+            nuevoId = String.format("R%04d", numero);
+        }
+        c.close();
+        return nuevoId;
+    }
+
+
     private void crearReserva() {
 
         String cedulaSeleccionada = spinnerCedulas.getSelectedItem().toString();
 
-        String idReserva = "R" + System.currentTimeMillis();
+        String idReserva = generarIdReserva();
 
         ContentValues reserva = new ContentValues();
         reserva.put("id_reserva", idReserva);

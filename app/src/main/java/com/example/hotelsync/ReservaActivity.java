@@ -25,8 +25,10 @@ public class ReservaActivity extends AppCompatActivity {
     SQLiteDatabase sql;
 
     Spinner spinnerHabitaciones, spinnerCedulas;
-    ArrayList<String> listaHabitaciones, listaCedulas, datos;
-    ArrayAdapter<String> adapterHabitaciones, adapterCedulas, adaptador;
+    ArrayList<String> listaHabitaciones, listaCedulas;
+    ArrayAdapter<String> adapterHabitaciones, adapterCedulas;
+    ArrayList<ReservasHuesped> datos;
+    ReservasHuespedAdapter adaptador;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +58,22 @@ public class ReservaActivity extends AppCompatActivity {
 
         btnReservar.setOnClickListener(v -> crearReserva());
         btnEditar.setOnClickListener(v -> editarReserva());
-        btnEliminar.setOnClickListener(v -> eliminarReserva());
+        btnEliminar.setOnClickListener(v -> {
+            // Eliminar usando spinnerCedulas como antes
+            String codigo = spinnerCedulas.getSelectedItem().toString();
+            eliminarReserva(codigo);
+        });
         btnRegresar.setOnClickListener(v -> finish());
+
+        // Nuevo: eliminar reserva al tocar un item del ListView
+        lista.setOnItemClickListener((parent, view, position, id) -> {
+            // Obtenemos la reserva seleccionada
+            ReservasHuesped reservaSeleccionada = (ReservasHuesped) parent.getItemAtPosition(position);
+            String idReserva = reservaSeleccionada.getIdReserva();
+
+            // Llamamos a la función de eliminación
+            eliminarReserva(idReserva);
+        });
     }
 
     private void eventoSpinnerCedulas() {
@@ -99,11 +115,9 @@ public class ReservaActivity extends AppCompatActivity {
         return nuevoId;
     }
 
-
     private void crearReserva() {
 
         String cedulaSeleccionada = spinnerCedulas.getSelectedItem().toString();
-
         String idReserva = generarIdReserva();
 
         ContentValues reserva = new ContentValues();
@@ -157,12 +171,11 @@ public class ReservaActivity extends AppCompatActivity {
         }
     }
 
-    private void eliminarReserva() {
+    // MODIFICADA: eliminar usando idReserva
+    private void eliminarReserva(String idReserva) {
 
-        String codigo = spinnerCedulas.getSelectedItem().toString();
-
-        sql.delete("reserva_huesped", "idreserva=?", new String[]{codigo});
-        int filas = sql.delete("reserva", "id_reserva=?", new String[]{codigo});
+        sql.delete("reserva_huesped", "idreserva=?", new String[]{idReserva});
+        int filas = sql.delete("reserva", "id_reserva=?", new String[]{idReserva});
 
         if (filas > 0) {
             Toast.makeText(this, "Reserva eliminada", Toast.LENGTH_SHORT).show();
@@ -176,27 +189,39 @@ public class ReservaActivity extends AppCompatActivity {
 
         datos = new ArrayList<>();
 
-        Cursor c = sql.rawQuery("SELECT * FROM reserva", null);
+        Cursor c = sql.rawQuery(
+                "SELECT r.id_reserva, r.codigo_habitacion, r.fecha_inicio, r.fecha_fin, " +
+                        "h.cedula, h.nombre, rh.estado " +
+                        "FROM reserva r " +
+                        "INNER JOIN reserva_huesped rh ON r.id_reserva = rh.idreserva " +
+                        "INNER JOIN huesped h ON h.cedula = rh.cedula_huesped",
+                null
+        );
 
         if (c.moveToFirst()) {
             do {
-                String id = c.getString(0);
-                String habitacion = c.getString(2);
-                String inicio = c.getString(3);
-                String fin = c.getString(4);
+                ReservasHuesped g = new ReservasHuesped();
 
-                datos.add(
-                        "Reserva: " + id +
-                                "\nHabitación: " + habitacion +
-                                "\nInicio: " + inicio +
-                                "\nFin: " + fin
-                );
+                g.setIdReserva(c.getString(0));
+                g.setHabitacion(c.getString(1));
+                g.setFechaInicio(c.getString(2));
+                g.setFechaFin(c.getString(3));
+
+                g.setCedulaHuesped(c.getString(4));
+                g.setNombreHuesped(c.getString(5));
+                g.setEstado(c.getString(6));
+
+                // imagen fija
+                g.setImagen(R.drawable.habitacion);
+
+                datos.add(g);
+
             } while (c.moveToNext());
         }
 
         c.close();
 
-        adaptador = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, datos);
+        adaptador = new ReservasHuespedAdapter(this, datos);
         lista.setAdapter(adaptador);
     }
 

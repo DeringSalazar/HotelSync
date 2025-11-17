@@ -20,7 +20,6 @@ import androidx.appcompat.app.AppCompatActivity;
 public class GestionEmpleado extends AppCompatActivity {
 
     EditText txtCodigoReserva, txtCedulaEmpleado, txtCedulaHuesped, txtFechaInicio, txtFechaFin, txtTotal;
-    Spinner spinnerEstado;
     Button btnConfirmar, btnCancelar, btnBuscar;
     ListView listaReservas;
 
@@ -39,7 +38,6 @@ public class GestionEmpleado extends AppCompatActivity {
         txtFechaInicio = findViewById(R.id.txtFechaInicio);
         txtFechaFin = findViewById(R.id.txtFechaFin);
         txtTotal = findViewById(R.id.txtTotal);
-        spinnerEstado = findViewById(R.id.spinnerEstado);
         btnConfirmar = findViewById(R.id.btnConfirmar);
         btnCancelar = findViewById(R.id.btnCancelar);
         btnBuscar = findViewById(R.id.btnBuscar);
@@ -47,11 +45,6 @@ public class GestionEmpleado extends AppCompatActivity {
 
         DBGestion admin = new DBGestion(this, "BaseDatos", null, 1);
         basedatos = admin.getWritableDatabase();
-
-        String[] estados = {"Pendiente", "Confirmada", "Cancelada"};
-        ArrayAdapter<String> adapterEstados =
-                new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, estados);
-        spinnerEstado.setAdapter(adapterEstados);
 
         btnConfirmar.setOnClickListener(v -> cambiarEstado("Confirmada"));
         btnCancelar.setOnClickListener(v -> cambiarEstado("Cancelada"));
@@ -80,11 +73,6 @@ public class GestionEmpleado extends AppCompatActivity {
         if (c.moveToFirst()) {
             txtCedulaEmpleado.setText(c.getString(1));
             txtCedulaHuesped.setText(c.getString(2));
-
-            spinnerEstado.setSelection(
-                    ((ArrayAdapter<String>) spinnerEstado.getAdapter())
-                            .getPosition(c.getString(3))
-            );
 
             txtFechaInicio.setText(c.getString(4));
             txtFechaFin.setText(c.getString(5));

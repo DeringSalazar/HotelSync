@@ -215,9 +215,9 @@
 
         <ListView
             android:id="@+id/listaHabitaciones"
-            android:dividerHeight="8dp"
-            android:paddingTop="6dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:dividerHeight="8dp"
+            android:paddingTop="6dp" />
     </LinearLayout>
 </ScrollView>

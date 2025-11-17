@@ -1,12 +1,13 @@
 package com.example.hotelsync;
 
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.*;
+
+import com.example.hotelsync.ReservasHuesped;
 
 import java.util.List;
 
@@ -41,17 +42,17 @@ public class ReservasHuespedAdapter extends BaseAdapter {
         ViewHolder holder;
 
         if (convertView == null) {
-            convertView = LayoutInflater.from(context)
-                   // .inflate(R.layout.listview_reservas_huesped, parent, false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.listview_reservas_huesped, parent, false);
 
-           // holder = new ViewHolder();
-           // holder.imgIcono = convertView.findViewById(R.id.imgIcono);
-          //  holder.txtIdReserva = convertView.findViewById(R.id.txtIdReserva);
+            holder = new ViewHolder();
+            holder.imgIcono = convertView.findViewById(R.id.imgIcono);
+            holder.txtIdReserva = convertView.findViewById(R.id.txtIdReserva);
             holder.txtCedula = convertView.findViewById(R.id.txtCedula);
             holder.txtNombre = convertView.findViewById(R.id.txtNombre);
             holder.txtEstado = convertView.findViewById(R.id.txtEstado);
             holder.txtInicio = convertView.findViewById(R.id.txtInicio);
             holder.txtFin = convertView.findViewById(R.id.txtFin);
+
             convertView.setTag(holder);
 
         } else {
@@ -59,6 +60,7 @@ public class ReservasHuespedAdapter extends BaseAdapter {
         }
 
         ReservasHuesped r = lst.get(position);
+
         holder.imgIcono.setImageResource(r.getImagen());
         holder.txtIdReserva.setText("Reserva: " + r.getIdReserva());
         holder.txtCedula.setText("Cédula: " + r.getCedulaHuesped());
@@ -66,8 +68,10 @@ public class ReservasHuespedAdapter extends BaseAdapter {
         holder.txtEstado.setText("Estado: " + r.getEstado());
         holder.txtInicio.setText("Inicio: " + r.getFechaInicio());
         holder.txtFin.setText("Fin: " + r.getFechaFin());
+
         return convertView;
     }
+
     static class ViewHolder {
         ImageView imgIcono;
         TextView txtIdReserva;

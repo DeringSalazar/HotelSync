@@ -51,7 +51,7 @@ public class HabitacionActivity extends AppCompatActivity {
 
         dbGestion = new DBGestion(this, "BaseDatos", null, 1);
         sql = dbGestion.getWritableDatabase();
-        String[] estados = {"Libre", "Ocupada"};
+        String[] estados = {"Suite", "Estandar", "Familiar", "Deluxe"};
         ArrayAdapter<String> adapterEstados = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, estados);
         spinnerEstado.setAdapter(adapterEstados);
         btnGuardar.setOnClickListener(v -> guardarHabitacion());
@@ -59,6 +59,9 @@ public class HabitacionActivity extends AppCompatActivity {
         btnActualizar.setOnClickListener(v -> actualizarHabitacion());
         btnEliminar.setOnClickListener(v -> eliminarHabitacion());
         cargarHabitaciones();
+
+        btnEliminar.setEnabled(false);
+        btnActualizar.setEnabled(false);
     }
 
     public void Anterior(View view)  {
@@ -98,6 +101,8 @@ public class HabitacionActivity extends AppCompatActivity {
             txtDescripcion.setText(c.getString(5));
             txtPrecio.setText(c.getString(6));
             txtCapacidad.setText(c.getString(7));
+            btnEliminar.setEnabled(true);
+            btnActualizar.setEnabled(true);
             Toast.makeText(this, "Habitación encontrada", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(this, "No existe la habitación", Toast.LENGTH_SHORT).show();
@@ -117,9 +122,10 @@ public class HabitacionActivity extends AppCompatActivity {
         valores.put("capacidad", txtCapacidad.getText().toString().trim());
 
         int r = sql.update("habitacion", valores, "codigo=?", new String[]{codigo});
-        if (r > 0)
+        if (r > 0) {
             Toast.makeText(this, "Habitación actualizada", Toast.LENGTH_SHORT).show();
-        else
+            btnActualizar.setEnabled(false);
+        }else
             Toast.makeText(this, "No existe la habitación", Toast.LENGTH_SHORT).show();
 
         cargarHabitaciones();
@@ -128,9 +134,10 @@ public class HabitacionActivity extends AppCompatActivity {
     private void eliminarHabitacion() {
         String codigo = txtCodigo.getText().toString().trim();
         int r = sql.delete("habitacion", "codigo=?", new String[]{codigo});
-        if (r > 0)
+        if (r > 0) {
             Toast.makeText(this, "Habitación eliminada", Toast.LENGTH_SHORT).show();
-        else
+            btnEliminar.setEnabled(false);
+        }else
             Toast.makeText(this, "No existe la habitación", Toast.LENGTH_SHORT).show();
 
         cargarHabitaciones();

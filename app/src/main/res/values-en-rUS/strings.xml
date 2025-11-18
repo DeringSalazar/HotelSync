@@ -42,10 +42,15 @@
     <string name="edittextFechaFin">End Date</string>
     <string name="edittexCantHabi">Number of Rooms</string>
 
-    <!-- Campos de Vista Principal Reserva  -->
+    <!-- Campos de vista principal huespedes  -->
     <string name="labelVistaHuesped">Guest View</string>
     <string name="btnGestionReseva">Reservation Management</string>
     <string name="btnCreacionUsuario">User Creation</string>
     <string name="btnRegresarVista">Back</string>
 
+
+    <!-- Campos de vista principal huespedes  -->
+    <string name="labelVistaEmpleado">Employee Main View</string>
+    <string name="btnCreacionEmpleado">Employee creation</string>
+    <string name="btnGestionHabitacion">Room management</string>
 </resources>

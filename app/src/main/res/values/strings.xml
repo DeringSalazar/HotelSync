@@ -50,6 +50,11 @@
     <string name="btnCreacionUsuario">Creacion de Usuarios</string>
     <string name="btnRegresarVista">Regresar</string>
 
+    <!-- Campos de vista principal Empleado  -->
+    <string name="labelVistaEmpleado">Vista principal de los Huespedes</string>
+    <string name="btnCreacionEmpleado">Creacion de Empleado</string>
+    <string name="btnGestionHabitacion">Gestion de Habitaciones</string>
+
 
 
 </resources>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">HotelSync</string>
+
+    <!-- Campos de usuarios en inglés -->
+    <string name="titleUser">Users</string>
+    <string name="labelRol">Select your role:</string>
+    <string name="rbHuesped">Guest</string>
+    <string name="rbEmpleado">Employee</string>
+    <string name="labelCedula">ID</string>
+    <string name="labelNombre">Name</string>
+    <string name="labelApellido">Last Name</string>
+    <string name="labelTelefono">Phone</string>
+    <string name="labelCorreo">Email</string>
+    <string name="btnInsertar">Insert</string>
+    <string name="btnBuscar">Search</string>
+    <string name="btnActualizar">Update</string>
+    <string name="btnEliminar">Delete</string>
+    <string name="btnRegresar">Back</string>
+    <string name="listTitle">List of records</string>
+
+    <string name="editTextCedula">Enter your ID number</string>
+    <string name="editTextNombre">Enter your first name</string>
+    <string name="editTextApellido">Enter your last name</string>
+    <string name="editTextTelefono">Enter your phone number</string>
+    <string name="editTextCorreo">Enter your email address</string>
+
+</resources>

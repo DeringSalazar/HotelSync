@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">HotelSync</string>
 
-    <!-- Campos de usuarios en español -->
+    <!-- Campos de usuarios  -->
     <string name="titleUser">Usuarios</string>
     <string name="labelRol">Selecciona tu rol:</string>
     <string name="rbHuesped">Huésped</string>
@@ -24,5 +24,13 @@
     <string name="editTextApellido">Ingrese el apellido</string>
     <string name="editTextTelefono">Ingrese el telefono</string>
     <string name="editTextCorreo">Ingrese el correo</string>
+
+
+    <!-- Campos de Main  -->
+    <string name="btnHuesped">Huespedes</string>
+    <string name="btnEmpleado">Empleados</string>
+
+    <string name="labelDescrip">Gestion moderna de reservas</string>
+    <string name="listRole">Selecciona tu rol</string>
 
 </resources>

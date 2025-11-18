@@ -25,4 +25,11 @@
     <string name="editTextTelefono">Enter your phone number</string>
     <string name="editTextCorreo">Enter your email address</string>
 
+    <!-- Campos de usuarios en inglés -->
+    <string name="btnHuesped">Guests</string>
+    <string name="btnEmpleado">Employee</string>
+
+    <string name="labelDescrip">Modern reservation management</string>
+    <string name="listRole">Select your role</string>
+
 </resources>

@@ -51,7 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
-                android:text="Gestión moderna de reservas"
+                android:text="@string/labelDescrip"
                 android:textColor="#666666"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -61,7 +61,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:text="Selecciona tu rol:"
+                android:text="@string/listRole"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -80,7 +80,7 @@
                     android:layout_weight="1"
                     android:backgroundTint="#E0F7FA"
                     android:onClick="Huesped"
-                    android:text="Huespedes"
+                    android:text="@string/btnHuesped"
                     android:textAllCaps="false"
                     android:textColor="#00796B" />
 
@@ -101,7 +101,7 @@
                     android:layout_weight="1"
                     android:backgroundTint="#F5F5F5"
                     android:onClick="Empleado"
-                    android:text="Empleados"
+                    android:text="@string/btnEmpleado"
                     android:textAllCaps="false"
                     android:textColor="#666666" />
             </LinearLayout>

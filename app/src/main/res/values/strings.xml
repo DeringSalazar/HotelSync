@@ -55,6 +55,18 @@
     <string name="btnCreacionEmpleado">Creacion de Empleado</string>
     <string name="btnGestionHabitacion">Gestion de Habitaciones</string>
 
+    <!-- Campos de Habitacion -->
+    <string name="labelIdentificacionHabi">Identificación</string>
+    <string name="labelUbicacionHabi">Ubicación</string>
+    <string name="labelInfoHabitacion">Información de Habitación</string>
+    <string name="labelTarivaHabi">Tarica y Cantidad</string>
+    <string name="labelListaHabi">Lista de Habitaciones</string>
+
+    <string name="editTextCodigoHabi">Código</string>
+    <string name="editTextNumeroHabi">Número</string>
+    <string name="editTextDescripcionHabi">Descripción</string>
+    <string name="editTextPrecioHabi">Precio/noche</string>
+    <string name="editTextCantidadHabi">Cantidad</string>
 
 
 </resources>

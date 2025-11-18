@@ -11,7 +11,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:text="Identificación"
+            android:text="@string/labelIdentificacionHabi"
             android:textStyle="bold"
             android:textSize="18sp"
             android:layout_marginBottom="10dp"
@@ -44,7 +44,7 @@
 
 
         <TextView
-            android:text="Ubicación"
+            android:text="@string/labelUbicacionHabi"
             android:textStyle="bold"
             android:textSize="18sp"
             android:layout_marginBottom="10dp"
@@ -74,7 +74,7 @@
         </LinearLayout>
 
         <TextView
-            android:text="Información de la habitación"
+            android:text="@string/labelInfoHabitacion"
             android:textStyle="bold"
             android:textSize="18sp"
             android:layout_marginBottom="10dp"
@@ -105,7 +105,7 @@
         </LinearLayout>
 
         <TextView
-            android:text="Tarifa y capacidad"
+            android:text="@string/labelTarivaHabi"
             android:textStyle="bold"
             android:textSize="18sp"
             android:layout_marginBottom="10dp"
@@ -151,7 +151,7 @@
 
                 <Button
                     android:id="@+id/btnGuardarHabitacion"
-                    android:text="Guardar"
+                    android:text="@string/btnInsertar"
                     android:layout_margin="6dp"
                     android:layout_weight="1"
                     android:layout_width="0dp"
@@ -159,7 +159,7 @@
 
                 <Button
                     android:id="@+id/btnBuscarHabitacion"
-                    android:text="Buscar"
+                    android:text="@string/btnBuscar"
                     android:layout_margin="6dp"
                     android:layout_weight="1"
                     android:layout_width="0dp"
@@ -175,7 +175,7 @@
 
                 <Button
                     android:id="@+id/btnActualizarHabitacion"
-                    android:text="Actualizar"
+                    android:text="@string/btnActualizar"
                     android:layout_margin="6dp"
                     android:layout_weight="1"
                     android:layout_width="0dp"
@@ -183,7 +183,7 @@
 
                 <Button
                     android:id="@+id/btnEliminarHabitacion"
-                    android:text="Eliminar"
+                    android:text="@string/btnEliminar"
                     android:layout_margin="6dp"
                     android:layout_weight="1"
                     android:layout_width="0dp"
@@ -197,7 +197,7 @@
 
                 <Button
                     android:id="@+id/btnExtra"
-                    android:text="Volver"
+                    android:text="@string/btnRegresar"
                     android:onClick="Anterior"
                     android:layout_margin="6dp"
                     android:layout_width="wrap_content"
@@ -207,7 +207,7 @@
         </LinearLayout>
 
         <TextView
-            android:text="Lista de habitaciones"
+            android:text="@string/labelListaHabi"
             android:textStyle="bold"
             android:layout_marginTop="12dp"
             android:layout_width="wrap_content"

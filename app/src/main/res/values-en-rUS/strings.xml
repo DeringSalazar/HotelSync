@@ -53,4 +53,18 @@
     <string name="labelVistaEmpleado">Employee Main View</string>
     <string name="btnCreacionEmpleado">Employee creation</string>
     <string name="btnGestionHabitacion">Room management</string>
+
+    <!-- Campos de Habitacion -->
+    <string name="labelIdentificacionHabi">ID</string>
+    <string name="labelUbicacionHabi">Location</string>
+    <string name="labelInfoHabitacion">Room Information </string>
+    <string name="labelTarivaHabi">Rate and Quantity</string>
+    <string name="labelListaHabi">Room List</string>
+
+    <string name="editTextCodigoHabi">Code</string>
+    <string name="editTextNumeroHabi">Number</string>
+    <string name="editTextDescripcionHabi">Description</string>
+    <string name="editTextPrecioHabi">Price/night</string>
+    <string name="editTextCantidadHabi">Amount</string>
+
 </resources>

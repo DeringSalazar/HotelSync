@@ -33,4 +33,23 @@
     <string name="labelDescrip">Gestion moderna de reservas</string>
     <string name="listRole">Selecciona tu rol</string>
 
+
+    <!-- Campos de Reserva  -->
+    <string name="btnReservar">Reservar</string>
+    <string name="btnEditarReserHuspe">Editar</string>
+
+    <string name="labelDatosHuesped">Datos Huéped</string>
+    <string name="labelDetalleReserva">Detalles de la Reserva</string>
+    <string name="edittextFechainicio">Fecha inicio</string>
+    <string name="edittextFechaFin">Feche fin</string>
+    <string name="edittexCantHabi">Numero de habitaciones</string>
+
+    <!-- Campos de vista principal huespedes  -->
+    <string name="labelVistaHuesped">Vista principal de los Huespedes</string>
+    <string name="btnGestionReseva">Gestion de Reservaciones</string>
+    <string name="btnCreacionUsuario">Creacion de Usuarios</string>
+    <string name="btnRegresarVista">Regresar</string>
+
+
+
 </resources>

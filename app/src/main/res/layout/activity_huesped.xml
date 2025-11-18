@@ -28,7 +28,7 @@
             android:layout_marginBottom="16dp"
             android:backgroundTint="#E0F7FA"
             android:onClick="reservaHuesped"
-            android:text="Gestión de reservaciones"
+            android:text="@string/btnGestionReseva"
             android:textAllCaps="false"
             android:textColor="#00796B" />
 
@@ -39,7 +39,7 @@
             android:layout_marginBottom="16dp"
             android:backgroundTint="#F5F5F5"
             android:onClick="usuario"
-            android:text="Creacion de Usuario"
+            android:text="@string/btnCreacionUsuario"
             android:textAllCaps="false"
             android:textColor="#666666" />
 
@@ -49,7 +49,7 @@
             android:layout_height="48dp"
             android:backgroundTint="#F5F5F5"
             android:onClick="Volver"
-            android:text="Volver"
+            android:text="@string/btnRegresarVista"
             android:textAllCaps="false"
             android:textColor="#666666" />
 
@@ -62,7 +62,7 @@
         android:layout_marginStart="173dp"
         android:layout_marginTop="192dp"
         android:layout_marginEnd="180dp"
-        android:text="Vista pincipal de los Huespedes"
+        android:text="@string/labelVistaHuesped"
         android:textColor="#0B0A0A"
         android:textSize="20sp"
         android:textStyle="bold"

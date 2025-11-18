@@ -34,7 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
-                android:text="Datos del huésped"
+                android:text="@string/labelDatosHuesped"
                 android:textColor="#444"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -61,7 +61,7 @@
                     android:layout_marginEnd="4dp"
                     android:layout_weight="1"
                     android:background="#FFFFFF"
-                    android:hint="Nombre"
+                    android:hint="@string/labelNombre"
                     android:padding="8dp" />
 
                 <EditText
@@ -71,7 +71,7 @@
                     android:layout_marginStart="4dp"
                     android:layout_weight="1"
                     android:background="#FFFFFF"
-                    android:hint="Apellido"
+                    android:hint="@string/labelApellido"
                     android:padding="8dp" />
             </LinearLayout>
 
@@ -80,7 +80,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
-                android:text="Detalles de la Reserva"
+                android:text="@string/labelDetalleReserva"
                 android:textColor="#444"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -107,7 +107,7 @@
                     android:layout_marginEnd="4dp"
                     android:layout_weight="1"
                     android:background="#FFFFFF"
-                    android:hint="Fecha inicio"
+                    android:hint="@string/edittextFechainicio"
                     android:padding="8dp" />
 
                 <EditText
@@ -117,7 +117,7 @@
                     android:layout_marginStart="4dp"
                     android:layout_weight="1"
                     android:background="#FFFFFF"
-                    android:hint="Fecha fin"
+                    android:hint="@string/edittextFechaFin"
                     android:padding="8dp" />
             </LinearLayout>
 
@@ -127,7 +127,7 @@
                 android:layout_height="48dp"
                 android:layout_marginBottom="8dp"
                 android:background="#FFFFFF"
-                android:hint="Cantidad de habitaciones"
+                android:hint="@string/edittexCantHabi"
                 android:inputType="number"
                 android:padding="8dp" />
 
@@ -146,7 +146,7 @@
                     android:layout_marginEnd="4dp"
                     android:layout_weight="1"
                     android:backgroundTint="#673AB7"
-                    android:text="Reservar"
+                    android:text="@string/btnReservar"
                     android:textColor="#FFF" />
 
                 <Button
@@ -156,7 +156,7 @@
                     android:layout_marginStart="4dp"
                     android:layout_weight="1"
                     android:backgroundTint="#673AB7"
-                    android:text="Editar"
+                    android:text="@string/btnEditarReserHuspe"
                     android:textColor="#FFF" />
             </LinearLayout>
 
@@ -173,7 +173,7 @@
                     android:layout_marginEnd="4dp"
                     android:layout_weight="1"
                     android:backgroundTint="#673AB7"
-                    android:text="Eliminar"
+                    android:text="@string/btnEliminar"
                     android:textColor="#FFF" />
 
                 <Button
@@ -183,7 +183,7 @@
                     android:layout_marginStart="4dp"
                     android:layout_weight="1"
                     android:backgroundTint="#757575"
-                    android:text="Regresar"
+                    android:text="@string/btnRegresar"
                     android:textColor="#FFF" />
             </LinearLayout>
 

@@ -59,19 +59,13 @@ public class ReservaActivity extends AppCompatActivity {
         btnReservar.setOnClickListener(v -> crearReserva());
         btnEditar.setOnClickListener(v -> editarReserva());
         btnEliminar.setOnClickListener(v -> {
-            // Eliminar usando spinnerCedulas como antes
             String codigo = spinnerCedulas.getSelectedItem().toString();
             eliminarReserva(codigo);
         });
         btnRegresar.setOnClickListener(v -> finish());
-
-        // Nuevo: eliminar reserva al tocar un item del ListView
         lista.setOnItemClickListener((parent, view, position, id) -> {
-            // Obtenemos la reserva seleccionada
             ReservasHuesped reservaSeleccionada = (ReservasHuesped) parent.getItemAtPosition(position);
             String idReserva = reservaSeleccionada.getIdReserva();
-
-            // Llamamos a la función de eliminación
             eliminarReserva(idReserva);
         });
     }
@@ -119,7 +113,6 @@ public class ReservaActivity extends AppCompatActivity {
 
         String cedulaSeleccionada = spinnerCedulas.getSelectedItem().toString();
         String idReserva = generarIdReserva();
-
         ContentValues reserva = new ContentValues();
         reserva.put("id_reserva", idReserva);
         reserva.put("cedula_empleado", "EMP001");
@@ -127,9 +120,7 @@ public class ReservaActivity extends AppCompatActivity {
         reserva.put("fecha_inicio", txtInicio.getText().toString());
         reserva.put("fecha_fin", txtFin.getText().toString());
         reserva.put("Total", "0");
-
         sql.insert("reserva", null, reserva);
-
         int cantidad = Integer.parseInt(txtCantidad.getText().toString());
 
         for (int i = 0; i < cantidad; i++) {
@@ -157,12 +148,9 @@ public class ReservaActivity extends AppCompatActivity {
         r.put("Total", "0");
 
         int fila1 = sql.update("reserva", r, "id_reserva=?", new String[]{codigo});
-
         ContentValues h = new ContentValues();
         h.put("cedula_huesped", cedulaSeleccionada);
-
         int fila2 = sql.update("reserva_huesped", h, "idreserva=?", new String[]{codigo});
-
         if (fila1 > 0 && fila2 > 0) {
             Toast.makeText(this, "Reserva actualizada", Toast.LENGTH_SHORT).show();
             cargarReservas();
@@ -171,7 +159,6 @@ public class ReservaActivity extends AppCompatActivity {
         }
     }
 
-    // MODIFICADA: eliminar usando idReserva
     private void eliminarReserva(String idReserva) {
 
         sql.delete("reserva_huesped", "idreserva=?", new String[]{idReserva});
@@ -206,12 +193,9 @@ public class ReservaActivity extends AppCompatActivity {
                 g.setHabitacion(c.getString(1));
                 g.setFechaInicio(c.getString(2));
                 g.setFechaFin(c.getString(3));
-
                 g.setCedulaHuesped(c.getString(4));
                 g.setNombreHuesped(c.getString(5));
                 g.setEstado(c.getString(6));
-
-                // imagen fija
                 g.setImagen(R.drawable.habitacion);
 
                 datos.add(g);

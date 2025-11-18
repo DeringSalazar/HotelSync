@@ -59,6 +59,9 @@ public class Usuarios extends AppCompatActivity {
         btnEliminar.setOnClickListener(v -> eliminarRegistro());
         btnRegresar.setOnClickListener(v -> finish());
 
+
+        btnEliminar.setEnabled(false);
+        btnActualizar.setEnabled(false);
         radioGroupRol.setOnCheckedChangeListener((group, checkedId) -> cargarListaPorRol());
 
         cargarListaPorRol();
@@ -76,8 +79,8 @@ public class Usuarios extends AppCompatActivity {
         String telefono = edtTelefono.getText().toString().trim();
         String correo = edtCorreo.getText().toString().trim();
 
-        if (cedula.isEmpty() || nombre.isEmpty()) {
-            Toast.makeText(this, "Cédula y nombre son obligatorios", Toast.LENGTH_SHORT).show();
+        if (cedula.isEmpty() || nombre.isEmpty() || apellido.isEmpty() || telefono.isEmpty() || correo.isEmpty()) {
+            Toast.makeText(this, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -105,6 +108,7 @@ public class Usuarios extends AppCompatActivity {
         String cedula = edtCedula.getText().toString().trim();
         if (cedula.isEmpty()) {
             Toast.makeText(this, "Ingrese cédula para buscar", Toast.LENGTH_SHORT).show();
+
             return;
         }
 
@@ -119,6 +123,8 @@ public class Usuarios extends AppCompatActivity {
             edtTelefono.setText(c.getString(3));
             edtCorreo.setText(c.getString(4));
             Toast.makeText(this, "Registro encontrado en " + tabla, Toast.LENGTH_SHORT).show();
+            btnEliminar.setEnabled(true);
+            btnActualizar.setEnabled(true);
         } else {
             Toast.makeText(this, "No existe la cédula en " + tabla, Toast.LENGTH_SHORT).show();
         }
@@ -130,6 +136,7 @@ public class Usuarios extends AppCompatActivity {
         String cedula = edtCedula.getText().toString().trim();
         if (cedula.isEmpty()) {
             Toast.makeText(this, "Ingrese cédula para actualizar", Toast.LENGTH_SHORT).show();
+            btnActualizar.setEnabled(false);
             return;
         }
 
@@ -154,7 +161,9 @@ public class Usuarios extends AppCompatActivity {
         String cedula = edtCedula.getText().toString().trim();
         if (cedula.isEmpty()) {
             Toast.makeText(this, "Ingrese cédula para eliminar", Toast.LENGTH_SHORT).show();
+            btnEliminar.setEnabled(false);
             return;
+
         }
 
         int filas = basedatos.delete(tabla, "cedula=?", new String[]{cedula});

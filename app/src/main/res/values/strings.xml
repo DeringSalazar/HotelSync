@@ -68,5 +68,26 @@
     <string name="editTextPrecioHabi">Precio/noche</string>
     <string name="editTextCantidadHabi">Cantidad</string>
 
+    <!-- Campos de Gestión de empleado -->
+    <string name="datos_de_identificaci_n">Datos de Identificación</string>
+    <string name="c_digo_reserva">Código reserva</string>
+    <string name="c_dula_empleado">Cédula empleado</string>
+    <string name="datos_del_hu_sped">Datos del Huésped</string>
+    <string name="c_dula_hu_sped">Cédula huésped</string>
+    <string name="total">Total</string>
+    <string name="fechas_de_reserva">Fechas de Reserva</string>
+    <string name="inicio_yyyy_mm_dd">Inicio (YYYY-MM-DD)</string>
+    <string name="fin_yyyy_mm_dd">Fin (YYYY-MM-DD)</string>
+    <string name="confirmar">Confirmar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="buscar">Buscar</string>
+    <string name="volver">Volver</string>
+    <string name="fin">"Fin: "</string>
+    <string name="c_dula">"Cédula: "</string>
+    <string name="nombre">"Nombre: "</string>
+    <string name="estado">"Estado: "</string>
+    <string name="inicio">"Inicio: "</string>
+    <string name="cedula">"Cédula: "</string>
+
 
 </resources>

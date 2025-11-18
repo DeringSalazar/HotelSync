@@ -26,6 +26,8 @@ public class Usuarios extends AppCompatActivity {
     ArrayList<Vista> listaUsuarios;
     UsuariosAdapter adaptador;
 
+    String cedulaSeleccionada  = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +48,19 @@ public class Usuarios extends AppCompatActivity {
         btnRegresar = findViewById(R.id.btnRegresar);
         listViewUsuarios = findViewById(R.id.listViewUsuarios);
 
+        String tipo = getIntent().getStringExtra("tipo");
+        if (tipo != null) {
+            if (tipo.equals("huesped")) {
+                rbEmpleado.setEnabled(false);
+                rbHuesped.setChecked(true);
+                rbEmpleado.setVisibility(View.INVISIBLE);
+            } else if (tipo.equals("empleado")) {
+                rbHuesped.setEnabled(false);
+                rbEmpleado.setChecked(true);
+                rbHuesped.setVisibility(View.INVISIBLE);
+            }
+        }
+
         admin = new DBGestion(this, "BaseDatos", null, 1);
         basedatos = admin.getWritableDatabase();
 
@@ -63,6 +78,17 @@ public class Usuarios extends AppCompatActivity {
         btnEliminar.setEnabled(false);
         btnActualizar.setEnabled(false);
         radioGroupRol.setOnCheckedChangeListener((group, checkedId) -> cargarListaPorRol());
+
+        listViewUsuarios.setOnItemClickListener((parent, view, position, id) -> {
+            Vista seleccionado = (Vista) parent.getItemAtPosition(position);
+
+            cedulaSeleccionada = String.valueOf(seleccionado.getCedula());
+
+            edtCedula.setText(cedulaSeleccionada);
+
+            btnEliminar.setEnabled(true);
+            btnActualizar.setEnabled(true);
+        });
 
         cargarListaPorRol();
     }
@@ -96,7 +122,7 @@ public class Usuarios extends AppCompatActivity {
             if (res != -1) {
                 Toast.makeText(this, "Insertado en " + tabla, Toast.LENGTH_SHORT).show();
                 limpiarCampos();
-                cargarListaPorRol();  // <-- Se recarga la lista con tu formato
+                cargarListaPorRol();
             }
         } catch (Exception e) {
             Toast.makeText(this, "Error al insertar: " + e.getMessage(), Toast.LENGTH_LONG).show();
@@ -157,24 +183,27 @@ public class Usuarios extends AppCompatActivity {
     }
 
     private void eliminarRegistro() {
-        String tabla = rolSeleccionado();
-        String cedula = edtCedula.getText().toString().trim();
-        if (cedula.isEmpty()) {
-            Toast.makeText(this, "Ingrese cédula para eliminar", Toast.LENGTH_SHORT).show();
-            btnEliminar.setEnabled(false);
+        if (cedulaSeleccionada == null) {
+            Toast.makeText(this, "Seleccione un registro", Toast.LENGTH_SHORT).show();
             return;
-
         }
 
-        int filas = basedatos.delete(tabla, "cedula=?", new String[]{cedula});
+        String tabla = rolSeleccionado();
+
+        int filas = basedatos.delete(tabla, "cedula=?", new String[]{cedulaSeleccionada});
+
         if (filas > 0) {
             Toast.makeText(this, "Eliminado de " + tabla, Toast.LENGTH_SHORT).show();
             limpiarCampos();
             cargarListaPorRol();
+            cedulaSeleccionada = null;
+            btnEliminar.setEnabled(false);
+            btnActualizar.setEnabled(false);
         } else {
             Toast.makeText(this, "No se encontró la cédula en " + tabla, Toast.LENGTH_SHORT).show();
         }
     }
+
 
     private void cargarListaPorRol() {
         String tabla = rolSeleccionado();

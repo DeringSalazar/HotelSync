@@ -29,6 +29,8 @@ public class ReservaActivity extends AppCompatActivity {
     ArrayAdapter<String> adapterHabitaciones, adapterCedulas;
     ArrayList<ReservasHuesped> datos;
     ReservasHuespedAdapter adaptador;
+    String idReservaSeleccionada = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,14 +61,20 @@ public class ReservaActivity extends AppCompatActivity {
         btnReservar.setOnClickListener(v -> crearReserva());
         btnEditar.setOnClickListener(v -> editarReserva());
         btnEliminar.setOnClickListener(v -> {
-            String codigo = spinnerCedulas.getSelectedItem().toString();
-            eliminarReserva(codigo);
+            if (idReservaSeleccionada != null) {
+                eliminarReserva(idReservaSeleccionada);
+                idReservaSeleccionada = null;
+            } else {
+                Toast.makeText(this, "Seleccione una reserva", Toast.LENGTH_SHORT).show();
+            }
         });
         btnRegresar.setOnClickListener(v -> finish());
         lista.setOnItemClickListener((parent, view, position, id) -> {
-            ReservasHuesped reservaSeleccionada = (ReservasHuesped) parent.getItemAtPosition(position);
-            String idReserva = reservaSeleccionada.getIdReserva();
-            eliminarReserva(idReserva);
+            ReservasHuesped reservaSeleccionada =
+                    (ReservasHuesped) parent.getItemAtPosition(position);
+
+            idReservaSeleccionada = reservaSeleccionada.getIdReserva();
+            Toast.makeText(this, "Seleccionó reserva: " + idReservaSeleccionada, Toast.LENGTH_SHORT).show();
         });
     }
 

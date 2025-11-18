@@ -62,12 +62,12 @@ public class ReservasHuespedAdapter extends BaseAdapter {
         ReservasHuesped r = lst.get(position);
 
         holder.imgIcono.setImageResource(r.getImagen());
-        holder.txtIdReserva.setText("Reserva: " + r.getIdReserva());
-        holder.txtCedula.setText("Cédula: " + r.getCedulaHuesped());
-        holder.txtNombre.setText("Nombre: " + r.getNombreHuesped());
-        holder.txtEstado.setText("Estado: " + r.getEstado());
-        holder.txtInicio.setText("Inicio: " + r.getFechaInicio());
-        holder.txtFin.setText("Fin: " + r.getFechaFin());
+        holder.txtIdReserva.setText(r.getIdReserva());
+        holder.txtCedula.setText(context.getString(R.string.c_dula) + r.getCedulaHuesped());
+        holder.txtNombre.setText(context.getString(R.string.nombre) + r.getNombreHuesped());
+        holder.txtEstado.setText(context.getString(R.string.estado) + r.getEstado());
+        holder.txtInicio.setText(context.getString(R.string.inicio) + r.getFechaInicio());
+        holder.txtFin.setText(context.getString(R.string.fin) + r.getFechaFin());
 
         return convertView;
     }

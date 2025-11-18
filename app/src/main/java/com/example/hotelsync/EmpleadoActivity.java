@@ -22,6 +22,7 @@ public class EmpleadoActivity extends AppCompatActivity {
 
     public void usuarioempleado(View view)  {
         Intent intent= new Intent(this,Usuarios.class);
+        intent.putExtra("tipo", "empleado");
         startActivity(intent);
     }
 

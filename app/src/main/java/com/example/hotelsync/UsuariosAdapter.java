@@ -58,7 +58,7 @@ public class UsuariosAdapter extends BaseAdapter {
 
         holder.imgUsuario.setImageResource(v.getImagen());
         holder.txtNombreApellido.setText(v.getNombre() + " " + v.getApellido());
-        holder.txtCedula.setText("Cédula: " + v.getCedula());
+        holder.txtCedula.setText(context.getString(R.string.cedula) + v.getCedula());
         holder.txtTelefono.setText("Tel: " + v.getTelefono());
         holder.txtCorreo.setText(v.getCorreo());
 

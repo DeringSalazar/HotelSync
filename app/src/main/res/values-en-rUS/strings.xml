@@ -61,10 +61,31 @@
     <string name="labelTarivaHabi">Rate and Quantity</string>
     <string name="labelListaHabi">Room List</string>
 
+    <!-- Campos de Gestión de empleado -->
     <string name="editTextCodigoHabi">Code</string>
     <string name="editTextNumeroHabi">Number</string>
     <string name="editTextDescripcionHabi">Description</string>
     <string name="editTextPrecioHabi">Price/night</string>
     <string name="editTextCantidadHabi">Amount</string>
+    <string name="datos_de_identificaci_n">Identification Data</string>
+    <string name="c_digo_reserva">Reservation Code</string>
+    <string name="c_dula_empleado">Employee ID</string>
+    <string name="datos_del_hu_sped">Guest Information</string>
+    <string name="c_dula_hu_sped">Guest ID</string>
+    <string name="total">Total</string>
+    <string name="fechas_de_reserva">Reservation Dates</string>
+    <string name="inicio_yyyy_mm_dd">Start (YYYY-MM-DD)</string>
+    <string name="fin_yyyy_mm_dd">End (YYYY-MM-DD)</string>
+    <string name="confirmar">Confirm</string>
+    <string name="cancelar">Cancel</string>
+    <string name="buscar">Search</string>
+    <string name="volver">Back</string>
+    <string name="fin">"End: "</string>
+    <string name="c_dula">"ID: "</string>
+    <string name="nombre">"Name: "</string>
+    <string name="estado">"State: "</string>
+    <string name="inicio">"Start: "</string>
+    <string name="cedula">"ID: "</string>
 
 </resources>
+

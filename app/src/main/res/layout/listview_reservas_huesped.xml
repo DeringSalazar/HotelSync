@@ -29,7 +29,7 @@
 
         <TextView
             android:id="@+id/txtIdReserva"
-            android:text="Reserva: R0001"
+            android:text="Res: R0001"
             android:textStyle="bold"
             android:textSize="16sp"
             android:textColor="#000"
@@ -38,7 +38,7 @@
 
         <TextView
             android:id="@+id/txtCedula"
-            android:text="Cédula: 0"
+            android:text="Céd: 0"
             android:textSize="14sp"
             android:textColor="#555"
             android:layout_width="wrap_content"
@@ -46,7 +46,7 @@
 
         <TextView
             android:id="@+id/txtNombre"
-            android:text="Nombre: Juan Pérez"
+            android:text="Nom: Juan Pérez"
             android:textSize="14sp"
             android:textColor="#555"
             android:layout_width="wrap_content"
@@ -54,7 +54,7 @@
 
         <TextView
             android:id="@+id/txtHabitacion"
-            android:text="Hab.: 101"
+            android:text="Hab: 101"
             android:textSize="14sp"
             android:textColor="#555"
             android:layout_width="wrap_content"
@@ -62,7 +62,7 @@
 
         <TextView
             android:id="@+id/txtEstado"
-            android:text="Estado: Pendiente"
+            android:text="Est: Pendiente"
             android:textSize="14sp"
             android:textColor="#555"
             android:layout_width="wrap_content"
@@ -70,7 +70,7 @@
 
         <TextView
             android:id="@+id/txtInicio"
-            android:text="Inicio: 01/01/2026"
+            android:text="Ini: 01/01/2026"
             android:textSize="14sp"
             android:textColor="#555"
             android:layout_width="wrap_content"

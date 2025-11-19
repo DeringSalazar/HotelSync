@@ -10,7 +10,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:text="Datos de Identificación"
+            android:text="@string/datos_de_identificaci_n"
             android:textStyle="bold"
             android:textSize="18sp"
             android:layout_marginBottom="12dp"
@@ -26,7 +26,7 @@
 
             <EditText
                 android:id="@+id/txtCodigoReserva"
-                android:hint="Código reserva"
+                android:text="@string/c_digo_reserva"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
@@ -34,14 +34,14 @@
 
             <EditText
                 android:id="@+id/txtCedulaEmpleado"
-                android:hint="Cédula empleado"
+                android:text="@string/c_dula_empleado"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
 
         <TextView
-            android:text="Datos del Huésped"
+            android:text="@string/datos_del_hu_sped"
             android:textStyle="bold"
             android:textSize="18sp"
             android:layout_marginBottom="12dp"
@@ -57,7 +57,7 @@
 
             <EditText
                 android:id="@+id/txtCedulaHuesped"
-                android:hint="Cédula huésped"
+                android:text="@string/c_dula_hu_sped"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
@@ -65,7 +65,7 @@
 
             <EditText
                 android:id="@+id/txtTotal"
-                android:hint="Total"
+                android:text="@string/total"
                 android:inputType="numberDecimal"
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -73,7 +73,7 @@
         </LinearLayout>
 
         <TextView
-            android:text="Fechas de Reserva"
+            android:text="@string/fechas_de_reserva"
             android:textStyle="bold"
             android:textSize="18sp"
             android:layout_marginBottom="12dp"
@@ -89,7 +89,7 @@
 
             <EditText
                 android:id="@+id/txtFechaInicio"
-                android:hint="Inicio (YYYY-MM-DD)"
+                android:text="@string/inicio_yyyy_mm_dd"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
@@ -97,7 +97,7 @@
 
             <EditText
                 android:id="@+id/txtFechaFin"
-                android:hint="Fin (YYYY-MM-DD)"
+                android:text="@string/fin_yyyy_mm_dd"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"/>
@@ -112,7 +112,7 @@
 
             <Button
                 android:id="@+id/btnConfirmar"
-                android:text="Confirmar"
+                android:text="@string/confirmar"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -120,7 +120,7 @@
 
             <Button
                 android:id="@+id/btnCancelar"
-                android:text="Cancelar"
+                android:text="@string/cancelar"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content" />
@@ -135,7 +135,7 @@
 
             <Button
                 android:id="@+id/btnBuscar"
-                android:text="Buscar"
+                android:text="@string/buscar"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -147,7 +147,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="Anterior"
-                android:text="Volver" />
+                android:text="@string/volver" />
         </LinearLayout>
 
         <ListView

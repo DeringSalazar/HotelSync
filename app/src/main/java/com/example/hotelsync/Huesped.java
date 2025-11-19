@@ -28,6 +28,7 @@ public class Huesped extends AppCompatActivity {
 
     public void usuario(View view)  {
         Intent intent= new Intent(this,Usuarios.class);
+        intent.putExtra("tipo", "huesped");
         startActivity(intent);
     }
 

@@ -1,9 +1,11 @@
 package com.example.hotelsync;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,7 +32,7 @@ public class ReservaActivity extends AppCompatActivity {
     ArrayList<ReservasHuesped> datos;
     ReservasHuespedAdapter adaptador;
     String idReservaSeleccionada = null;
-
+    ReservasHuesped reservaSeleccionada;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +61,6 @@ public class ReservaActivity extends AppCompatActivity {
         eventoSpinnerCedulas();
 
         btnReservar.setOnClickListener(v -> crearReserva());
-        btnEditar.setOnClickListener(v -> editarReserva());
         btnEliminar.setOnClickListener(v -> {
             if (idReservaSeleccionada != null) {
                 eliminarReserva(idReservaSeleccionada);
@@ -68,14 +69,36 @@ public class ReservaActivity extends AppCompatActivity {
                 Toast.makeText(this, "Seleccione una reserva", Toast.LENGTH_SHORT).show();
             }
         });
-        btnRegresar.setOnClickListener(v -> finish());
         lista.setOnItemClickListener((parent, view, position, id) -> {
-            ReservasHuesped reservaSeleccionada =
-                    (ReservasHuesped) parent.getItemAtPosition(position);
-
-            idReservaSeleccionada = reservaSeleccionada.getIdReserva();
+            ReservasHuesped reserva = datos.get(position);
+            idReservaSeleccionada = reserva.getIdReserva();
+            reservaSeleccionada = reserva;
             Toast.makeText(this, "Seleccionó reserva: " + idReservaSeleccionada, Toast.LENGTH_SHORT).show();
         });
+        btnEditar.setOnClickListener(v -> {
+            if (reservaSeleccionada == null) {
+                Toast.makeText(this, "Seleccione una reserva", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            Intent intent = new Intent(this, EditarReservas.class);
+            intent.putExtra("id_reserva", reservaSeleccionada.getIdReserva());
+            intent.putExtra("cedula", reservaSeleccionada.getCedulaHuesped());
+            intent.putExtra("habitacion", reservaSeleccionada.getHabitacion());
+            intent.putExtra("inicio", reservaSeleccionada.getFechaInicio());
+            intent.putExtra("fin", reservaSeleccionada.getFechaFin());
+            startActivityForResult(intent, 1001);
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        cargarReservas();
+    }
+
+    public void Volver(View view)  {
+        Intent intent = new Intent(this, Huesped.class);
+        startActivity(intent);
     }
 
     private void eventoSpinnerCedulas() {
@@ -141,30 +164,6 @@ public class ReservaActivity extends AppCompatActivity {
 
         Toast.makeText(this, "Reserva creada correctamente", Toast.LENGTH_LONG).show();
         cargarReservas();
-    }
-
-    private void editarReserva() {
-
-        String codigo = spinnerCedulas.getSelectedItem().toString();
-        String cedulaSeleccionada = spinnerCedulas.getSelectedItem().toString();
-
-        ContentValues r = new ContentValues();
-        r.put("cedula_empleado", "EMP001");
-        r.put("codigo_habitacion", spinnerHabitaciones.getSelectedItem().toString());
-        r.put("fecha_inicio", txtInicio.getText().toString());
-        r.put("fecha_fin", txtFin.getText().toString());
-        r.put("Total", "0");
-
-        int fila1 = sql.update("reserva", r, "id_reserva=?", new String[]{codigo});
-        ContentValues h = new ContentValues();
-        h.put("cedula_huesped", cedulaSeleccionada);
-        int fila2 = sql.update("reserva_huesped", h, "idreserva=?", new String[]{codigo});
-        if (fila1 > 0 && fila2 > 0) {
-            Toast.makeText(this, "Reserva actualizada", Toast.LENGTH_SHORT).show();
-            cargarReservas();
-        } else {
-            Toast.makeText(this, "No existe la reserva", Toast.LENGTH_SHORT).show();
-        }
     }
 
     private void eliminarReserva(String idReserva) {

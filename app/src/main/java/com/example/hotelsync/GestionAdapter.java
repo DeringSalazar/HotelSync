@@ -5,15 +5,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.*;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.List;
 
-public class ReservasAdapter extends BaseAdapter {
+public class GestionAdapter extends BaseAdapter {
+
     Context context;
     List<Gestion> lst;
 
-    public ReservasAdapter(Context context, List<Gestion> lst) {
+    public GestionAdapter(Context context, List<Gestion> lst) {
         this.context = context;
         this.lst = lst;
     }
@@ -24,13 +26,13 @@ public class ReservasAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int i) {
-        return lst.get(i);
+    public Object getItem(int position) {
+        return lst.get(position);
     }
 
     @Override
-    public long getItemId(int i) {
-        return i;
+    public long getItemId(int position) {
+        return position;
     }
 
     @Override
@@ -39,7 +41,9 @@ public class ReservasAdapter extends BaseAdapter {
         ViewHolder holder;
 
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.listview_gestion, parent, false);
+
+            convertView = LayoutInflater.from(context)
+                    .inflate(R.layout.listview_gestion, parent, false);
 
             holder = new ViewHolder();
 
@@ -74,13 +78,7 @@ public class ReservasAdapter extends BaseAdapter {
 
     static class ViewHolder {
         ImageView imgHabitacion;
-        TextView txtCodigo;
-        TextView txtEmpleado;
-        TextView txtHuesped;
-        TextView txtEstado;
-        TextView txtFechaInicio;
-        TextView txtFechaFin;
-        TextView txtTotal;
+        TextView txtCodigo, txtEmpleado, txtHuesped,
+                txtEstado, txtFechaInicio, txtFechaFin, txtTotal;
     }
-
 }

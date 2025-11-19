@@ -14,6 +14,9 @@
 
         <!-- Actividades de tu app -->
         <activity
+            android:name=".EditarReservas"
+            android:exported="false" />
+        <activity
             android:name=".EditarUsuario"
             android:exported="false" />
         <activity

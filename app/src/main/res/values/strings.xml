@@ -90,6 +90,14 @@
     <string name="estado">"Estado: "</string>
     <string name="inicio">"Inicio: "</string>
     <string name="cedula">"Cédula: "</string>
+    <string name="editar_usuario">Editar usuario</string>
+    <string name="guardar">Guardar</string>
+    <string name="vol">Volver</string>
+    <string name="registros_actuales">Registros actuales</string>
+    <string name="editar_reserva">Editar Reserva</string>
+    <string name="cantidad_de_habitaciones">Cantidad de habitaciones</string>
+    <string name="guardar_cambios">Guardar cambios</string>
+    <string name="volver1">Volver</string>
 
 
 </resources>

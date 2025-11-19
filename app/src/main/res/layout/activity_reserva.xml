@@ -183,6 +183,7 @@
                     android:layout_marginStart="4dp"
                     android:layout_weight="1"
                     android:backgroundTint="#757575"
+                    android:onClick="Volver"
                     android:text="@string/btnRegresar"
                     android:textColor="#FFF" />
             </LinearLayout>

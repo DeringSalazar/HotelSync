@@ -13,6 +13,8 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -21,11 +23,21 @@ public class HabitacionActivity extends AppCompatActivity {
 
     EditText txtCodigo, txtNumero, txtPiso, txtNombre, txtDescripcion, txtPrecio, txtCapacidad;
     Spinner spinnerEstado;
-    Button btnGuardar, btnBuscar, btnActualizar, btnEliminar;
+    Button btnGuardar, btnBuscar, btnActualizar, btnEliminar, btnEditarHabitacion;
     ListView listaHabitaciones;
 
     DBGestion dbGestion;
     SQLiteDatabase sql;
+
+    Habitacion habitacionSeleccionada;
+    HabitacionAdapter adapter;
+
+    ActivityResultLauncher<Intent> editarLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                cargarHabitaciones();
+            }
+    );
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,18 +51,17 @@ public class HabitacionActivity extends AppCompatActivity {
         txtDescripcion = findViewById(R.id.txtDescripcion);
         txtPrecio = findViewById(R.id.txtPrecio);
         txtCapacidad = findViewById(R.id.txtCapacidad);
-
         spinnerEstado = findViewById(R.id.spinnerEstado);
-
         btnGuardar = findViewById(R.id.btnGuardarHabitacion);
         btnBuscar = findViewById(R.id.btnBuscarHabitacion);
         btnActualizar = findViewById(R.id.btnActualizarHabitacion);
         btnEliminar = findViewById(R.id.btnEliminarHabitacion);
+        btnEditarHabitacion = findViewById(R.id.btnEditarHabitacion);
         listaHabitaciones = findViewById(R.id.listaHabitaciones);
+
 
         dbGestion = new DBGestion(this, "BaseDatos", null, 1);
         sql = dbGestion.getWritableDatabase();
-
         String[] estados = {"Suite", "Estandar", "Familiar", "Deluxe"};
         ArrayAdapter<String> adapterEstados =
                 new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, estados);
@@ -59,15 +70,31 @@ public class HabitacionActivity extends AppCompatActivity {
         btnBuscar.setOnClickListener(v -> buscarHabitacion());
         btnActualizar.setOnClickListener(v -> actualizarHabitacion());
         btnEliminar.setOnClickListener(v -> eliminarHabitacion());
-        cargarHabitaciones();
+
+        btnEditarHabitacion.setEnabled(false);
+
+        listaHabitaciones.setOnItemClickListener((parent, view, position, id) -> {
+            habitacionSeleccionada = (Habitacion) parent.getItemAtPosition(position);
+            btnEditarHabitacion.setEnabled(true);
+            Toast.makeText(this, "Habitación seleccionada: " + habitacionSeleccionada.getCodigo(), Toast.LENGTH_SHORT).show();
+        });
+
+        btnEditarHabitacion.setOnClickListener(v -> {
+            if (habitacionSeleccionada != null) {
+                Intent intent = new Intent(HabitacionActivity.this, EditarHabitacionActivity.class);
+                intent.putExtra("codigo", habitacionSeleccionada.getCodigo());
+                editarLauncher.launch(intent); // Lanzamos con callback
+            }
+        });
 
         btnEliminar.setEnabled(false);
         btnActualizar.setEnabled(false);
+
+        cargarHabitaciones();
     }
 
     public void Anterior(View view) {
-        Intent intent = new Intent(this, EmpleadoActivity.class);
-        startActivity(intent);
+        startActivity(new Intent(this, EmpleadoActivity.class));
     }
 
     private void guardarHabitacion() {
@@ -180,7 +207,11 @@ public class HabitacionActivity extends AppCompatActivity {
 
         c.close();
 
-        HabitacionAdapter adapter = new HabitacionAdapter(this, lista);
-        listaHabitaciones.setAdapter(adapter);
+        if (adapter == null) {
+            adapter = new HabitacionAdapter(this, lista);
+            listaHabitaciones.setAdapter(adapter);
+        } else {
+            adapter.actualizarLista(lista);
+        }
     }
 }

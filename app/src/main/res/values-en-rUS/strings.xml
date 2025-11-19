@@ -60,6 +60,8 @@
     <string name="labelInfoHabitacion">Room Information </string>
     <string name="labelTarivaHabi">Rate and Quantity</string>
     <string name="labelListaHabi">Room List</string>
+    <string name="editTextPisoHabi">Floor</string>
+    <string name="editTextNombreHabi">Room name</string>
 
     <!-- Campos de Gestión de empleado -->
     <string name="editTextCodigoHabi">Code</string>

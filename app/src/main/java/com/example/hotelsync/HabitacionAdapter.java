@@ -39,8 +39,6 @@ public class HabitacionAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         ViewHolder holder;
-
-        // Inflar layout solo cuando sea necesario (mejora rendimiento)
         if (convertView == null) {
             convertView = LayoutInflater.from(context)
                     .inflate(R.layout.listview_habitacion, parent, false);
@@ -50,11 +48,7 @@ public class HabitacionAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-
-        // Obtener habitación actual
         Habitacion h = getItem(position);
-
-        // Asignar valores a los elementos visuales
         holder.imgHabitacion.setImageResource(h.getImagen());
         holder.txtCodigo.setText("Código: " + h.getCodigo());
         holder.txtNumero.setText("Número: " + h.getNumero());
@@ -69,7 +63,6 @@ public class HabitacionAdapter extends BaseAdapter {
     }
 
     static class ViewHolder {
-
         ImageView imgHabitacion;
         TextView txtCodigo, txtNumero, txtEstado, txtPiso,
                 txtNombre, txtDescripcion, txtPrecio, txtCapacidad;
@@ -85,5 +78,11 @@ public class HabitacionAdapter extends BaseAdapter {
             txtPrecio = view.findViewById(R.id.txtPrecio);
             txtCapacidad = view.findViewById(R.id.txtCapacidad);
         }
+    }
+
+    public void actualizarLista(List<Habitacion> nuevaLista) {
+        habitaciones.clear();
+        habitaciones.addAll(nuevaLista);
+        notifyDataSetChanged();
     }
 }

@@ -24,7 +24,7 @@ public class GestionEmpleado extends AppCompatActivity {
     ListView listaReservas;
 
     ArrayList<Gestion> listaGestion;
-    ReservasAdapter adaptador;
+    GestionAdapter adaptador;
     SQLiteDatabase basedatos;
 
     @Override
@@ -134,7 +134,7 @@ public class GestionEmpleado extends AppCompatActivity {
             } while (c.moveToNext());
         }
         c.close();
-        adaptador = new ReservasAdapter(this, listaGestion);
+        adaptador = new GestionAdapter(this, listaGestion);
         listaReservas.setAdapter(adaptador);
     }
 }

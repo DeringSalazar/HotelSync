@@ -86,6 +86,14 @@
     <string name="estado">"State: "</string>
     <string name="inicio">"Start: "</string>
     <string name="cedula">"ID: "</string>
+    <string name="editar_usuario">Edit user</string>
+    <string name="guardar">Keep</string>
+    <string name="vol">Back</string>
+    <string name="registros_actuales">Current records</string>
+    <string name="editar_reserva">Edit Reservation</string>
+    <string name="cantidad_de_habitaciones">Number of rooms</string>
+    <string name="guardar_cambios">Save changes</string>
+    <string name="volver1">Back</string>
 
 </resources>
 

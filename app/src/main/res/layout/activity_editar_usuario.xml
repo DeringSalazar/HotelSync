@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Editar usuario"
+        android:text="@string/editar_usuario"
         android:textStyle="bold"
         android:textSize="18sp"
         android:layout_marginBottom="8dp"/>
@@ -63,7 +63,7 @@
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_weight="1"
-            android:text="Guardar" />
+            android:text="@string/guardar" />
 
         <Button
             android:id="@+id/btnCancelar"
@@ -72,14 +72,14 @@
             android:layout_marginStart="8dp"
             android:layout_weight="1"
             android:onClick="Volver"
-            android:text="Volver" />
+            android:text="@string/vol" />
     </LinearLayout>
 
     <TextView
         android:layout_marginTop="12dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Registros actuales"
+        android:text="@string/registros_actuales"
         android:textStyle="bold"/>
 
     <ListView

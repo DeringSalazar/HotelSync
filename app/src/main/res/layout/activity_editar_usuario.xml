@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Editar usuario"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:layout_marginBottom="8dp"/>
+
+    <EditText
+        android:id="@+id/edtCedulaEdit"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="Cédula"
+        android:padding="8dp"/>
+
+    <EditText
+        android:id="@+id/edtNombreEdit"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="Nombre"
+        android:padding="8dp"/>
+
+    <EditText
+        android:id="@+id/edtApellidoEdit"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="Apellido"
+        android:padding="8dp"/>
+
+    <EditText
+        android:id="@+id/edtTelefonoEdit"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="Teléfono"
+        android:inputType="phone"
+        android:padding="8dp"/>
+
+    <EditText
+        android:id="@+id/edtCorreoEdit"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="Correo"
+        android:inputType="textEmailAddress"
+        android:padding="8dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp"
+        android:weightSum="2">
+
+        <Button
+            android:id="@+id/btnGuardar"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:text="Guardar" />
+
+        <Button
+            android:id="@+id/btnCancelar"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:onClick="Volver"
+            android:text="Volver" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_marginTop="12dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Registros actuales"
+        android:textStyle="bold"/>
+
+    <ListView
+        android:id="@+id/listViewEditUsuarios"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:dividerHeight="1dp"
+        android:paddingTop="8dp" />
+</LinearLayout>

@@ -27,6 +27,7 @@ public class Usuarios extends AppCompatActivity {
     UsuariosAdapter adaptador;
 
     String cedulaSeleccionada  = null;
+    Vista seleccionadoGlobal = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,9 +71,7 @@ public class Usuarios extends AppCompatActivity {
 
         btnInsertar.setOnClickListener(v -> insertarRegistro());
         btnBuscar.setOnClickListener(v -> buscarRegistro());
-        btnActualizar.setOnClickListener(v -> actualizarRegistro());
         btnEliminar.setOnClickListener(v -> eliminarRegistro());
-        btnRegresar.setOnClickListener(v -> finish());
 
 
         btnEliminar.setEnabled(false);
@@ -81,16 +80,47 @@ public class Usuarios extends AppCompatActivity {
 
         listViewUsuarios.setOnItemClickListener((parent, view, position, id) -> {
             Vista seleccionado = (Vista) parent.getItemAtPosition(position);
+            seleccionadoGlobal = seleccionado;
 
             cedulaSeleccionada = String.valueOf(seleccionado.getCedula());
 
-            edtCedula.setText(cedulaSeleccionada);
+            edtCedula.setText(String.valueOf(seleccionado.getCedula()));
+            edtNombre.setText(seleccionado.getNombre());
+            edtApellido.setText(seleccionado.getApellido());
+            edtTelefono.setText(String.valueOf(seleccionado.getTelefono()));
+            edtCorreo.setText(seleccionado.getCorreo());
 
             btnEliminar.setEnabled(true);
             btnActualizar.setEnabled(true);
         });
 
+        btnActualizar.setOnClickListener(v -> {
+            if (seleccionadoGlobal == null) {
+                Toast.makeText(Usuarios.this, "Seleccione un registro para editar", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            Intent i = new Intent(Usuarios.this, EditarUsuario.class);
+            i.putExtra("cedula", String.valueOf(seleccionadoGlobal.getCedula()));
+            i.putExtra("nombre", seleccionadoGlobal.getNombre());
+            i.putExtra("apellido", seleccionadoGlobal.getApellido());
+            i.putExtra("telefono", String.valueOf(seleccionadoGlobal.getTelefono()));
+            i.putExtra("correo", seleccionadoGlobal.getCorreo());
+            i.putExtra("rol", rolSeleccionado());
+            startActivity(i);
+        });
+
         cargarListaPorRol();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        cargarListaPorRol();
+    }
+
+    public void Volver(View view)  {
+        Intent intent = new Intent(this, Huesped.class);
+        startActivity(intent);
     }
 
     private String rolSeleccionado() {
@@ -155,31 +185,6 @@ public class Usuarios extends AppCompatActivity {
             Toast.makeText(this, "No existe la cédula en " + tabla, Toast.LENGTH_SHORT).show();
         }
         c.close();
-    }
-
-    private void actualizarRegistro() {
-        String tabla = rolSeleccionado();
-        String cedula = edtCedula.getText().toString().trim();
-        if (cedula.isEmpty()) {
-            Toast.makeText(this, "Ingrese cédula para actualizar", Toast.LENGTH_SHORT).show();
-            btnActualizar.setEnabled(false);
-            return;
-        }
-
-        ContentValues cv = new ContentValues();
-        cv.put("nombre", edtNombre.getText().toString().trim());
-        cv.put("apellido", edtApellido.getText().toString().trim());
-        cv.put("telefono", edtTelefono.getText().toString().trim());
-        cv.put("correo", edtCorreo.getText().toString().trim());
-
-        int filas = basedatos.update(tabla, cv, "cedula=?", new String[]{cedula});
-        if (filas > 0) {
-            Toast.makeText(this, "Actualizado en " + tabla, Toast.LENGTH_SHORT).show();
-            limpiarCampos();
-            cargarListaPorRol();
-        } else {
-            Toast.makeText(this, "No se encontró la cédula en " + tabla, Toast.LENGTH_SHORT).show();
-        }
     }
 
     private void eliminarRegistro() {

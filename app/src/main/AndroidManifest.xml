@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HotelSync">
         <activity
+            android:name=".EditarUsuario"
+            android:exported="false" />
+        <activity
             android:name=".Usuarios"
             android:exported="false" />
         <activity

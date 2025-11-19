@@ -26,8 +26,6 @@ public class HabitacionActivity extends AppCompatActivity {
 
     DBGestion dbGestion;
     SQLiteDatabase sql;
-    ArrayList<String> datos;
-    ArrayAdapter<String> adaptador;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +39,7 @@ public class HabitacionActivity extends AppCompatActivity {
         txtDescripcion = findViewById(R.id.txtDescripcion);
         txtPrecio = findViewById(R.id.txtPrecio);
         txtCapacidad = findViewById(R.id.txtCapacidad);
+
         spinnerEstado = findViewById(R.id.spinnerEstado);
 
         btnGuardar = findViewById(R.id.btnGuardarHabitacion);
@@ -51,8 +50,10 @@ public class HabitacionActivity extends AppCompatActivity {
 
         dbGestion = new DBGestion(this, "BaseDatos", null, 1);
         sql = dbGestion.getWritableDatabase();
+
         String[] estados = {"Suite", "Estandar", "Familiar", "Deluxe"};
-        ArrayAdapter<String> adapterEstados = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, estados);
+        ArrayAdapter<String> adapterEstados =
+                new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, estados);
         spinnerEstado.setAdapter(adapterEstados);
         btnGuardar.setOnClickListener(v -> guardarHabitacion());
         btnBuscar.setOnClickListener(v -> buscarHabitacion());
@@ -64,8 +65,8 @@ public class HabitacionActivity extends AppCompatActivity {
         btnActualizar.setEnabled(false);
     }
 
-    public void Anterior(View view)  {
-        Intent intent= new Intent(this, EmpleadoActivity.class);
+    public void Anterior(View view) {
+        Intent intent = new Intent(this, EmpleadoActivity.class);
         startActivity(intent);
     }
 
@@ -81,6 +82,7 @@ public class HabitacionActivity extends AppCompatActivity {
         valores.put("capacidad", txtCapacidad.getText().toString().trim());
 
         long r = sql.insertWithOnConflict("habitacion", null, valores, SQLiteDatabase.CONFLICT_IGNORE);
+
         if (r > 0)
             Toast.makeText(this, "Habitación registrada", Toast.LENGTH_SHORT).show();
         else
@@ -91,27 +93,34 @@ public class HabitacionActivity extends AppCompatActivity {
 
     private void buscarHabitacion() {
         String codigo = txtCodigo.getText().toString().trim();
+
         Cursor c = sql.rawQuery("SELECT * FROM habitacion WHERE codigo=?", new String[]{codigo});
 
         if (c.moveToFirst()) {
             txtNumero.setText(c.getString(1));
-            spinnerEstado.setSelection(((ArrayAdapter<String>) spinnerEstado.getAdapter()).getPosition(c.getString(2)));
+            spinnerEstado.setSelection(
+                    ((ArrayAdapter<String>) spinnerEstado.getAdapter()).getPosition(c.getString(2))
+            );
             txtPiso.setText(c.getString(3));
             txtNombre.setText(c.getString(4));
             txtDescripcion.setText(c.getString(5));
             txtPrecio.setText(c.getString(6));
             txtCapacidad.setText(c.getString(7));
+
             btnEliminar.setEnabled(true);
             btnActualizar.setEnabled(true);
+
             Toast.makeText(this, "Habitación encontrada", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(this, "No existe la habitación", Toast.LENGTH_SHORT).show();
         }
+
         c.close();
     }
 
     private void actualizarHabitacion() {
         String codigo = txtCodigo.getText().toString().trim();
+
         ContentValues valores = new ContentValues();
         valores.put("numero", txtNumero.getText().toString().trim());
         valores.put("estado", spinnerEstado.getSelectedItem().toString());
@@ -122,29 +131,35 @@ public class HabitacionActivity extends AppCompatActivity {
         valores.put("capacidad", txtCapacidad.getText().toString().trim());
 
         int r = sql.update("habitacion", valores, "codigo=?", new String[]{codigo});
+
         if (r > 0) {
             Toast.makeText(this, "Habitación actualizada", Toast.LENGTH_SHORT).show();
             btnActualizar.setEnabled(false);
-        }else
+        } else {
             Toast.makeText(this, "No existe la habitación", Toast.LENGTH_SHORT).show();
+        }
 
         cargarHabitaciones();
     }
 
     private void eliminarHabitacion() {
         String codigo = txtCodigo.getText().toString().trim();
+
         int r = sql.delete("habitacion", "codigo=?", new String[]{codigo});
+
         if (r > 0) {
             Toast.makeText(this, "Habitación eliminada", Toast.LENGTH_SHORT).show();
             btnEliminar.setEnabled(false);
-        }else
+        } else {
             Toast.makeText(this, "No existe la habitación", Toast.LENGTH_SHORT).show();
+        }
 
         cargarHabitaciones();
     }
 
     private void cargarHabitaciones() {
         ArrayList<Habitacion> lista = new ArrayList<>();
+
         Cursor c = sql.rawQuery("SELECT * FROM habitacion", null);
 
         if (c.moveToFirst()) {
@@ -162,10 +177,10 @@ public class HabitacionActivity extends AppCompatActivity {
                 ));
             } while (c.moveToNext());
         }
+
         c.close();
 
         HabitacionAdapter adapter = new HabitacionAdapter(this, lista);
         listaHabitaciones.setAdapter(adapter);
     }
-
 }

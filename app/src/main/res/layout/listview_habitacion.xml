@@ -10,12 +10,13 @@
     <ImageView
         android:id="@+id/imgHabitacion"
         android:layout_width="131dp"
-        android:layout_height="121dp"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
         android:scaleType="centerCrop"
         android:src="@drawable/habitacion"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
         android:id="@+id/layoutInfo"
@@ -24,8 +25,8 @@
         android:orientation="vertical"
         android:layout_marginStart="12dp"
         app:layout_constraintStart_toEndOf="@id/imgHabitacion"
-        app:layout_constraintTop_toTopOf="@id/imgHabitacion"
-        app:layout_constraintBottom_toBottomOf="@id/imgHabitacion"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
         <TextView

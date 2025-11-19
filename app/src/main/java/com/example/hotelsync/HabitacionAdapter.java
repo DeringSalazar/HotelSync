@@ -11,27 +11,28 @@ import android.widget.TextView;
 import java.util.List;
 
 public class HabitacionAdapter extends BaseAdapter {
-    Context context;
-    List<Habitacion> lst;
 
-    public HabitacionAdapter(Context context, List<Habitacion> lista) {
+    private final Context context;
+    private final List<Habitacion> habitaciones;
+
+    public HabitacionAdapter(Context context, List<Habitacion> habitaciones) {
         this.context = context;
-        this.lst = lista;
+        this.habitaciones = habitaciones;
     }
 
     @Override
     public int getCount() {
-        return lst.size();
+        return habitaciones.size();
     }
 
     @Override
-    public Object getItem(int i) {
-        return lst.get(i);
+    public Habitacion getItem(int position) {
+        return habitaciones.get(position);
     }
 
     @Override
-    public long getItemId(int i) {
-        return i;
+    public long getItemId(int position) {
+        return position;
     }
 
     @Override
@@ -39,29 +40,21 @@ public class HabitacionAdapter extends BaseAdapter {
 
         ViewHolder holder;
 
+        // Inflar layout solo cuando sea necesario (mejora rendimiento)
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.listview_habitacion, parent, false);
+            convertView = LayoutInflater.from(context)
+                    .inflate(R.layout.listview_habitacion, parent, false);
 
-            holder = new ViewHolder();
-
-            holder.imgHabitacion = convertView.findViewById(R.id.imgHabitacion);
-            holder.txtCodigo = convertView.findViewById(R.id.txtCodigo);
-            holder.txtNumero = convertView.findViewById(R.id.txtNumero);
-            holder.txtEstado = convertView.findViewById(R.id.txtEstado);
-            holder.txtPiso = convertView.findViewById(R.id.txtPiso);
-            holder.txtNombre = convertView.findViewById(R.id.txtNombre);
-            holder.txtDescripcion = convertView.findViewById(R.id.txtDescripcion);
-            holder.txtPrecio = convertView.findViewById(R.id.txtPrecio);
-            holder.txtCapacidad = convertView.findViewById(R.id.txtCapacidad);
-
+            holder = new ViewHolder(convertView);
             convertView.setTag(holder);
-
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        Habitacion h = lst.get(position);
+        // Obtener habitación actual
+        Habitacion h = getItem(position);
 
+        // Asignar valores a los elementos visuales
         holder.imgHabitacion.setImageResource(h.getImagen());
         holder.txtCodigo.setText("Código: " + h.getCodigo());
         holder.txtNumero.setText("Número: " + h.getNumero());
@@ -76,7 +69,21 @@ public class HabitacionAdapter extends BaseAdapter {
     }
 
     static class ViewHolder {
+
         ImageView imgHabitacion;
-        TextView txtCodigo, txtNumero, txtEstado, txtPiso, txtNombre, txtDescripcion, txtPrecio, txtCapacidad;
+        TextView txtCodigo, txtNumero, txtEstado, txtPiso,
+                txtNombre, txtDescripcion, txtPrecio, txtCapacidad;
+
+        ViewHolder(View view) {
+            imgHabitacion = view.findViewById(R.id.imgHabitacion);
+            txtCodigo = view.findViewById(R.id.txtCodigo);
+            txtNumero = view.findViewById(R.id.txtNumero);
+            txtEstado = view.findViewById(R.id.txtEstado);
+            txtPiso = view.findViewById(R.id.txtPiso);
+            txtNombre = view.findViewById(R.id.txtNombre);
+            txtDescripcion = view.findViewById(R.id.txtDescripcion);
+            txtPrecio = view.findViewById(R.id.txtPrecio);
+            txtCapacidad = view.findViewById(R.id.txtCapacidad);
+        }
     }
 }

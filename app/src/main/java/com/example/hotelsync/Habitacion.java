@@ -23,7 +23,6 @@ public class Habitacion {
         this.imagen = imagen;
     }
 
-    // GETTERS
     public String getCodigo() {
         return codigo;
     }
@@ -52,7 +51,6 @@ public class Habitacion {
         return imagen;
     }
 
-    // SETTERS
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }

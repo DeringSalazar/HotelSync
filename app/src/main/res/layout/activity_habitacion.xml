@@ -28,7 +28,7 @@
 
             <EditText
                 android:id="@+id/txtCodigo"
-                android:hint="Código"
+                android:hint="@string/c_digo2"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
 
             <EditText
                 android:id="@+id/txtNumero"
-                android:hint="Número"
+                android:hint="@string/n_mero3"
                 android:inputType="number"
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -60,7 +60,7 @@
 
             <EditText
                 android:id="@+id/txtPiso"
-                android:hint="Piso"
+                android:hint="@string/piso2"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
@@ -90,7 +90,7 @@
 
             <EditText
                 android:id="@+id/txtNombre"
-                android:hint="Nombre"
+                android:hint="@string/nombre3"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
@@ -98,7 +98,7 @@
 
             <EditText
                 android:id="@+id/txtDescripcion"
-                android:hint="Descripción"
+                android:hint="@string/descripci_n2"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"/>
@@ -121,7 +121,7 @@
 
             <EditText
                 android:id="@+id/txtPrecio"
-                android:hint="Precio/noche"
+                android:hint="@string/precio_noche3"
                 android:inputType="numberDecimal"
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -130,7 +130,7 @@
 
             <EditText
                 android:id="@+id/txtCapacidad"
-                android:hint="Capacidad"
+                android:hint="@string/capacidad2"
                 android:inputType="number"
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -168,7 +168,7 @@
 
             <LinearLayout
                 android:orientation="horizontal"
-                android:weightSum="3"
+                android:weightSum="2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -187,15 +187,6 @@
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"/>
-
-                <Button
-                    android:id="@+id/btnEditarHabitacion"
-                    android:text="Editar"
-                    android:layout_margin="6dp"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:enabled="false"/>
             </LinearLayout>
 
             <LinearLayout

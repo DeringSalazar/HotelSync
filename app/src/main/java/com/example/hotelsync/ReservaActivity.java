@@ -115,8 +115,8 @@ public class ReservaActivity extends AppCompatActivity {
                 );
 
                 if (c.moveToFirst()) {
-                    txtNombre.setText(c.getString(0));   // nombre
-                    txtApellido.setText(c.getString(1)); // apellido
+                    txtNombre.setText(c.getString(0));
+                    txtApellido.setText(c.getString(1));
                 }
 
                 c.close();

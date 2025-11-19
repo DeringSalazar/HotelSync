@@ -3,7 +3,7 @@ package com.example.hotelsync;
 public class ReservasHuesped {
 
     private String idReserva;
-    private int imagen = R.drawable.habitacion; // imagen por defecto
+    private int imagen = R.drawable.habitacion;
     private String cedulaHuesped;
     private String nombreHuesped;
     private String estado;
@@ -25,7 +25,6 @@ public class ReservasHuesped {
         this.habitacion = habitacion;
     }
 
-    // GETTERS Y SETTERS
     public String getIdReserva() { return idReserva; }
     public void setIdReserva(String idReserva) { this.idReserva = idReserva; }
 

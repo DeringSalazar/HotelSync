@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -56,7 +57,12 @@ public class EditarHabitacionActivity extends AppCompatActivity {
         }
 
         btnGuardar.setOnClickListener(v -> guardarCambios());
-        btnRegresar.setOnClickListener(v -> finish());
+    }
+
+    public void Volver(View view)  {
+        Intent intent = new Intent(this, HabitacionActivity.class);
+        setResult(RESULT_OK, intent);
+        startActivity(intent);
     }
 
     private void cargarHabitacion(String codigo) {

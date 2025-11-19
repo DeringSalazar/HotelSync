@@ -30,7 +30,6 @@ public class EditarUsuario extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar_usuario);
 
-        // ----- INICIALIZAR COMPONENTES -----
         edtCedulaEdit = findViewById(R.id.edtCedulaEdit);
         edtNombreEdit = findViewById(R.id.edtNombreEdit);
         edtApellidoEdit = findViewById(R.id.edtApellidoEdit);

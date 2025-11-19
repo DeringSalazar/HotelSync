@@ -50,14 +50,14 @@ public class HabitacionAdapter extends BaseAdapter {
         }
         Habitacion h = getItem(position);
         holder.imgHabitacion.setImageResource(h.getImagen());
-        holder.txtCodigo.setText("Código: " + h.getCodigo());
-        holder.txtNumero.setText("Número: " + h.getNumero());
-        holder.txtEstado.setText("Estado: " + h.getEstado());
-        holder.txtPiso.setText("Piso: " + h.getPiso());
-        holder.txtNombre.setText("Nombre: " + h.getNombre());
-        holder.txtDescripcion.setText("Descripción: " + h.getDescripcion());
-        holder.txtPrecio.setText("Precio/noche: " + h.getPrecioNoche());
-        holder.txtCapacidad.setText("Capacidad: " + h.getCapacidad());
+        holder.txtCodigo.setText(context.getString(R.string.c_digo) + h.getCodigo());
+        holder.txtNumero.setText(context.getString(R.string.n_mero) + h.getNumero());
+        holder.txtEstado.setText(context.getString(R.string.estado2) + h.getEstado());
+        holder.txtPiso.setText(context.getString(R.string.piso) + h.getPiso());
+        holder.txtNombre.setText(context.getString(R.string.nombre2) + h.getNombre());
+        holder.txtDescripcion.setText(context.getString(R.string.descripci_n) + h.getDescripcion());
+        holder.txtPrecio.setText(context.getString(R.string.precio_noche) + h.getPrecioNoche());
+        holder.txtCapacidad.setText(context.getString(R.string.capacidad) + h.getCapacidad());
 
         return convertView;
     }

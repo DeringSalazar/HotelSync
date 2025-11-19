@@ -40,8 +40,6 @@ public class Vista {
         return correo;
     }
 
-    // --- SETTERS ---
-
     public void setCedula(int cedula) {
         this.cedula = cedula;
     }

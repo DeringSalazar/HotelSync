@@ -23,7 +23,7 @@ public class HabitacionActivity extends AppCompatActivity {
 
     EditText txtCodigo, txtNumero, txtPiso, txtNombre, txtDescripcion, txtPrecio, txtCapacidad;
     Spinner spinnerEstado;
-    Button btnGuardar, btnBuscar, btnActualizar, btnEliminar, btnEditarHabitacion;
+    Button btnGuardar, btnBuscar, btnActualizar, btnEliminar;
     ListView listaHabitaciones;
 
     DBGestion dbGestion;
@@ -56,7 +56,6 @@ public class HabitacionActivity extends AppCompatActivity {
         btnBuscar = findViewById(R.id.btnBuscarHabitacion);
         btnActualizar = findViewById(R.id.btnActualizarHabitacion);
         btnEliminar = findViewById(R.id.btnEliminarHabitacion);
-        btnEditarHabitacion = findViewById(R.id.btnEditarHabitacion);
         listaHabitaciones = findViewById(R.id.listaHabitaciones);
 
 
@@ -71,19 +70,20 @@ public class HabitacionActivity extends AppCompatActivity {
         btnActualizar.setOnClickListener(v -> actualizarHabitacion());
         btnEliminar.setOnClickListener(v -> eliminarHabitacion());
 
-        btnEditarHabitacion.setEnabled(false);
 
         listaHabitaciones.setOnItemClickListener((parent, view, position, id) -> {
             habitacionSeleccionada = (Habitacion) parent.getItemAtPosition(position);
-            btnEditarHabitacion.setEnabled(true);
+            btnActualizar.setEnabled(true);
+            btnEliminar.setEnabled(true);
+            txtCodigo.setText(habitacionSeleccionada.getCodigo());
             Toast.makeText(this, "Habitación seleccionada: " + habitacionSeleccionada.getCodigo(), Toast.LENGTH_SHORT).show();
         });
 
-        btnEditarHabitacion.setOnClickListener(v -> {
+        btnActualizar.setOnClickListener(v -> {
             if (habitacionSeleccionada != null) {
                 Intent intent = new Intent(HabitacionActivity.this, EditarHabitacionActivity.class);
                 intent.putExtra("codigo", habitacionSeleccionada.getCodigo());
-                editarLauncher.launch(intent); // Lanzamos con callback
+                editarLauncher.launch(intent);
             }
         });
 
@@ -95,6 +95,12 @@ public class HabitacionActivity extends AppCompatActivity {
 
     public void Anterior(View view) {
         startActivity(new Intent(this, EmpleadoActivity.class));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        cargarHabitaciones();
     }
 
     private void guardarHabitacion() {
@@ -170,19 +176,25 @@ public class HabitacionActivity extends AppCompatActivity {
     }
 
     private void eliminarHabitacion() {
-        String codigo = txtCodigo.getText().toString().trim();
-
+        if (habitacionSeleccionada == null) {
+            Toast.makeText(this, "Seleccione una habitación", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        String codigo = habitacionSeleccionada.getCodigo();
         int r = sql.delete("habitacion", "codigo=?", new String[]{codigo});
-
         if (r > 0) {
             Toast.makeText(this, "Habitación eliminada", Toast.LENGTH_SHORT).show();
-            btnEliminar.setEnabled(false);
         } else {
-            Toast.makeText(this, "No existe la habitación", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Error: No se pudo eliminar", Toast.LENGTH_SHORT).show();
         }
+        habitacionSeleccionada = null;
+        btnEliminar.setEnabled(false);
+        btnActualizar.setEnabled(false);
+        txtCodigo.setText("");
 
         cargarHabitaciones();
     }
+
 
     private void cargarHabitaciones() {
         ArrayList<Habitacion> lista = new ArrayList<>();

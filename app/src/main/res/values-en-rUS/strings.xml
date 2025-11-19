@@ -96,6 +96,23 @@
     <string name="cantidad_de_habitaciones">Number of rooms</string>
     <string name="guardar_cambios">Save changes</string>
     <string name="volver1">Back</string>
+    <string name="c_digo">"Code: "</string>
+    <string name="n_mero">"Number: "</string>
+    <string name="estado2">"State: "</string>
+    <string name="piso">"Floor: "</string>
+    <string name="nombre2">"Name: "</string>
+    <string name="descripci_n">"Description: "</string>
+    <string name="precio_noche">"Price/Night: "</string>
+    <string name="capacidad">"Ability: "</string>
+    <string name="c_digo2">Code</string>
+    <string name="n_mero3">Number</string>
+    <string name="piso2">Floor</string>
+    <string name="nombre3">Name</string>
+    <string name="descripci_n2">Description</string>
+    <string name="precio_noche3">Price/Night</string>
+    <string name="capacidad2">Ability</string>
+    <string name="guardar3">Save</string>
+    <string name="regresar">Go back</string>
 
 </resources>
 

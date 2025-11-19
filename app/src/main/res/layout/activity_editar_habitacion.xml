@@ -10,7 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <!-- Código y Número -->
         <LinearLayout
             android:orientation="horizontal"
             android:weightSum="2"
@@ -35,7 +34,6 @@
                 android:layout_height="wrap_content"/>
         </LinearLayout>
 
-        <!-- Piso y Estado -->
         <LinearLayout
             android:orientation="horizontal"
             android:weightSum="2"
@@ -58,7 +56,6 @@
                 android:layout_height="wrap_content"/>
         </LinearLayout>
 
-        <!-- Nombre y Descripción -->
         <LinearLayout
             android:orientation="horizontal"
             android:weightSum="2"
@@ -82,7 +79,6 @@
                 android:layout_height="wrap_content"/>
         </LinearLayout>
 
-        <!-- Precio y Capacidad -->
         <LinearLayout
             android:orientation="horizontal"
             android:weightSum="2"
@@ -108,7 +104,6 @@
                 android:layout_height="wrap_content"/>
         </LinearLayout>
 
-        <!-- Botones -->
         <LinearLayout
             android:orientation="horizontal"
             android:weightSum="2"
@@ -118,7 +113,7 @@
 
             <Button
                 android:id="@+id/btnGuardarEditar"
-                android:text="Guardar"
+                android:text="@string/guardar3"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
@@ -126,11 +121,12 @@
 
             <Button
                 android:id="@+id/btnRegresarEditar"
-                android:text="Regresar"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:layout_margin="6dp"/>
+                android:layout_margin="6dp"
+                android:layout_weight="1"
+                android:onClick="Volver"
+                android:text="@string/regresar" />
         </LinearLayout>
 
     </LinearLayout>

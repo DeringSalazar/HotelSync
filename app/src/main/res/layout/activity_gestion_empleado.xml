@@ -26,7 +26,7 @@
 
             <EditText
                 android:id="@+id/txtCodigoReserva"
-                android:text="@string/c_digo_reserva"
+                android:hint="@string/c_digo_reserva"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
@@ -34,7 +34,7 @@
 
             <EditText
                 android:id="@+id/txtCedulaEmpleado"
-                android:text="@string/c_dula_empleado"
+                android:hint="@string/c_dula_empleado"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"/>
@@ -57,7 +57,7 @@
 
             <EditText
                 android:id="@+id/txtCedulaHuesped"
-                android:text="@string/c_dula_hu_sped"
+                android:hint="@string/c_dula_hu_sped"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
@@ -65,7 +65,7 @@
 
             <EditText
                 android:id="@+id/txtTotal"
-                android:text="@string/total"
+                android:hint="@string/total"
                 android:inputType="numberDecimal"
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -89,7 +89,7 @@
 
             <EditText
                 android:id="@+id/txtFechaInicio"
-                android:text="@string/inicio_yyyy_mm_dd"
+                android:hint="@string/inicio_yyyy_mm_dd"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
@@ -97,7 +97,7 @@
 
             <EditText
                 android:id="@+id/txtFechaFin"
-                android:text="@string/fin_yyyy_mm_dd"
+                android:hint="@string/fin_yyyy_mm_dd"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"/>

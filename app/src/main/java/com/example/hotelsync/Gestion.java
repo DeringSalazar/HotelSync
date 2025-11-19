@@ -21,7 +21,6 @@ public class Gestion {
         this.total = total;
     }
 
-    // --- GETTERS ---
     public String getCodigo() {
         return codigo;
     }
@@ -53,7 +52,6 @@ public class Gestion {
         return total;
     }
 
-    // --- SETTERS ---
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }

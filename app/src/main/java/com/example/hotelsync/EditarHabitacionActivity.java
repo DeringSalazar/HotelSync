@@ -42,7 +42,7 @@ public class EditarHabitacionActivity extends AppCompatActivity {
         btnGuardar = findViewById(R.id.btnGuardarEditar);
         btnRegresar = findViewById(R.id.btnRegresarEditar);
 
-        dbGestion = new DBGestion(this, "BaseDatos", null, 1);
+        dbGestion = new DBGestion(this, "BaseDatos", null, 2);
         sql = dbGestion.getWritableDatabase();
 
         String[] estados = {"Suite", "Estandar", "Familiar", "Deluxe"};

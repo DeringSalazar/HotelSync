@@ -59,7 +59,7 @@ public class HabitacionActivity extends AppCompatActivity {
         listaHabitaciones = findViewById(R.id.listaHabitaciones);
 
 
-        dbGestion = new DBGestion(this, "BaseDatos", null, 1);
+        dbGestion = new DBGestion(this, "BaseDatos", null, 2);
         sql = dbGestion.getWritableDatabase();
         String[] estados = {"Suite", "Estandar", "Familiar", "Deluxe"};
         ArrayAdapter<String> adapterEstados =
@@ -101,6 +101,11 @@ public class HabitacionActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         cargarHabitaciones();
+    }
+
+    public void Foto(View view) {
+        Intent intent = new Intent(this, FotoActivity.class);
+        startActivity(intent);
     }
 
     private void guardarHabitacion() {
@@ -214,6 +219,7 @@ public class HabitacionActivity extends AppCompatActivity {
                         c.getString(7),
                         R.drawable.habitacion
                 ));
+
             } while (c.moveToNext());
         }
 

@@ -52,7 +52,7 @@ public class ReservaActivity extends AppCompatActivity {
         lista = findViewById(R.id.lista);
         btnRegresar = findViewById(R.id.btnRegresar);
 
-        db = new DBGestion(this, "BaseDatos", null, 1);
+        db = new DBGestion(this, "BaseDatos", null, 2);
         sql = db.getWritableDatabase();
 
         cargarCedulas();

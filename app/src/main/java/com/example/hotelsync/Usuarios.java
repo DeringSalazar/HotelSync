@@ -62,7 +62,7 @@ public class Usuarios extends AppCompatActivity {
             }
         }
 
-        admin = new DBGestion(this, "BaseDatos", null, 1);
+        admin = new DBGestion(this, "BaseDatos", null, 2);
         basedatos = admin.getWritableDatabase();
 
         listaUsuarios = new ArrayList<>();

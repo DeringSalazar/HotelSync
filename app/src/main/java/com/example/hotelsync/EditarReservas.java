@@ -43,7 +43,7 @@ public class EditarReservas extends AppCompatActivity {
         btnGuardarCambios = findViewById(R.id.btnGuardarCambios);
         listViewReservasEditar = findViewById(R.id.listViewReservasEditar);
 
-        db = new DBGestion(this, "BaseDatos", null, 1);
+        db = new DBGestion(this, "BaseDatos", null, 2);
         sql = db.getWritableDatabase();
 
         idReserva = getIntent().getStringExtra("id_reserva");

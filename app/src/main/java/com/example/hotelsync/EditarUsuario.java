@@ -44,7 +44,7 @@ public class EditarUsuario extends AppCompatActivity {
         adaptador = new UsuariosAdapter(this, listaUsuarios);
         listViewEditUsuarios.setAdapter(adaptador);
 
-        admin = new DBGestion(this, "BaseDatos", null, 1);
+        admin = new DBGestion(this, "BaseDatos", null, 2);
         basedatos = admin.getWritableDatabase();
 
         cedulaOriginal = getIntent().getStringExtra("cedula");

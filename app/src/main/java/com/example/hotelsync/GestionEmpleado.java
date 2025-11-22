@@ -39,7 +39,7 @@ public class GestionEmpleado extends AppCompatActivity {
         btnBuscar = findViewById(R.id.btnBuscar);
         listaReservas = findViewById(R.id.listaReservas);
 
-        DBGestion admin = new DBGestion(this, "BaseDatos", null, 1);
+        DBGestion admin = new DBGestion(this, "BaseDatos", null, 2);
         basedatos = admin.getWritableDatabase();
 
         btnConfirmar.setOnClickListener(v -> cambiarEstado("Confirmada"));

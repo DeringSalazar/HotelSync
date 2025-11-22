@@ -11,8 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HotelSync">
-
-        <!-- Actividades de tu app -->
+        <activity
+            android:name=".AudioActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FotoActivity"
+            android:exported="false" /> <!-- Actividades de tu app -->
         <activity
             android:name=".EditarReservas"
             android:exported="false" />
@@ -40,18 +44,15 @@
         <activity
             android:name=".EditarHabitacionActivity"
             android:exported="false" />
-
         <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
-                <action
-                    android:name="android.intent.action.MAIN" />
-                <category
-                    android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>

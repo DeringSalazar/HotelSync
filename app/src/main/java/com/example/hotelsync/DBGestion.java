@@ -36,6 +36,12 @@ public class DBGestion extends SQLiteOpenHelper {
                 "    foto blob," +
                 "    foreign key(codigo_habit) references habitacion(codigo)" +
                 ")");
+        db.execSQL("create table audio_habitacion (" +
+                "    id integer primary key autoincrement," +
+                "    codigo_habit text," +
+                "    audio blob," +
+                "    foreign key(codigo_habit) references habitacion(codigo)" +
+                ")");
     }
 
     @Override

@@ -31,20 +31,6 @@ public class DBGestion extends SQLiteOpenHelper {
                 "FOREIGN KEY (idreserva) REFERENCES reserva(id_reserva), " +
                 "FOREIGN KEY (cedula_huesped) REFERENCES huesped(cedula))");
 
-        db.execSQL("create table multimedia_habitacion (" +
-                "    id integer primary key autoincrement," +
-                "    codigo_habit text," +
-                "    foto blob," +
-                "    foreign key(codigo_habit) references habitacion(codigo)" +
-                ")");
-        db.execSQL("create table audio_habitacion (" +
-                "    id integer primary key autoincrement," +
-                "    codigo_habit text," +
-                "    audio blob," +
-                "    foreign key(codigo_habit) references habitacion(codigo)" +
-                ")");
-
-
         db.execSQL("CREATE TABLE ubicacion (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "nombre TEXT, " +
@@ -55,12 +41,6 @@ public class DBGestion extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS multimedia_habitacion");
-        db.execSQL("DROP TABLE IF EXISTS habitacion");
-        db.execSQL("DROP TABLE IF EXISTS reserva");
-        db.execSQL("DROP TABLE IF EXISTS reserva_huesped");
-        db.execSQL("DROP TABLE IF EXISTS empleado");
-        db.execSQL("DROP TABLE IF EXISTS huesped");
-        onCreate(db);
+
     }
 }

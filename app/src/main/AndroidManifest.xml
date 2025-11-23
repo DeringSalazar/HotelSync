@@ -4,6 +4,11 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -17,23 +22,36 @@
 
         <!-- Actividades de tu app -->
         <activity
+            android:name=".AudioActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FotoActivity"
+            android:exported="false" />
+
+        <activity
             android:name=".EditarReservas"
             android:exported="false" />
+
         <activity
             android:name=".EditarUsuario"
             android:exported="false" />
+
         <activity
             android:name=".Usuarios"
             android:exported="false" />
+
         <activity
             android:name=".Huesped"
             android:exported="false" />
+
         <activity
             android:name=".GestionEmpleado"
             android:exported="false" />
+
         <activity
             android:name=".EmpleadoActivity"
             android:exported="false" />
+
         <activity
             android:name=".ReservaActivity"
             android:exported="false" />
@@ -43,22 +61,26 @@
         <activity
             android:name=".EditarHabitacionActivity"
             android:exported="false" />
+
         <activity
             android:name=".UbicacionActivity"
             android:exported="false" />
 
-        <activity android:name=".ListaUbicacionesActivity" android:exported="false"/>
-        <activity android:name=".EditarUbicacionActivity" android:exported="false"/>
+        <activity
+            android:name=".ListaUbicacionesActivity"
+            android:exported="false" />
 
+        <activity
+            android:name=".EditarUbicacionActivity"
+            android:exported="false" />
 
         <activity
             android:name=".MainActivity"
             android:exported="true">
+
             <intent-filter>
-                <action
-                    android:name="android.intent.action.MAIN" />
-                <category
-                    android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 

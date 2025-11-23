@@ -73,7 +73,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/BtnHabitacion"
+                    android:id="@+id/BtnUbicacion"
                     android:layout_width="0dp"
                     android:layout_height="48dp"
                     android:layout_marginEnd="8dp"

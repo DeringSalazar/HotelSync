@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/txtNombreEdit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Nombre del hotel"
+        android:layout_margin="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <EditText
+        android:id="@+id/txtLatEdit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Latitud"
+        android:layout_margin="10dp"
+        app:layout_constraintTop_toBottomOf="@id/txtNombreEdit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <EditText
+        android:id="@+id/txtLonEdit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Longitud"
+        android:layout_margin="10dp"
+        app:layout_constraintTop_toBottomOf="@id/txtLatEdit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <Button
+        android:id="@+id/btnActualizar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Actualizar"
+        android:layout_margin="10dp"
+        app:layout_constraintTop_toBottomOf="@id/txtLonEdit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnEliminar"/>
+
+    <Button
+        android:id="@+id/btnEliminar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Eliminar"
+        android:layout_margin="10dp"
+        app:layout_constraintTop_toBottomOf="@id/txtLonEdit"
+        app:layout_constraintStart_toEndOf="@id/btnActualizar"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- 🔵 Mapa -->
+    <org.osmdroid.views.MapView
+        android:id="@+id/mapEdit"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/btnEliminar"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

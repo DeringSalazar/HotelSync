@@ -7,6 +7,9 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -49,6 +52,14 @@
         <activity
             android:name=".EditarHabitacionActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".UbicacionActivity"
+            android:exported="false" />
+
+        <activity android:name=".ListaUbicacionesActivity" android:exported="false"/>
+        <activity android:name=".EditarUbicacionActivity" android:exported="false"/>
+
         <activity
             android:name=".MainActivity"
             android:exported="true">

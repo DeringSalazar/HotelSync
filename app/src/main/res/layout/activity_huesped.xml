@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:id="@+id/BtnHabitacion"
+            android:id="@+id/BtnUbicacion"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginBottom="16dp"

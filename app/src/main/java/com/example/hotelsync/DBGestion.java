@@ -30,6 +30,7 @@ public class DBGestion extends SQLiteOpenHelper {
                 "PRIMARY KEY (idreserva, cedula_huesped), " +
                 "FOREIGN KEY (idreserva) REFERENCES reserva(id_reserva), " +
                 "FOREIGN KEY (cedula_huesped) REFERENCES huesped(cedula))");
+
         db.execSQL("create table multimedia_habitacion (" +
                 "    id integer primary key autoincrement," +
                 "    codigo_habit text," +
@@ -42,6 +43,14 @@ public class DBGestion extends SQLiteOpenHelper {
                 "    audio blob," +
                 "    foreign key(codigo_habit) references habitacion(codigo)" +
                 ")");
+
+
+        db.execSQL("CREATE TABLE ubicacion (" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "nombre TEXT, " +
+                "latitud TEXT, " +
+                "longitud TEXT)");
+
     }
 
     @Override

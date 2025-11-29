@@ -28,8 +28,8 @@ public class DBGestion extends SQLiteOpenHelper {
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "nombre TEXT, " +
                 "cedula_empleado TEXT REFERENCES empleado(cedula), " +
-                "latitud TEXT, " +
-                "longitud TEXT," +
+                "latitud double , " +
+                "longitud double ," +
                 "foto BLOB, " +
                 "audio BLOB)");
     }

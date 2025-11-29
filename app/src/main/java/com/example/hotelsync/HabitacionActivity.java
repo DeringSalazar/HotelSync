@@ -108,11 +108,6 @@ public class HabitacionActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void Audio(View view) {
-        Intent intent = new Intent(this, AudioActivity.class);
-        startActivity(intent);
-    }
-
     private void guardarHabitacion() {
         ContentValues valores = new ContentValues();
         valores.put("codigo", txtCodigo.getText().toString().trim());

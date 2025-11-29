@@ -65,10 +65,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="📷 Tomar Foto"
-                app:iconGravity="textStart"
                 android:backgroundTint="#E0E0E0"
-                android:textColor="@android:color/black" />
+                android:onClick="tomarFoto"
+                android:text="📷 Tomar Foto"
+                android:textColor="@android:color/black"
+                app:iconGravity="textStart" />
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
@@ -88,27 +89,49 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_marginTop="16dp">
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnGrabar"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="🎙️ Grabar"
-                    android:backgroundTint="#E0E0E0"
-                    android:textColor="@android:color/black"/>
+                    android:orientation="horizontal">
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnReproducir"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnGrabar"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="🎙️ Grabar"
+                        android:backgroundTint="#E0E0E0"
+                        android:textColor="@android:color/black"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnDetener"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="⏸️ Detener"
+                        android:backgroundTint="#E0E0E0"
+                        android:textColor="@android:color/black"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text="▶️ Reproducir"
-                    android:backgroundTint="#E0E0E0"
-                    android:textColor="@android:color/black"/>
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_marginTop="8dp">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnReproducir"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="▶️ Reproducir"
+                        android:backgroundTint="#E0E0E0"
+                        android:textColor="@android:color/black"/>
+                </LinearLayout>
+
             </LinearLayout>
 
             <com.google.android.material.card.MaterialCardView
@@ -127,28 +150,53 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center"
+                android:orientation="vertical"
                 android:layout_marginTop="16dp">
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnGuardar"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Guardar"
-                    android:backgroundTint="#E0E0E0"
-                    android:textColor="@android:color/black"/>
+                    android:orientation="horizontal">
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnCancelar"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_marginStart="8dp"
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnGuardar"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Guardar"
+                        android:backgroundTint="#E0E0E0"
+                        android:textColor="@android:color/black"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnCancelar"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="8dp"
+                        android:layout_height="wrap_content"
+                        android:text="Cancelar"
+                        android:backgroundTint="#E0E0E0"
+                        android:textColor="@android:color/black"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Cancelar"
-                    android:backgroundTint="#E0E0E0"
-                    android:textColor="@android:color/black"/>
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_marginTop="8dp">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnVolver"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="#E0E0E0"
+                        android:onClick="Volver"
+                        android:text="Volver"
+                        android:textColor="@android:color/black" />
+                </LinearLayout>
+
             </LinearLayout>
 
         </LinearLayout>

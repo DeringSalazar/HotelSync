@@ -23,9 +23,6 @@
 
         <!-- Actividades de tu app -->
         <activity
-            android:name=".AudioActivity"
-            android:exported="false" />
-        <activity
             android:name=".FotoActivity"
             android:exported="false" />
 
@@ -62,11 +59,6 @@
         <activity
             android:name=".EditarHabitacionActivity"
             android:exported="false" />
-
-        <activity
-            android:name=".UbicacionActivity"
-            android:exported="false" />
-
         <activity
             android:name=".ListaUbicacionesActivity"
             android:exported="false" />

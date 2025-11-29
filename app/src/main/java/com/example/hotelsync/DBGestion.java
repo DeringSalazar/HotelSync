@@ -20,30 +20,18 @@ public class DBGestion extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE empleado (" + "cedula TEXT PRIMARY KEY, " + "nombre TEXT, " + "apellido TEXT, " + "telefono TEXT, " + "correo TEXT)");
         db.execSQL("CREATE TABLE habitacion (" + "codigo TEXT PRIMARY KEY, " + "numero TEXT, " + "estado TEXT, " + "piso TEXT, " + "nombre TEXT, " + "descripcion TEXT, " + "precio_noche TEXT, " + "capacidad TEXT)");
         db.execSQL("CREATE TABLE reserva (" + "id_reserva TEXT PRIMARY KEY, " + "cedula_empleado TEXT REFERENCES empleado(cedula), " + "codigo_habitacion TEXT REFERENCES habitacion(codigo), " + "fecha_inicio TEXT, " + "fecha_fin TEXT, " + "total TEXT)");
-
         db.execSQL("CREATE TABLE reserva_huesped (" + "idreserva TEXT, " + "cedula_huesped TEXT, " + "estado TEXT, " +
                 "PRIMARY KEY (idreserva, cedula_huesped), " +
                 "FOREIGN KEY (idreserva) REFERENCES reserva(id_reserva), " +
                 "FOREIGN KEY (cedula_huesped) REFERENCES huesped(cedula))");
-
         db.execSQL("CREATE TABLE ubicacion (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "nombre TEXT, " +
-                "descripcion TEXT, " +
+                "cedula_empleado TEXT REFERENCES empleado(cedula), " +
                 "latitud TEXT, " +
-                "longitud TEXT)");
-
-        db.execSQL("CREATE TABLE multimedia_habitacion (" +
-                "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "codigo_habit TEXT, " +
+                "longitud TEXT," +
                 "foto BLOB, " +
-                "FOREIGN KEY(codigo_habit) REFERENCES habitacion(codigo))");
-
-        db.execSQL("CREATE TABLE audio_habitacion (" +
-                "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "codigo_habit TEXT, " +
-                "audio BLOB, " +
-                "FOREIGN KEY(codigo_habit) REFERENCES habitacion(codigo))");
+                "audio BLOB)");
     }
 
     @Override

@@ -19,14 +19,16 @@ public class ListaUbicacionesActivity extends AppCompatActivity {
     ListView lista;
     SearchView searchView;
     Button btnEditar;
+
     SQLiteDatabase db;
 
     ArrayList<String> ubicaciones = new ArrayList<>();
     ArrayList<Integer> ids = new ArrayList<>();
+
     ArrayAdapter<String> adapter;
 
-    int idSeleccionado = -1;      // ID de DB
-    int posicionSeleccionada = -1; // posición en la lista (para el color)
+    int idSeleccionado = -1;
+    int posicionSeleccionada = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,47 +39,39 @@ public class ListaUbicacionesActivity extends AppCompatActivity {
         searchView = findViewById(R.id.searchUbicaciones);
         btnEditar = findViewById(R.id.btnEditar);
 
-        DBGestion gestion = new DBGestion(this, "hotel.db", null, 1);
-        db = gestion.getWritableDatabase();
+        DBGestion helper = new DBGestion(this, "BaseDatos", null, 2);
+        db = helper.getWritableDatabase();
 
         cargarUbicaciones();
 
-        // 👉 Seleccionar item sin Toast, solo resaltado
         lista.setOnItemClickListener((parent, view, position, id) -> {
             idSeleccionado = ids.get(position);
             posicionSeleccionada = position;
-
-            pintarSeleccion(); // 👉 Resaltar selección
+            pintarSeleccion();
         });
 
-        // 👉 Botón EDITAR abre la pantalla SOLO si hay selección
         btnEditar.setOnClickListener(v -> {
             if (idSeleccionado == -1) {
-                Toast.makeText(this, "Seleccione una ubicación primero", Toast.LENGTH_SHORT).show();
-            } else {
-                Intent intent = new Intent(this, EditarUbicacionActivity.class);
-                intent.putExtra("id", idSeleccionado);
-                startActivity(intent);
+                Toast.makeText(this, "Seleccione una ubicación", Toast.LENGTH_SHORT).show();
+                return;
             }
+
+            Intent intent = new Intent(this, EditarUbicacionActivity.class);
+            intent.putExtra("id", idSeleccionado);
+            startActivity(intent);
         });
 
-        // 🔍 FILTRO EN TIEMPO REAL
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
+            @Override public boolean onQueryTextSubmit(String query) {
                 adapter.getFilter().filter(query);
                 return true;
             }
 
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                adapter.getFilter().filter(newText);
-
-                // Reset selección si cambia la búsqueda
+            @Override public boolean onQueryTextChange(String text) {
+                adapter.getFilter().filter(text);
                 idSeleccionado = -1;
                 posicionSeleccionada = -1;
                 lista.post(ListaUbicacionesActivity.this::pintarSeleccion);
-
                 return true;
             }
         });
@@ -87,7 +81,6 @@ public class ListaUbicacionesActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         cargarUbicaciones();
-
         idSeleccionado = -1;
         posicionSeleccionada = -1;
     }
@@ -96,33 +89,35 @@ public class ListaUbicacionesActivity extends AppCompatActivity {
         ubicaciones.clear();
         ids.clear();
 
-        Cursor cursor = db.rawQuery("SELECT id, nombre, latitud, longitud FROM ubicacion", null);
+        Cursor c = db.rawQuery("SELECT id, nombre, latitud, longitud FROM ubicacion", null);
 
-        while (cursor.moveToNext()) {
-            ids.add(cursor.getInt(0));
-            String item = cursor.getString(1) +
-                    "\nLat: " + cursor.getString(2) +
-                    "  Lon: " + cursor.getString(3);
+        while (c.moveToNext()) {
+            int idUbicacion = c.getInt(0);
+            ids.add(idUbicacion);
+
+            String item =
+                    "ID: " + idUbicacion +
+                            "\nNombre: " + c.getString(1) +
+                            "\nLat: " + c.getDouble(2) +
+                            "   Lon: " + c.getDouble(3);
+
             ubicaciones.add(item);
         }
 
-        cursor.close();
+        c.close();
 
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, ubicaciones);
         lista.setAdapter(adapter);
 
-        // 👉 repinta por si quedó algo marcado antes
         lista.post(this::pintarSeleccion);
     }
 
-    // ⭐ Pintar el item seleccionado
     private void pintarSeleccion() {
         for (int i = 0; i < lista.getChildCount(); i++) {
-            if (i == posicionSeleccionada) {
-                lista.getChildAt(i).setBackgroundColor(0xFFB2DFDB); // verde agua suave
-            } else {
-                lista.getChildAt(i).setBackgroundColor(0xFFFFFFFF); // blanco
-            }
+            if (i == posicionSeleccionada)
+                lista.getChildAt(i).setBackgroundColor(0xFFB2DFDB);
+            else
+                lista.getChildAt(i).setBackgroundColor(0xFFFFFFFF);
         }
     }
 }

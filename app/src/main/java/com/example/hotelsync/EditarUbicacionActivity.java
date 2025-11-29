@@ -1,141 +1,335 @@
 package com.example.hotelsync;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.MediaPlayer;
+import android.media.MediaRecorder;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.osmdroid.api.IMapController;
 import org.osmdroid.config.Configuration;
 import org.osmdroid.events.MapEventsReceiver;
+import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.MapEventsOverlay;
 import org.osmdroid.views.overlay.Marker;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+
 public class EditarUbicacionActivity extends AppCompatActivity {
 
-    EditText txtNombreEdit, txtLatEdit, txtLonEdit;
-    Button btnActualizar, btnEliminar;
+    // UI
+    EditText txtCodigoEdit, txtNombreEdit, txtCedulaEdit, txtLatEdit, txtLonEdit;
+    Button btnActualizar, btnEliminar, btnReproducirAudio, btnCambiarFoto, btnGrabarAudio, btnDetenerAudio;
+    ImageView imgFotoEdit;
+    MapView mapEdit;
 
-    MapView mapView;
+    // BD
+    SQLiteDatabase db;
+
+    // Identificador
+    int id;
+
+    // Datos actuales
+    double lat = 0, lon = 0;
+    byte[] fotoBytes = null;
+    byte[] audioBytes = null;
+
+    // Flags
+    boolean nuevaFoto = false;
+    boolean nuevoAudio = false;
+
+    // Audio Recorder
+    MediaRecorder recorder;
+    File archivoAudioTemp;
+
+    // Map Marker
     Marker marker;
 
-    SQLiteDatabase db;
-    int id;
+    // Foto launcher
+    ActivityResultLauncher<Intent> fotoLauncher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        Configuration.getInstance().setUserAgentValue(getPackageName());
         setContentView(R.layout.activity_editar_ubicacion);
 
-        txtNombreEdit = findViewById(R.id.txtNombreEdit);
-        txtLatEdit = findViewById(R.id.txtLatEdit);
-        txtLonEdit = findViewById(R.id.txtLonEdit);
-        btnActualizar = findViewById(R.id.btnActualizar);
-        btnEliminar = findViewById(R.id.btnEliminar);
-        mapView = findViewById(R.id.mapEdit);
+        // Inicializar OSMDroid
+        Configuration.getInstance().setUserAgentValue(getPackageName());
 
-        DBGestion gestion = new DBGestion(this, "hotel.db", null, 1);
-        db = gestion.getWritableDatabase();
-
-        id = getIntent().getIntExtra("id", -1);
-
-        mapView.setMultiTouchControls(true);
-        mapView.getController().setZoom(16.0);
+        inicializarUI();
+        inicializarBD();
+        inicializarMapa();
+        inicializarFotoLauncher();
 
         cargarDatos();
 
-        MapEventsReceiver mReceiver = new MapEventsReceiver() {
+        // Eventos
+        btnActualizar.setOnClickListener(v -> actualizarRegistro());
+        btnEliminar.setOnClickListener(v -> eliminarRegistro());
+        btnReproducirAudio.setOnClickListener(v -> reproducirAudio());
+        btnCambiarFoto.setOnClickListener(v -> cambiarFoto());
+        btnGrabarAudio.setOnClickListener(v -> iniciarGrabacion());
+        btnDetenerAudio.setOnClickListener(v -> detenerGrabacion());
+    }
+
+    // ---------------------------------------------------------
+    // INICIALIZACIÓN
+    // ---------------------------------------------------------
+
+    private void inicializarUI() {
+        txtCodigoEdit = findViewById(R.id.txtCodigoEdit);
+        txtNombreEdit = findViewById(R.id.txtNombreEdit);
+        txtCedulaEdit = findViewById(R.id.txtCedulaEdit);
+        txtLatEdit = findViewById(R.id.txtLatEdit);
+        txtLonEdit = findViewById(R.id.txtLonEdit);
+
+        btnActualizar = findViewById(R.id.btnActualizar);
+        btnEliminar = findViewById(R.id.btnEliminar);
+        btnReproducirAudio = findViewById(R.id.btnReproducirAudio);
+
+        btnCambiarFoto = findViewById(R.id.btnCambiarFoto);
+        btnGrabarAudio = findViewById(R.id.btnGrabarAudio);
+        btnDetenerAudio = findViewById(R.id.btnDetenerAudio);
+
+        imgFotoEdit = findViewById(R.id.imgFotoEdit);
+        mapEdit = findViewById(R.id.mapEdit);
+
+        btnDetenerAudio.setVisibility(View.GONE);
+    }
+
+    private void inicializarBD() {
+        DBGestion helper = new DBGestion(this, "BaseDatos", null, 2);
+        db = helper.getWritableDatabase();
+
+        id = getIntent().getIntExtra("id", -1);
+        if (id == -1) {
+            Toast.makeText(this, "Error al recibir ID", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+    }
+
+    private void inicializarMapa() {
+        mapEdit.setTileSource(TileSourceFactory.MAPNIK);
+        mapEdit.setMultiTouchControls(true);
+
+        marker = new Marker(mapEdit);
+        marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+
+        MapEventsReceiver events = new MapEventsReceiver() {
             @Override
             public boolean singleTapConfirmedHelper(GeoPoint p) {
-                moverMarcador(p);
+                lat = p.getLatitude();
+                lon = p.getLongitude();
+                txtLatEdit.setText(String.valueOf(lat));
+                txtLonEdit.setText(String.valueOf(lon));
+
+                marker.setPosition(p);
+                mapEdit.getOverlays().add(marker);
+                mapEdit.invalidate();
                 return true;
             }
 
-            @Override
-            public boolean longPressHelper(GeoPoint p) {
-                moverMarcador(p);
-                return true;
-            }
+            @Override public boolean longPressHelper(GeoPoint p) { return false; }
         };
 
-        MapEventsOverlay mapEventsOverlay = new MapEventsOverlay(mReceiver);
-        mapView.getOverlays().add(mapEventsOverlay);
-
-        btnActualizar.setOnClickListener(v -> actualizar());
-        btnEliminar.setOnClickListener(v -> eliminar());
+        mapEdit.getOverlays().add(new MapEventsOverlay(events));
     }
+
+    private void inicializarFotoLauncher() {
+        fotoLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+
+                        Bitmap bitmap = (Bitmap) result.getData().getExtras().get("data");
+                        imgFotoEdit.setImageBitmap(bitmap);
+
+                        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 90, bos);
+                        fotoBytes = bos.toByteArray();
+
+                        nuevaFoto = true;
+                    }
+                }
+        );
+    }
+
+    // ---------------------------------------------------------
+    // CARGAR DATOS
+    // ---------------------------------------------------------
 
     private void cargarDatos() {
-        Cursor cursor = db.rawQuery("SELECT nombre, latitud, longitud FROM ubicacion WHERE id=?",
-                new String[]{String.valueOf(id)});
 
-        if (cursor.moveToFirst()) {
-            String nombre = cursor.getString(0);
-            String lat = cursor.getString(1);
-            String lon = cursor.getString(2);
+        Cursor c = db.rawQuery(
+                "SELECT nombre, cedula_empleado, latitud, longitud, foto, audio FROM ubicacion WHERE id=?",
+                new String[]{String.valueOf(id)}
+        );
 
-            txtNombreEdit.setText(nombre);
-            txtLatEdit.setText(lat);
-            txtLonEdit.setText(lon);
+        if (c.moveToFirst()) {
 
-            GeoPoint punto = new GeoPoint(Double.parseDouble(lat), Double.parseDouble(lon));
-            mapView.getController().setCenter(punto);
+            txtCodigoEdit.setText(String.valueOf(id));
+            txtNombreEdit.setText(c.getString(0));
+            txtCedulaEdit.setText(c.getString(1));
 
-            marker = new Marker(mapView);
-            marker.setPosition(punto);
-            marker.setTitle("Ubicación guardada");
-            mapView.getOverlays().add(marker);
+            lat = c.getDouble(2);
+            lon = c.getDouble(3);
+
+            txtLatEdit.setText(String.valueOf(lat));
+            txtLonEdit.setText(String.valueOf(lon));
+
+            fotoBytes = c.getBlob(4);
+            audioBytes = c.getBlob(5);
+
+            if (fotoBytes != null)
+                imgFotoEdit.setImageBitmap(BitmapFactory.decodeByteArray(fotoBytes, 0, fotoBytes.length));
+
+            if (lat != 0 && lon != 0) {
+                GeoPoint punto = new GeoPoint(lat, lon);
+                IMapController controller = mapEdit.getController();
+                controller.setZoom(16.0);
+                controller.setCenter(punto);
+
+                marker.setPosition(punto);
+                mapEdit.getOverlays().add(marker);
+            }
         }
-
-        cursor.close();
+        c.close();
     }
 
-    private void moverMarcador(GeoPoint punto) {
-        txtLatEdit.setText(String.valueOf(punto.getLatitude()));
-        txtLonEdit.setText(String.valueOf(punto.getLongitude()));
+    // ---------------------------------------------------------
+    // FOTO
+    // ---------------------------------------------------------
 
-        mapView.getOverlays().remove(marker);
-
-        marker = new Marker(mapView);
-        marker.setPosition(punto);
-        marker.setTitle("Nueva ubicación");
-        mapView.getOverlays().add(marker);
-
-        mapView.invalidate();
+    private void cambiarFoto() {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        fotoLauncher.launch(intent);
     }
 
-    private void actualizar() {
-        ContentValues v = new ContentValues();
-        v.put("nombre", txtNombreEdit.getText().toString().trim());
-        v.put("latitud", txtLatEdit.getText().toString().trim());
-        v.put("longitud", txtLonEdit.getText().toString().trim());
+    // ---------------------------------------------------------
+    // AUDIO: GRABAR NUEVO
+    // ---------------------------------------------------------
 
-        int filas = db.update("ubicacion", v, "id=?", new String[]{String.valueOf(id)});
+    private void iniciarGrabacion() {
+        try {
+            btnGrabarAudio.setEnabled(false);
+            btnDetenerAudio.setVisibility(View.VISIBLE);
 
-        if (filas > 0) {
-            Toast.makeText(this, "Ubicación actualizada", Toast.LENGTH_SHORT).show();
-            finish();
-        } else {
-            Toast.makeText(this, "Error al actualizar", Toast.LENGTH_SHORT).show();
+            archivoAudioTemp = File.createTempFile("audio_nuevo", ".3gp", getCacheDir());
+
+            recorder = new MediaRecorder();
+            recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+            recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+            recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+            recorder.setOutputFile(archivoAudioTemp.getAbsolutePath());
+
+            recorder.prepare();
+            recorder.start();
+
+            Toast.makeText(this, "Grabando audio...", Toast.LENGTH_SHORT).show();
+
+        } catch (Exception e) {
+            Toast.makeText(this, "Error al iniciar grabación", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void eliminar() {
-        int filas = db.delete("ubicacion", "id=?", new String[]{String.valueOf(id)});
+    private void detenerGrabacion() {
+        try {
+            recorder.stop();
+            recorder.release();
+            recorder = null;
 
-        if (filas > 0) {
-            Toast.makeText(this, "Ubicación eliminada", Toast.LENGTH_SHORT).show();
-            finish();
-        } else {
-            Toast.makeText(this, "Error al eliminar", Toast.LENGTH_SHORT).show();
+            btnGrabarAudio.setEnabled(true);
+            btnDetenerAudio.setVisibility(View.GONE);
+
+            InputStream is = new FileInputStream(archivoAudioTemp);
+            audioBytes = is.readAllBytes();
+            is.close();
+
+            nuevoAudio = true;
+
+            Toast.makeText(this, "Audio grabado correctamente", Toast.LENGTH_SHORT).show();
+
+        } catch (Exception e) {
+            Toast.makeText(this, "Error al detener grabación", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    // ---------------------------------------------------------
+    // AUDIO: REPRODUCIR
+    // ---------------------------------------------------------
+
+    private void reproducirAudio() {
+
+        if (audioBytes == null) {
+            Toast.makeText(this, "No hay audio para reproducir", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        try {
+            File temp = File.createTempFile("audioTemp", ".3gp", getCacheDir());
+            FileOutputStream fos = new FileOutputStream(temp);
+            fos.write(audioBytes);
+            fos.close();
+
+            MediaPlayer player = new MediaPlayer();
+            player.setDataSource(temp.getAbsolutePath());
+            player.prepare();
+            player.start();
+
+        } catch (Exception e) {
+            Toast.makeText(this, "Error al reproducir audio", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    // ---------------------------------------------------------
+    // ACTUALIZAR Y ELIMINAR BD
+    // ---------------------------------------------------------
+
+    private void actualizarRegistro() {
+
+        ContentValues valores = new ContentValues();
+
+        valores.put("nombre", txtNombreEdit.getText().toString());
+        valores.put("cedula_empleado", txtCedulaEdit.getText().toString());
+        valores.put("latitud", txtLatEdit.getText().toString());
+        valores.put("longitud", txtLonEdit.getText().toString());
+
+        if (nuevaFoto)
+            valores.put("foto", fotoBytes);
+
+        if (nuevoAudio)
+            valores.put("audio", audioBytes);
+
+        db.update("ubicacion", valores, "id=?", new String[]{String.valueOf(id)});
+
+        Toast.makeText(this, "Registro actualizado correctamente", Toast.LENGTH_SHORT).show();
+        finish();
+    }
+
+    private void eliminarRegistro() {
+        db.execSQL("DELETE FROM ubicacion WHERE id=?", new Object[]{id});
+        Toast.makeText(this, "Registro eliminado", Toast.LENGTH_SHORT).show();
+        finish();
     }
 }

@@ -26,10 +26,11 @@ public class EmpleadoActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void VerUbicaciones (View view) {
+    public void VerUbicaciones(View view) {
         Intent intent = new Intent(this, ListaUbicacionesActivity.class);
         startActivity(intent);
     }
+
 
     public void Reserva(View view)  {
         Intent intent= new Intent(this,GestionEmpleado.class);

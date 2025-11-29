@@ -196,6 +196,15 @@
                 android:gravity="center">
 
                 <Button
+                    android:id="@+id/btnFoto"
+                    android:text="Foto"
+                    android:layout_margin="6dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="Foto" />
+
+
+                <Button
                     android:id="@+id/btnExtra"
                     android:text="Regresar"
                     android:onClick="Anterior"

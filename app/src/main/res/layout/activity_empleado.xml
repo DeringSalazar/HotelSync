@@ -55,17 +55,6 @@
             android:textColor="#666666" />
 
         <Button
-            android:id="@+id/BtnUbicacion"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginBottom="16dp"
-            android:backgroundTint="#E0F7FA"
-            android:onClick="CreacionUbicacion"
-            android:text="Creacion Ubicacion"
-            android:textAllCaps="false"
-            android:textColor="#00796B" />
-
-        <Button
             android:id="@+id/BtnVerUbicaciones"
             android:layout_width="match_parent"
             android:layout_height="48dp"

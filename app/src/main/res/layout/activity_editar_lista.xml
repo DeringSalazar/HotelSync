@@ -1,144 +1,182 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
 
-    <EditText
-        android:id="@+id/txtCodigoEdit"
-        android:layout_width="0dp"
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbarEdit"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Código"
-        android:layout_margin="12dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:background="?attr/colorPrimary"
+        app:title="Editar ubicación"
+        app:titleTextColor="@android:color/white"
+        android:elevation="4dp"/>
 
-    <EditText
-        android:id="@+id/txtNombreEdit"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Nombre"
-        android:layout_marginHorizontal="12dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@id/txtCodigoEdit"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/txtCedulaEdit"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Cédula empleado"
-        android:layout_marginHorizontal="12dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@id/txtNombreEdit"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-    <EditText
-        android:id="@+id/txtLatEdit"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Latitud"
-        android:layout_marginHorizontal="12dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@id/txtCedulaEdit"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+            <!-- Código -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Código">
 
-    <EditText
-        android:id="@+id/txtLonEdit"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Longitud"
-        android:layout_marginHorizontal="12dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@id/txtLatEdit"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtCodigoEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/btnActualizar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Actualizar"
-        android:layout_margin="12dp"
-        app:layout_constraintTop_toBottomOf="@id/txtLonEdit"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/btnEliminar" />
+            <!-- Nombre -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="Nombre">
 
-    <Button
-        android:id="@+id/btnEliminar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Eliminar"
-        android:layout_margin="12dp"
-        app:layout_constraintTop_toBottomOf="@id/txtLonEdit"
-        app:layout_constraintStart_toEndOf="@id/btnActualizar"
-        app:layout_constraintEnd_toEndOf="parent" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtNombreEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <ImageView
-        android:id="@+id/imgFotoEdit"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
-        android:layout_margin="12dp"
-        android:background="#DDDDDD"
-        android:scaleType="centerCrop"
-        app:layout_constraintTop_toBottomOf="@id/btnActualizar"
-        app:layout_constraintStart_toStartOf="parent" />
+            <!-- Cédula empleado -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="Cédula empleado">
 
-    <Button
-        android:id="@+id/btnCambiarFoto"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="📸 Cambiar Foto"
-        android:layout_marginHorizontal="12dp"
-        app:layout_constraintTop_toTopOf="@id/imgFotoEdit"
-        app:layout_constraintStart_toEndOf="@id/imgFotoEdit"
-        app:layout_constraintEnd_toEndOf="parent" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtCedulaEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/btnGrabarAudio"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="🎙️ Grabar Audio"
-        android:layout_marginHorizontal="12dp"
-        android:layout_marginTop="6dp"
-        app:layout_constraintTop_toBottomOf="@id/btnCambiarFoto"
-        app:layout_constraintStart_toEndOf="@id/imgFotoEdit"
-        app:layout_constraintEnd_toEndOf="parent" />
+            <!-- Latitud -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="Latitud">
 
-    <Button
-        android:id="@+id/btnDetenerAudio"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="⏹ Detener"
-        android:layout_marginHorizontal="12dp"
-        android:layout_marginTop="6dp"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/btnGrabarAudio"
-        app:layout_constraintStart_toEndOf="@id/imgFotoEdit"
-        app:layout_constraintEnd_toEndOf="parent" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtLatEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/btnReproducirAudio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="▶ Reproducir Audio"
-        android:layout_margin="12dp"
-        app:layout_constraintTop_toBottomOf="@id/imgFotoEdit"
-        app:layout_constraintStart_toStartOf="parent" />
+            <!-- Longitud -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="Longitud">
 
-    <org.osmdroid.views.MapView
-        android:id="@+id/mapEdit"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="12dp"
-        app:layout_constraintTop_toBottomOf="@id/btnReproducirAudio"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtLonEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <!-- Botones Actualizar / Eliminar -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnActualizar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Actualizar"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnEliminar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:text="Eliminar"/>
+            </LinearLayout>
+
+            <!-- Imagen -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:layout_marginTop="12dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="2dp">
+
+                <ImageView
+                    android:id="@+id/imgFotoEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:background="#DDDDDD"/>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Botón Cambiar Foto -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCambiarFoto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="📸 Cambiar Foto"/>
+
+            <!-- Botón Grabar Audio -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnGrabarAudio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="🎙️ Grabar Audio"/>
+
+            <!-- Botón Detener -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDetenerAudio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="⏹ Detener"
+                android:visibility="gone"/>
+
+            <!-- Botón Reproducir -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnReproducirAudio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="▶ Reproducir Audio"/>
+
+            <!-- Mapa -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
+                android:layout_marginTop="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="3dp">
+
+                <org.osmdroid.views.MapView
+                    android:id="@+id/mapEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

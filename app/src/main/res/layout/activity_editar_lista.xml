@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- CÓDIGO -->
     <EditText
         android:id="@+id/txtCodigoEdit"
         android:layout_width="0dp"
@@ -16,7 +15,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- NOMBRE -->
     <EditText
         android:id="@+id/txtNombreEdit"
         android:layout_width="0dp"
@@ -28,7 +26,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- CÉDULA -->
     <EditText
         android:id="@+id/txtCedulaEdit"
         android:layout_width="0dp"
@@ -40,7 +37,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- LATITUD -->
     <EditText
         android:id="@+id/txtLatEdit"
         android:layout_width="0dp"
@@ -52,7 +48,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- LONGITUD -->
     <EditText
         android:id="@+id/txtLonEdit"
         android:layout_width="0dp"
@@ -64,7 +59,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- BOTONES ACTUALIZAR / ELIMINAR -->
     <Button
         android:id="@+id/btnActualizar"
         android:layout_width="0dp"
@@ -85,7 +79,6 @@
         app:layout_constraintStart_toEndOf="@id/btnActualizar"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- FOTO -->
     <ImageView
         android:id="@+id/imgFotoEdit"
         android:layout_width="160dp"
@@ -96,7 +89,6 @@
         app:layout_constraintTop_toBottomOf="@id/btnActualizar"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <!-- BOTÓN CAMBIAR FOTO -->
     <Button
         android:id="@+id/btnCambiarFoto"
         android:layout_width="0dp"
@@ -107,7 +99,6 @@
         app:layout_constraintStart_toEndOf="@id/imgFotoEdit"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- GRABAR AUDIO -->
     <Button
         android:id="@+id/btnGrabarAudio"
         android:layout_width="0dp"
@@ -119,7 +110,6 @@
         app:layout_constraintStart_toEndOf="@id/imgFotoEdit"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- DETENER AUDIO -->
     <Button
         android:id="@+id/btnDetenerAudio"
         android:layout_width="0dp"
@@ -132,7 +122,6 @@
         app:layout_constraintStart_toEndOf="@id/imgFotoEdit"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- REPRODUCIR AUDIO -->
     <Button
         android:id="@+id/btnReproducirAudio"
         android:layout_width="wrap_content"
@@ -142,7 +131,6 @@
         app:layout_constraintTop_toBottomOf="@id/imgFotoEdit"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <!-- MAPA -->
     <org.osmdroid.views.MapView
         android:id="@+id/mapEdit"
         android:layout_width="0dp"

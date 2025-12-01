@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -22,10 +21,8 @@ public class ListaActivity extends AppCompatActivity {
 
     SQLiteDatabase db;
 
-    ArrayList<String> ubicaciones = new ArrayList<>();
-    ArrayList<Integer> ids = new ArrayList<>();
-
-    ArrayAdapter<String> adapter;
+    ArrayList<ListaView> listaUbicaciones = new ArrayList<>();
+    ListaAdapter adapter;
 
     int idSeleccionado = -1;
     int posicionSeleccionada = -1;
@@ -45,7 +42,8 @@ public class ListaActivity extends AppCompatActivity {
         cargarUbicaciones();
 
         lista.setOnItemClickListener((parent, view, position, id) -> {
-            idSeleccionado = ids.get(position);
+            ListaView item = (ListaView) adapter.getItem(position);
+            idSeleccionado = item.id;
             posicionSeleccionada = position;
             pintarSeleccion();
         });
@@ -62,17 +60,34 @@ public class ListaActivity extends AppCompatActivity {
         });
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override public boolean onQueryTextSubmit(String query) {
-                adapter.getFilter().filter(query);
-                return true;
-            }
 
-            @Override public boolean onQueryTextChange(String text) {
-                adapter.getFilter().filter(text);
+            @Override
+            public boolean onQueryTextChange(String text) {
+
+                ArrayList<ListaView> filtrada = new ArrayList<>();
+
+                for (ListaView u : listaUbicaciones) {
+
+                    if (String.valueOf(u.id).contains(text) ||
+                            u.nombre.toLowerCase().contains(text.toLowerCase())) {
+
+                        filtrada.add(u);
+                    }
+                }
+
+                adapter = new ListaAdapter(ListaActivity.this, filtrada);
+                lista.setAdapter(adapter);
+
                 idSeleccionado = -1;
                 posicionSeleccionada = -1;
                 lista.post(ListaActivity.this::pintarSeleccion);
+
                 return true;
+            }
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
             }
         });
     }
@@ -86,27 +101,25 @@ public class ListaActivity extends AppCompatActivity {
     }
 
     private void cargarUbicaciones() {
-        ubicaciones.clear();
-        ids.clear();
 
-        Cursor c = db.rawQuery("SELECT id, nombre, latitud, longitud FROM ubicacion", null);
+        listaUbicaciones.clear();
+
+        Cursor c = db.rawQuery("SELECT id, nombre, latitud, longitud, foto FROM ubicacion", null);
 
         while (c.moveToNext()) {
-            int idUbicacion = c.getInt(0);
-            ids.add(idUbicacion);
 
-            String item =
-                    "ID: " + idUbicacion +
-                            "\nNombre: " + c.getString(1) +
-                            "\nLat: " + c.getDouble(2) +
-                            "   Lon: " + c.getDouble(3);
+            int id = c.getInt(0);
+            String nombre = c.getString(1);
+            double lat = c.getDouble(2);
+            double lon = c.getDouble(3);
+            byte[] foto = c.getBlob(4);
 
-            ubicaciones.add(item);
+            listaUbicaciones.add(new ListaView(id, nombre, lat, lon, foto));
         }
 
         c.close();
 
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, ubicaciones);
+        adapter = new ListaAdapter(this, listaUbicaciones);
         lista.setAdapter(adapter);
 
         lista.post(this::pintarSeleccion);

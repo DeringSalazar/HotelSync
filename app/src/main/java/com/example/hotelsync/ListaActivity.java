@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
-public class ListaUbicacionesActivity extends AppCompatActivity {
+public class ListaActivity extends AppCompatActivity {
 
     ListView lista;
     SearchView searchView;
@@ -33,7 +33,7 @@ public class ListaUbicacionesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lista_ubicaciones);
+        setContentView(R.layout.activity_lista);
 
         lista = findViewById(R.id.listUbicaciones2);
         searchView = findViewById(R.id.searchUbicaciones);
@@ -56,7 +56,7 @@ public class ListaUbicacionesActivity extends AppCompatActivity {
                 return;
             }
 
-            Intent intent = new Intent(this, EditarUbicacionActivity.class);
+            Intent intent = new Intent(this, EditarListaDatos.class);
             intent.putExtra("id", idSeleccionado);
             startActivity(intent);
         });
@@ -71,7 +71,7 @@ public class ListaUbicacionesActivity extends AppCompatActivity {
                 adapter.getFilter().filter(text);
                 idSeleccionado = -1;
                 posicionSeleccionada = -1;
-                lista.post(ListaUbicacionesActivity.this::pintarSeleccion);
+                lista.post(ListaActivity.this::pintarSeleccion);
                 return true;
             }
         });

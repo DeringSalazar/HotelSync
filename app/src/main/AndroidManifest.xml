@@ -60,11 +60,11 @@
             android:name=".EditarHabitacionActivity"
             android:exported="false" />
         <activity
-            android:name=".ListaUbicacionesActivity"
+            android:name=".ListaActivity"
             android:exported="false" />
 
         <activity
-            android:name=".EditarUbicacionActivity"
+            android:name=".EditarListaDatos"
             android:exported="false" />
 
         <activity

@@ -102,7 +102,7 @@ public class FotoActivity extends AppCompatActivity {
     }
 
     public void Volver(View view) {
-        Intent intent = new Intent(this, EditarUbicacionActivity.class);
+        Intent intent = new Intent(this, EditarListaDatos.class);
         startActivity(intent);
     }
 

@@ -27,7 +27,7 @@ public class EmpleadoActivity extends AppCompatActivity {
     }
 
     public void VerUbicaciones(View view) {
-        Intent intent = new Intent(this, ListaUbicacionesActivity.class);
+        Intent intent = new Intent(this, ListaActivity.class);
         startActivity(intent);
     }
 

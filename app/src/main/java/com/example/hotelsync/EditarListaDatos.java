@@ -8,7 +8,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
@@ -36,55 +35,46 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 
-public class EditarUbicacionActivity extends AppCompatActivity {
+public class EditarListaDatos extends AppCompatActivity {
 
-    // UI
+
     EditText txtCodigoEdit, txtNombreEdit, txtCedulaEdit, txtLatEdit, txtLonEdit;
     Button btnActualizar, btnEliminar, btnReproducirAudio, btnCambiarFoto, btnGrabarAudio, btnDetenerAudio;
     ImageView imgFotoEdit;
     MapView mapEdit;
 
-    // BD
     SQLiteDatabase db;
 
-    // Identificador
     int id;
 
-    // Datos actuales
     double lat = 0, lon = 0;
     byte[] fotoBytes = null;
     byte[] audioBytes = null;
 
-    // Flags
     boolean nuevaFoto = false;
     boolean nuevoAudio = false;
 
-    // Audio Recorder
     MediaRecorder recorder;
     File archivoAudioTemp;
 
-    // Map Marker
     Marker marker;
 
-    // Foto launcher
+
     ActivityResultLauncher<Intent> fotoLauncher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_editar_ubicacion);
-
-        // Inicializar OSMDroid
+        setContentView(R.layout.activity_editar_lista);
         Configuration.getInstance().setUserAgentValue(getPackageName());
 
         inicializarUI();
         inicializarBD();
         inicializarMapa();
         inicializarFotoLauncher();
-
         cargarDatos();
 
-        // Eventos
+
         btnActualizar.setOnClickListener(v -> actualizarRegistro());
         btnEliminar.setOnClickListener(v -> eliminarRegistro());
         btnReproducirAudio.setOnClickListener(v -> reproducirAudio());
@@ -92,10 +82,6 @@ public class EditarUbicacionActivity extends AppCompatActivity {
         btnGrabarAudio.setOnClickListener(v -> iniciarGrabacion());
         btnDetenerAudio.setOnClickListener(v -> detenerGrabacion());
     }
-
-    // ---------------------------------------------------------
-    // INICIALIZACIÓN
-    // ---------------------------------------------------------
 
     private void inicializarUI() {
         txtCodigoEdit = findViewById(R.id.txtCodigoEdit);
@@ -175,10 +161,6 @@ public class EditarUbicacionActivity extends AppCompatActivity {
         );
     }
 
-    // ---------------------------------------------------------
-    // CARGAR DATOS
-    // ---------------------------------------------------------
-
     private void cargarDatos() {
 
         Cursor c = db.rawQuery(
@@ -217,18 +199,10 @@ public class EditarUbicacionActivity extends AppCompatActivity {
         c.close();
     }
 
-    // ---------------------------------------------------------
-    // FOTO
-    // ---------------------------------------------------------
-
     private void cambiarFoto() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         fotoLauncher.launch(intent);
     }
-
-    // ---------------------------------------------------------
-    // AUDIO: GRABAR NUEVO
-    // ---------------------------------------------------------
 
     private void iniciarGrabacion() {
         try {
@@ -275,10 +249,6 @@ public class EditarUbicacionActivity extends AppCompatActivity {
         }
     }
 
-    // ---------------------------------------------------------
-    // AUDIO: REPRODUCIR
-    // ---------------------------------------------------------
-
     private void reproducirAudio() {
 
         if (audioBytes == null) {
@@ -301,11 +271,6 @@ public class EditarUbicacionActivity extends AppCompatActivity {
             Toast.makeText(this, "Error al reproducir audio", Toast.LENGTH_SHORT).show();
         }
     }
-
-    // ---------------------------------------------------------
-    // ACTUALIZAR Y ELIMINAR BD
-    // ---------------------------------------------------------
-
     private void actualizarRegistro() {
 
         ContentValues valores = new ContentValues();

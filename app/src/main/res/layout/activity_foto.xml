@@ -67,7 +67,10 @@
                 android:layout_marginTop="16dp"
                 android:backgroundTint="#E0E0E0"
                 android:onClick="tomarFoto"
-                android:text="📷 Tomar Foto"
+                android:text="Tomar Foto"
+                app:icon="@drawable/photo_camera_24"
+                app:iconTint="@android:color/black"
+                app:iconPadding="8dp"
                 android:textColor="@android:color/black"
                 app:iconGravity="textStart" />
 
@@ -102,7 +105,11 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="🎙️ Grabar"
+                        android:text="Grabar"
+                        app:icon="@drawable/record_7930024"
+                        app:iconTint="@null"
+                        app:iconPadding="8dp"
+                        app:iconGravity="textStart"
                         android:backgroundTint="#E0E0E0"
                         android:textColor="@android:color/black"/>
 
@@ -111,7 +118,11 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="⏸️ Detener"
+                        android:text="Detener"
+                        app:icon="@drawable/silent_5470936"
+                        app:iconTint="@null"
+                        app:iconPadding="8dp"
+                        app:iconGravity="textStart"
                         android:backgroundTint="#E0E0E0"
                         android:textColor="@android:color/black"/>
 
@@ -127,7 +138,11 @@
                         android:id="@+id/btnReproducir"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="▶️ Reproducir"
+                        android:text="Reproducir"
+                        app:icon="@drawable/rewind_4428747"
+                        app:iconTint="@null"
+                        app:iconPadding="8dp"
+                        app:iconGravity="textStart"
                         android:backgroundTint="#E0E0E0"
                         android:textColor="@android:color/black"/>
                 </LinearLayout>
@@ -164,6 +179,10 @@
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:text="Guardar"
+                        app:icon="@drawable/diskette_12957624"
+                        app:iconTint="@null"
+                        app:iconPadding="8dp"
+                        app:iconGravity="textStart"
                         android:backgroundTint="#E0E0E0"
                         android:textColor="@android:color/black"/>
 
@@ -174,6 +193,10 @@
                         android:layout_marginStart="8dp"
                         android:layout_height="wrap_content"
                         android:text="Cancelar"
+                        app:icon="@drawable/cancelled_5268671"
+                        app:iconTint="@null"
+                        app:iconPadding="8dp"
+                        app:iconGravity="textStart"
                         android:backgroundTint="#E0E0E0"
                         android:textColor="@android:color/black"/>
 
@@ -194,6 +217,10 @@
                         android:backgroundTint="#E0E0E0"
                         android:onClick="Volver"
                         android:text="Volver"
+                        app:icon="@drawable/back_2550309"
+                        app:iconTint="@null"
+                        app:iconPadding="8dp"
+                        app:iconGravity="textStart"
                         android:textColor="@android:color/black" />
                 </LinearLayout>
 

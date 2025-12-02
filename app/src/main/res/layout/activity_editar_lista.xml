@@ -100,6 +100,10 @@
                     android:id="@+id/btnActualizar"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    app:icon="@drawable/exchange_5355188"
+                    app:iconTint="@null"
+                    app:iconPadding="8dp"
+                    app:iconGravity="textStart"
                     android:layout_weight="1"
                     android:text="Actualizar"/>
 
@@ -108,6 +112,10 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    app:icon="@drawable/zerowaste_10203796"
+                    app:iconTint="@null"
+                    app:iconPadding="8dp"
+                    app:iconGravity="textStart"
                     android:layout_weight="1"
                     android:text="Eliminar"/>
             </LinearLayout>
@@ -134,7 +142,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="📸 Cambiar Foto"/>
+                app:icon="@drawable/photo_camera_24"
+                app:iconTint="@null"
+                app:iconPadding="8dp"
+                app:iconGravity="textStart"
+                android:text="Cambiar Foto"/>
 
             <!-- Botón Grabar Audio -->
             <com.google.android.material.button.MaterialButton
@@ -142,7 +154,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:text="🎙️ Grabar Audio"/>
+                app:icon="@drawable/record_7930024"
+                app:iconTint="@null"
+                app:iconPadding="8dp"
+                app:iconGravity="textStart"
+                android:text="Grabar Audio"/>
 
             <!-- Botón Detener -->
             <com.google.android.material.button.MaterialButton
@@ -150,7 +166,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:text="⏹ Detener"
+                app:icon="@drawable/silent_5470936"
+                app:iconTint="@null"
+                app:iconPadding="8dp"
+                app:iconGravity="textStart"
+                android:text="Detener"
                 android:visibility="gone"/>
 
             <!-- Botón Reproducir -->
@@ -159,7 +179,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:text="▶ Reproducir Audio"/>
+                app:icon="@drawable/rewind_4428747"
+                app:iconTint="@null"
+                app:iconPadding="8dp"
+                app:iconGravity="textStart"
+                android:text="Reproducir Audio"/>
 
             <!-- Mapa -->
             <com.google.android.material.card.MaterialCardView

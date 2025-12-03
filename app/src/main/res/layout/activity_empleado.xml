@@ -61,7 +61,7 @@
             android:layout_marginBottom="16dp"
             android:backgroundTint="#C8E6C9"
             android:onClick="VerUbicaciones"
-            android:text="Gestionar Ubicaciones"
+            android:text="Gestion Listado"
             android:textAllCaps="false"
             android:textColor="#1B5E20" />
 

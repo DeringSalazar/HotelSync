@@ -122,7 +122,7 @@ public class FotoActivity extends AppCompatActivity {
 
         IMapController controller = mapView.getController();
         controller.setZoom(16.0);
-        controller.setCenter(new GeoPoint(10.0, -84.0)); // punto inicial
+        controller.setCenter(new GeoPoint(10.0, -84.0)); 
 
         markerMapa = new Marker(mapView);
         markerMapa.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
